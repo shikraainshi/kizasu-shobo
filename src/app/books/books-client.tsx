@@ -16,7 +16,7 @@ const CATEGORIES = [
   "小説・評論・エッセイ"
 ];
 
-type SortOption = "date-desc" | "date-asc" | "title" | "price-desc" | "price-asc";
+type SortOption = "date-desc" | "date-asc" | "title";
 
 interface BooksClientProps {
   initialBooks: Book[];
@@ -30,13 +30,6 @@ function BooksContent({ initialBooks }: BooksClientProps) {
   const [sortOption, setSortOption] = useState<SortOption>("date-desc");
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 20;
-
-  // Helper to extract numeric price for sorting
-  const getPriceValue = (priceStr: string) => {
-    const match = priceStr.match(/[0-9,]+/);
-    if (!match) return 0;
-    return parseInt(match[0].replace(/,/g, ''), 10);
-  };
 
   // 1. Filter and Sort logic
   const filteredAndSortedBooks = useMemo(() => {
@@ -66,10 +59,6 @@ function BooksContent({ initialBooks }: BooksClientProps) {
           return new Date(a.date).getTime() - new Date(b.date).getTime();
         case "title":
           return a.title.localeCompare(b.title, 'ja');
-        case "price-desc":
-          return getPriceValue(b.price) - getPriceValue(a.price);
-        case "price-asc":
-          return getPriceValue(a.price) - getPriceValue(b.price);
         default:
           return 0;
       }
@@ -141,8 +130,6 @@ function BooksContent({ initialBooks }: BooksClientProps) {
               <option value="date-desc">出版年月日の新しい順</option>
               <option value="date-asc">出版年月日の古い順</option>
               <option value="title">タイトル</option>
-              <option value="price-desc">価格の高い順</option>
-              <option value="price-asc">価格の安い順</option>
             </select>
             <div className="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none text-accent/40 group-hover:text-accent">
               <ChevronDown size={14} />
