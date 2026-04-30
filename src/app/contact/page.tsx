@@ -64,36 +64,48 @@ export default function ContactPage() {
               </p>
             </div>
 
-            <div className="space-y-10">
-              <div className="flex items-start gap-6">
-                <div className="w-10 h-10 bg-wakaba/30 flex items-center justify-center shrink-0">
-                  <MapPin size={18} className="text-accent/60" />
+            <div className="space-y-12">
+              <div className="space-y-6">
+                <div className="flex items-center gap-3 border-b border-accent/10 pb-2">
+                  <h3 className="text-xs font-bold tracking-[0.2em] text-accent font-serif uppercase">Kitamachi Office / きたまちオフィス</h3>
+                  <span className="text-[9px] px-2 py-0.5 bg-accent/10 text-accent font-bold rounded-full">主連絡先</span>
                 </div>
-                <div>
-                  <h3 className="text-[9px] font-bold tracking-[0.3em] uppercase text-accent/40 mb-2 font-serif">Address</h3>
-                  <p className="text-sm font-serif text-foreground/80">〒630-8113 奈良県奈良市法蓮町1050-1</p>
+                <div className="flex items-start gap-6">
+                  <MapPin size={18} className="text-accent/40 mt-1" />
+                  <p className="text-sm font-serif text-foreground/80 leading-relaxed">
+                    〒630-8113 奈良市法蓮町1050-1
+                  </p>
                 </div>
-
-              </div>
-
-              <div className="flex items-start gap-6">
-                <div className="w-10 h-10 bg-wakaba/30 flex items-center justify-center shrink-0">
-                  <Phone size={18} className="text-accent/60" />
-                </div>
-                <div>
-                  <h3 className="text-[9px] font-bold tracking-[0.3em] uppercase text-accent/40 mb-2 font-serif">Phone / Fax</h3>
-                  <p className="text-sm font-serif text-foreground/80">Tel: 0742-93-2234</p>
-                  <p className="text-sm font-serif text-foreground/80">Fax: 0742-93-2235</p>
+                <div className="flex items-start gap-6">
+                  <Phone size={18} className="text-accent/40 mt-1" />
+                  <div className="text-sm font-serif text-foreground/80 space-y-1">
+                    <p>TEL：0742-42-6986</p>
+                    <p>FAX：0742-90-0044</p>
+                  </div>
                 </div>
               </div>
 
-              <div className="flex items-start gap-6">
-                <div className="w-10 h-10 bg-wakaba/30 flex items-center justify-center shrink-0">
-                  <Mail size={18} className="text-accent/60" />
+              <div className="space-y-6 pt-4 opacity-80">
+                <h3 className="text-xs font-bold tracking-[0.2em] text-accent/60 font-serif border-b border-accent/10 pb-2 uppercase">Headquarters / 本社</h3>
+                <div className="flex items-start gap-6">
+                  <MapPin size={18} className="text-accent/40 mt-1" />
+                  <p className="text-sm font-serif text-foreground/80 leading-relaxed">
+                    〒630-1242 奈良市大柳生町3619-1
+                  </p>
                 </div>
-                <div>
-                  <h3 className="text-[9px] font-bold tracking-[0.3em] uppercase text-accent/40 mb-2 font-serif">Email</h3>
-                  <p className="text-sm font-serif text-foreground/80">kizasu-s@m3.kcn.ne.jp</p>
+                <div className="flex items-start gap-6">
+                  <Phone size={18} className="text-accent/40 mt-1" />
+                  <div className="text-sm font-serif text-foreground/80 space-y-1">
+                    <p>TEL：0742-93-2234</p>
+                    <p>FAX：0742-93-2235</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-6 pt-6 border-t border-accent/5">
+                <Mail size={18} className="text-accent/40 mt-1" />
+                <div className="text-sm font-serif text-foreground/80">
+                  <p>Email：kizasu-s@m3.kcn.ne.jp</p>
                 </div>
               </div>
             </div>

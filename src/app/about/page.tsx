@@ -101,11 +101,26 @@ export default function AboutPage() {
             <div className="flex flex-col md:flex-row md:items-baseline gap-4 md:gap-20 border-b border-accent/5 pb-10">
               <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-accent/70 w-32 font-serif flex items-center gap-3">
                 <span className="w-1.5 h-1.5 bg-accent/30 rounded-full"></span>
-                所在地
-                </span>
-                <span className="text-foreground/70 font-serif text-sm">〒630-8113 奈良県奈良市法蓮町1050-1</span>
+                住所
+              </span>
+              <div className="flex flex-col gap-6 font-serif text-sm text-foreground/70">
+                <div className="space-y-1">
+                  <p className="font-bold text-accent/60 text-[10px] uppercase tracking-widest">本社</p>
+                  <p>〒630-1242 奈良市大柳生町3619-1</p>
                 </div>
-
+                <div className="space-y-1">
+                  <p className="font-bold text-accent/60 text-[10px] uppercase tracking-widest">きたまちオフィス / Book Cafe 川べり</p>
+                  <p>〒630-8113 奈良市法蓮町1050-1</p>
+                </div>
+              </div>
+            </div>
+            <div className="flex flex-col md:flex-row md:items-baseline gap-4 md:gap-20 border-b border-accent/5 pb-10">
+              <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-accent/70 w-32 font-serif flex items-center gap-3">
+                <span className="w-1.5 h-1.5 bg-accent/30 rounded-full"></span>
+                代表
+              </span>
+              <span className="text-foreground/70 font-serif text-sm">白石 徳浩</span>
+            </div>
             <div className="flex flex-col md:flex-row md:items-baseline gap-4 md:gap-20 border-b border-accent/5 pb-10">
               <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-accent/70 w-32 font-serif flex items-center gap-3">
                 <span className="w-1.5 h-1.5 bg-accent/30 rounded-full"></span>
@@ -118,19 +133,16 @@ export default function AboutPage() {
                 <span className="w-1.5 h-1.5 bg-accent/30 rounded-full"></span>
                 連絡先
               </span>
-              <div className="flex flex-col gap-3 font-serif text-sm text-foreground/70">
-                <span className="flex items-center gap-4">
-                  <span className="text-[10px] text-accent/40 uppercase tracking-widest w-8">Tel</span>
-                  0742-93-2234
-                </span>
-                <span className="flex items-center gap-4">
-                  <span className="text-[10px] text-accent/40 uppercase tracking-widest w-8">Fax</span>
-                  0742-93-2235
-                </span>
-                <span className="flex items-center gap-4">
-                  <span className="text-[10px] text-accent/40 uppercase tracking-widest w-8">Mail</span>
-                  kizasu-s@m3.kcn.ne.jp
-                </span>
+              <div className="flex flex-col gap-10 font-serif text-sm text-foreground/70">
+                <div className="space-y-2">
+                  <p className="font-bold text-accent/60">［本社］</p>
+                  <p>TEL：0742-93-2234 / FAX：0742-93-2235</p>
+                </div>
+                <div className="space-y-2">
+                  <p className="font-bold text-accent/60">［きたまちオフィス／Book Cafe 川べり］</p>
+                  <p>TEL：0742-42-6986 / FAX：0742-90-0044</p>
+                </div>
+                <p>Mail：kizasu-s@m3.kcn.ne.jp</p>
               </div>
             </div>
             <div className="flex flex-col md:flex-row md:items-baseline gap-4 md:gap-20 pb-10">

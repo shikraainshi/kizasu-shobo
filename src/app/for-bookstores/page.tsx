@@ -15,57 +15,66 @@ export default function ForBookstoresPage() {
         <div className="max-w-4xl mx-auto space-y-20">
           
           {/* Main Message */}
-          <section className="space-y-8 font-serif">
-            <h2 className="text-2xl font-serif font-bold border-b border-accent/10 pb-6 text-foreground tracking-tight">萌書房書籍のご注文先について</h2>
-            <div className="space-y-6 text-foreground/70 leading-relaxed text-lg">
+          <section className="space-y-12 font-serif">
+            <h2 className="text-2xl font-serif font-bold border-b border-accent/10 pb-6 text-foreground tracking-tight">萌書房書籍のご注文について</h2>
+            <div className="space-y-8 text-foreground/70 leading-relaxed text-lg">
               <p>
                 日頃、皆さまには萌書房の書籍をご販売いただき、深く御礼を申し上げます。
               </p>
-              <p>
-                萌書房が自社販売を始めました2024年12月以降の刊行作品につきましては、萌書房まで直接ご注文ください。
+              <div className="bg-wakaba/10 border-l-4 border-accent/30 p-8 space-y-6">
+                <p className="text-foreground font-bold">
+                  小社書籍は、下記取次各社を通じてご注文いただけます。
+                </p>
+                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-4 text-xl text-accent font-bold tracking-wider ml-6">
+                  <li className="list-disc">トーハン</li>
+                  <li className="list-disc">日販</li>
+                  <li className="list-disc">楽天ブックスネットワーク</li>
+                  <li className="list-disc">JRC</li>
+                </ul>
+              </div>
+              <p className="mt-20">
+                その他、直接のお取引や在庫確認、仕入条件に関するお問い合わせは、下記までご連絡ください。
               </p>
             </div>
             
-            <div className="bg-wakaba/10 border border-accent/10 p-10 mt-10">
-              <h3 className="text-xs font-bold mb-8 uppercase tracking-[0.3em] text-accent/50 font-serif">萌書房 書店注文専用</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-12 items-center">
-                <div className="space-y-2">
-                  <p className="text-[10px] text-accent/40 uppercase tracking-[0.2em] font-serif font-bold">TEL</p>
-                  <p className="text-3xl font-mono font-bold text-accent tracking-tighter tabular-nums">0742-93-2234</p>
+            <div className="mt-16 space-y-12 max-w-2xl mx-auto">
+              {/* きたまちオフィス */}
+              <div className="flex flex-col md:flex-row md:items-baseline gap-4 md:gap-12 border-b border-accent/5 pb-10">
+                <div className="w-56 shrink-0 flex items-center gap-3">
+                  <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-accent font-serif flex items-center gap-3">
+                    <span className="w-1.5 h-1.5 bg-accent rounded-full"></span>
+                    きたまちオフィス
+                  </span>
+                  <span className="text-[8px] px-1.5 py-0.5 bg-accent/10 text-accent font-bold rounded-full whitespace-nowrap">主連絡先</span>
                 </div>
-                <div className="space-y-2">
-                  <p className="text-[10px] text-accent/40 uppercase tracking-[0.2em] font-serif font-bold">FAX</p>
-                  <p className="text-3xl font-mono font-bold text-accent tracking-tighter tabular-nums">0742-93-2235</p>
+                <div className="flex flex-col gap-3 font-serif text-sm text-foreground/70">
+                  <span className="flex items-center gap-4">
+                    <span className="text-[10px] text-accent/40 uppercase tracking-widest w-8">Tel</span>
+                    <span className="text-lg font-bold text-accent">0742-42-6986</span>
+                  </span>
+                  <span className="flex items-center gap-4">
+                    <span className="text-[10px] text-accent/40 uppercase tracking-widest w-8">Fax</span>
+                    <span className="text-lg font-bold text-accent">0742-90-0044</span>
+                  </span>
                 </div>
               </div>
-              <p className="mt-10 text-[11px] text-accent/50 font-serif border-t border-accent/10 pt-6 italic">
-                受付時間：平日10:00～17:00。土日祝日とお盆、年末年始は営業しておりません。
-              </p>
-            </div>
-          </section>
 
-          {/* Special Condition Section */}
-          <section className="bg-accent text-white p-12 shadow-2xl relative overflow-hidden">
-            {/* Decorative element */}
-            <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 -mr-16 -mt-16 rotate-45" />
-            
-            <h2 className="text-[10px] font-bold mb-8 uppercase tracking-[0.4em] text-white/40 font-serif">
-              仕入条件に関するお知らせ
-            </h2>
-            <div className="space-y-8 font-serif">
-              <h3 className="text-2xl md:text-3xl font-serif leading-tight tracking-tight border-b border-white/10 pb-6">
-                特定書籍の「書店様正味50%」での出庫継続について
-              </h3>
-              <div className="space-y-6 text-white/80 leading-relaxed text-lg">
-                <p>
-                  2024年12月に刊行いたしました一部の書籍につきましては、現在もそして今後も、発売当初の仕入条件<span className="text-white font-bold underline decoration-white/30 underline-offset-8">「書店様仕入正味50%」</span>の書籍として出庫いたします。
-                </p>
-                <p>
-                  末永くご販売をいただけますよう、なにとぞよろしくお願い申し上げます。
-                </p>
-                <p className="text-sm italic text-white/50 pt-4 border-t border-white/5">
-                  ※なお返品の際は、発売当初の返品条件である「10%歩安入帳」が適用となりますことをご了承ください。
-                </p>
+              {/* 本社 */}
+              <div className="flex flex-col md:flex-row md:items-baseline gap-4 md:gap-12 border-b border-accent/5 pb-10 opacity-70">
+                <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-accent/70 w-56 shrink-0 font-serif flex items-center gap-3">
+                  <span className="w-1.5 h-1.5 bg-accent/30 rounded-full"></span>
+                  本社
+                </span>
+                <div className="flex flex-col gap-3 font-serif text-sm text-foreground/70">
+                  <span className="flex items-center gap-4">
+                    <span className="text-[10px] text-accent/40 uppercase tracking-widest w-8">Tel</span>
+                    0742-93-2234
+                  </span>
+                  <span className="flex items-center gap-4">
+                    <span className="text-[10px] text-accent/40 uppercase tracking-widest w-8">Fax</span>
+                    0742-93-2235
+                  </span>
+                </div>
               </div>
             </div>
           </section>

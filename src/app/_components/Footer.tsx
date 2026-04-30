@@ -78,7 +78,7 @@ export default function Footer() {
                 <span className="text-3xl font-serif font-bold tracking-[0.2em] text-foreground">萌書房</span>
               </div>
               <div className="space-y-4 text-[14px] font-serif text-foreground/80 leading-relaxed">
-                <p>〒630-8113 奈良県奈良市法蓮町1050-1</p>
+                <p>〒630-1242 奈良市大柳生町3619-1</p>
                 <p>Tel: 0742-93-2234</p>
                 <p>Fax: 0742-93-2235</p>
                 <p>Mail: kizasu-s@m3.kcn.ne.jp</p>

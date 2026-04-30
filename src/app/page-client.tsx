@@ -123,28 +123,14 @@ export default function HomeClient({ latestBooks, featuredBooks, initialNews }: 
         </div>
       </section>
 
-      {/* 4. お知らせ & イベント */}
-      <section className="py-12 bg-background">
-        <div className="container mx-auto px-6 max-w-3xl">
-          <div className="flex items-center gap-6 mb-6 border-b border-border">
-            <button 
-              onClick={() => setNewsTab("お知らせ")}
-              className={`pb-3 text-base font-serif font-bold tracking-widest transition-all relative ${
-                newsTab === "お知らせ" ? "text-accent" : "text-accent/30 hover:text-accent/60"
-              }`}
-            >
+      {/* 4. お知らせ */}
+      <section className="py-32 bg-background border-t border-accent/5">
+        <div className="container mx-auto px-6 max-w-4xl">
+          <div className="flex flex-col mb-20 items-center">
+            <h2 className="text-3xl font-serif font-bold text-foreground tracking-widest relative">
               お知らせ
-              {newsTab === "お知らせ" && <div className="absolute bottom-0 left-0 w-full h-0.5 bg-accent" />}
-            </button>
-            <button 
-              onClick={() => setNewsTab("イベント")}
-              className={`pb-3 text-base font-serif font-bold tracking-widest transition-all relative ${
-                newsTab === "イベント" ? "text-accent" : "text-accent/30 hover:text-accent/60"
-              }`}
-            >
-              イベント
-              {newsTab === "イベント" && <div className="absolute bottom-0 left-0 w-full h-0.5 bg-accent" />}
-            </button>
+              <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-6 h-[1.5px] bg-accent/40"></div>
+            </h2>
           </div>
 
           <div className="divide-y divide-accent/5">
@@ -187,7 +173,7 @@ export default function HomeClient({ latestBooks, featuredBooks, initialNews }: 
             {/* 右側：コンテンツ */}
             <div className="flex-1 flex flex-col gap-8 md:gap-24 md:pl-8">
               <h3 className="text-3xl md:text-5xl font-serif font-bold text-accent tracking-[0.3em] z-20">
-                「芽生え。」
+                芽生え。
               </h3>
 
               <div className="space-y-4 text-foreground/80 text-sm leading-relaxed font-serif max-w-lg">
