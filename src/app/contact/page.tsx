@@ -6,12 +6,45 @@ import { motion } from 'framer-motion';
 
 export default function ContactPage() {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Simulate submission
-    setIsSubmitted(true);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setIsLoading(true);
+    setError(null);
+
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      name: formData.get('name'),
+      email: formData.get('email'),
+      type: formData.get('type'),
+      message: formData.get('message'),
+    };
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || '送信に失敗しました。');
+      }
+
+      setIsSubmitted(true);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } catch (err: any) {
+      console.error('Submission error:', err);
+      setError(err.message || '予期せぬエラーが発生しました。時間を置いて再度お試しください。');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   if (isSubmitted) {
@@ -113,12 +146,18 @@ export default function ContactPage() {
 
           {/* Right: Contact Form (3/5) */}
           <div className="lg:col-span-3">
+            {error && (
+              <div className="mb-8 p-4 bg-red-50 border border-red-200 text-red-600 text-sm font-serif">
+                {error}
+              </div>
+            )}
             <form onSubmit={handleSubmit} className="space-y-10 bg-wakaba/5 p-8 md:p-12 border border-border/40">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                 <div className="space-y-3">
                   <label className="text-[10px] font-bold tracking-[0.3em] uppercase text-accent/80 font-serif block">お名前 <span className="text-accent/40 ml-2">Required</span></label>
                   <input 
                     required
+                    name="name"
                     type="text" 
                     placeholder="萌 太郎"
                     className="w-full bg-background border border-accent/20 px-5 py-4 text-sm font-serif focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/10 transition-all placeholder:text-accent/20 shadow-sm"
@@ -128,6 +167,7 @@ export default function ContactPage() {
                   <label className="text-[10px] font-bold tracking-[0.3em] uppercase text-accent/80 font-serif block">メールアドレス <span className="text-accent/40 ml-2">Required</span></label>
                   <input 
                     required
+                    name="email"
                     type="email" 
                     placeholder="example@kizasu.com"
                     className="w-full bg-background border border-accent/20 px-5 py-4 text-sm font-serif focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/10 transition-all placeholder:text-accent/20 shadow-sm"
@@ -138,7 +178,10 @@ export default function ContactPage() {
               <div className="space-y-3">
                 <label className="text-[10px] font-bold tracking-[0.3em] uppercase text-accent/80 font-serif block">お問い合わせ種別</label>
                 <div className="relative">
-                  <select className="w-full bg-background border border-accent/20 px-5 py-4 text-sm font-serif focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/10 transition-all appearance-none cursor-pointer shadow-sm">
+                  <select 
+                    name="type"
+                    className="w-full bg-background border border-accent/20 px-5 py-4 text-sm font-serif focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/10 transition-all appearance-none cursor-pointer shadow-sm"
+                  >
                     <option>書籍のご注文について</option>
                     <option>公費購入について</option>
                     <option>企画・執筆の持ち込み</option>
@@ -154,6 +197,7 @@ export default function ContactPage() {
                 <label className="text-[10px] font-bold tracking-[0.3em] uppercase text-accent/80 font-serif block">メッセージ内容 <span className="text-accent/40 ml-2">Required</span></label>
                 <textarea 
                   required
+                  name="message"
                   rows={8}
                   placeholder="お問い合わせ内容をご記入ください。"
                   className="w-full bg-background border border-accent/20 px-5 py-4 text-sm font-serif focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/10 transition-all placeholder:text-accent/20 resize-none shadow-sm"
@@ -163,9 +207,10 @@ export default function ContactPage() {
               <div className="pt-6">
                 <button 
                   type="submit"
-                  className="w-full bg-accent text-white py-6 font-bold tracking-[0.5em] text-[11px] uppercase hover:bg-accent/90 transition-all font-serif shadow-lg"
+                  disabled={isLoading}
+                  className={`w-full bg-accent text-white py-6 font-bold tracking-[0.5em] text-[11px] uppercase transition-all font-serif shadow-lg ${isLoading ? 'opacity-70 cursor-not-allowed' : 'hover:bg-accent/90'}`}
                 >
-                  メッセージを送信する
+                  {isLoading ? '送信中...' : 'メッセージを送信する'}
                 </button>
                 <p className="text-[9px] text-accent/30 text-center mt-6 font-serif tracking-widest">
                   ※ 通常2〜3営業日以内にご返信いたします。
