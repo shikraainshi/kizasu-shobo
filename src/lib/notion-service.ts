@@ -58,10 +58,12 @@ export async function getBooksFromNotion(): Promise<Book[]> {
       const featured = getPropValue("H%7B%7Cu", "注目表示")?.checkbox || false;
       const isPublic = getPropValue("cI%5CF", "公開")?.checkbox ?? true;
 
-      const imagePath = getPropValue("mWz%3B", "書影")?.rich_text?.[0]?.plain_text || "";
-      const formattedImage = imagePath && !imagePath.startsWith("http") && !imagePath.startsWith("/") 
-        ? `/${imagePath}` 
-        : imagePath;
+      const imageProp = getPropValue("mWz%3B", "書影");
+      let imageUrl = "";
+      if (imageProp?.files && imageProp.files.length > 0) {
+        const file = imageProp.files[0];
+        imageUrl = file.file?.url || file.external?.url || "";
+      }
 
       return {
         id: parseInt(rawId, 10),
@@ -75,7 +77,7 @@ export async function getBooksFromNotion(): Promise<Book[]> {
         isbn: getPropValue("_D%3D%3A", "ISBN")?.rich_text?.[0]?.plain_text || "",
         pages: getPropValue("uNuk", "ページ数")?.rich_text?.[0]?.plain_text || "",
         color: getPropValue("MGGs", "背景色")?.rich_text?.[0]?.plain_text || "",
-        image: formattedImage,
+        image: imageUrl,
         featured: featured,
         isPublic: isPublic,
       };
