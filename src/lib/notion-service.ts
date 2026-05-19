@@ -46,42 +46,89 @@ export async function getBooksFromNotion(): Promise<Book[]> {
     const books = response.results.map((page: any) => {
       const props = page.properties;
       
-      const getPropValue = (id: string, name?: string) => {
-        let prop = Object.values(props).find((p: any) => p.id === id) as any;
-        if (prop) return prop;
-        if (name && props[name]) return props[name];
-        const key = Object.keys(props).find(k => props[k].id === id);
-        return key ? props[key] : null;
+      const getProp = (name: string, id: string) => {
+        // Try by name first (more reliable if name is known)
+        if (props[name]) return props[name];
+        // Try by ID (fallback)
+        const propById = Object.values(props).find((p: any) => p.id === id || p.id === decodeURIComponent(id));
+        if (propById) return propById as any;
+        return null;
       };
 
-      const rawId = getPropValue("kQ%3ED", "id")?.rich_text?.[0]?.plain_text || "0";
-      const featured = getPropValue("H%7B%7Cu", "注目表示")?.checkbox || false;
-      const isPublic = getPropValue("cI%5CF", "公開")?.checkbox ?? true;
+      const titleProp = getProp("書籍名", "title");
+      const title = titleProp?.title?.[0]?.plain_text || "";
 
-      const imageProp = getPropValue("mWz%3B", "書影");
+      const idProp = getProp("id", "kQ%3ED");
+      const rawId = idProp?.rich_text?.[0]?.plain_text || "0";
+
+      const featuredProp = getProp("注目表示", "H%7B%7Cu");
+      const featured = featuredProp?.checkbox || false;
+
+      const publicProp = getProp("公開", "cI%5CF");
+      const isPublic = publicProp?.checkbox ?? true;
+
+      const authorProp = getProp("著者名", "UI%7BT");
+      const author = authorProp?.rich_text?.[0]?.plain_text || "";
+
+      const categoryProp = getProp("カテゴリー", "MQkM");
+      const category = categoryProp?.select?.name || "";
+
+      const dateProp = getProp("刊行日", "D~da");
+      const date = dateProp?.rich_text?.[0]?.plain_text || dateProp?.date?.start || "";
+
+      const descProp = getProp("概要", "JM%7CP");
+      const description = descProp?.rich_text?.[0]?.plain_text || "";
+
+      const fullDescProp = getProp("詳細説明", "B%5Emb");
+      const fullDescription = fullDescProp?.rich_text?.[0]?.plain_text || "";
+
+      const priceProp = getProp("価格", "%40Lv%5B");
+      const price = priceProp?.rich_text?.[0]?.plain_text || "";
+
+      const isbnProp = getProp("ISBN", "_D%3D%3A");
+      const isbn = isbnProp?.rich_text?.[0]?.plain_text || "";
+
+      const pagesProp = getProp("ページ数", "uNuk");
+      const pages = pagesProp?.rich_text?.[0]?.plain_text || "";
+
+      const colorProp = getProp("背景色", "MGGs");
+      const color = colorProp?.rich_text?.[0]?.plain_text || "";
+
+      const imageProp = getProp("書影", "mWz%3B");
       let imageUrl = "";
-      if (imageProp?.files && imageProp.files.length > 0) {
-        const file = imageProp.files[0];
-        imageUrl = file.file?.url || file.external?.url || "";
+      
+      if (imageProp) {
+        if (imageProp.type === "files" && imageProp.files?.length > 0) {
+          const file = imageProp.files[0];
+          imageUrl = file.file?.url || file.external?.url || "";
+        } else if (imageProp.type === "rich_text" && imageProp.rich_text?.length > 0) {
+          imageUrl = imageProp.rich_text[0].plain_text || "";
+        } else if (imageProp.type === "url") {
+          imageUrl = imageProp.url || "";
+        }
+      }
+
+      // If it's a local path from older data, it might need a leading slash
+      if (imageUrl && !imageUrl.startsWith("http") && !imageUrl.startsWith("/")) {
+        imageUrl = `/${imageUrl}`;
       }
 
       return {
         id: parseInt(rawId, 10),
-        title: getPropValue("title", "書籍名")?.title?.[0]?.plain_text || "",
-        author: getPropValue("UI%7BT", "著者名")?.rich_text?.[0]?.plain_text || "",
-        category: getPropValue("MQkM", "カテゴリー")?.select?.name || "",
-        date: getPropValue("D~da", "刊行日")?.rich_text?.[0]?.plain_text || "",
-        description: getPropValue("JM%7CP", "概要")?.rich_text?.[0]?.plain_text || "",
-        fullDescription: getPropValue("B%5Emb", "詳細説明")?.rich_text?.[0]?.plain_text || "",
-        price: getPropValue("%40Lv%5B", "価格")?.rich_text?.[0]?.plain_text || "",
-        isbn: getPropValue("_D%3D%3A", "ISBN")?.rich_text?.[0]?.plain_text || "",
-        pages: getPropValue("uNuk", "ページ数")?.rich_text?.[0]?.plain_text || "",
-        color: getPropValue("MGGs", "背景色")?.rich_text?.[0]?.plain_text || "",
+        title,
+        author,
+        category,
+        date,
+        description,
+        fullDescription,
+        price,
+        isbn,
+        pages,
+        color,
         image: imageUrl,
-        featured: featured,
-        isPublic: isPublic,
+        featured,
+        isPublic,
       };
-
     });
 
     const publicBooks = books.filter((b: any) => b.isPublic);
