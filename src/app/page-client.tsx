@@ -38,17 +38,17 @@ export default function HomeClient({ latestBooks, featuredBooks, initialNews }: 
           <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/10" />
         </div>
 
-        <div className="relative z-10 w-full pl-12 pr-24 md:pl-24 md:pr-48 lg:pl-32 lg:pr-64 flex justify-end">
+        <div className="relative z-10 w-full px-6 sm:pl-12 sm:pr-24 md:pl-24 md:pr-48 lg:pl-32 lg:pr-64 flex justify-end">
           <motion.div
             initial={{ x: 50, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ delay: 0.8, duration: 1.5, ease: "easeOut" }}
           >
-            <div className="flex flex-col items-start gap-10 md:gap-20 [writing-mode:vertical-rl] h-[450px] md:h-[600px]">
-              <span className="text-lg md:text-2xl lg:text-3xl font-serif font-medium text-white/90 tracking-[0.3em] pt-4 md:pt-8 whitespace-nowrap">
+            <div className="flex flex-col items-start gap-8 md:gap-20 [writing-mode:vertical-rl] h-[400px] sm:h-[450px] md:h-[600px]">
+              <span className="text-base sm:text-lg md:text-2xl lg:text-3xl font-serif font-medium text-white/90 tracking-[0.3em] pt-4 md:pt-8 whitespace-nowrap">
                 まだ言葉にならない思考を、
               </span>
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif font-bold text-white tracking-[0.5em] leading-none drop-shadow-[0_4px_20px_rgba(0,0,0,0.5)] whitespace-nowrap pt-24 md:pt-32">
+              <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-serif font-bold text-white tracking-[0.5em] leading-none drop-shadow-[0_4px_20px_rgba(0,0,0,0.5)] whitespace-nowrap pt-16 sm:pt-24 md:pt-32">
                 かたちにする。
               </h1>
             </div>
