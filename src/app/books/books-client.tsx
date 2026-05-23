@@ -147,7 +147,7 @@ function BooksContent({ initialBooks }: BooksClientProps) {
                   className="group cursor-pointer bg-background p-10 h-full transition-colors hover:bg-wakaba/10 flex flex-col border-r border-b border-border"
                 >
                   {/* 1. 書影 */}
-                  <div className={`aspect-[2/3] w-full max-w-[150px] mx-auto mb-8 bg-wakaba/5 flex items-center justify-center transition-all duration-500 group-hover:shadow-lg border border-border/40 overflow-hidden relative shadow-md`}>
+                  <div className={`aspect-[2/3] w-full max-w-[160px] mx-auto mb-8 bg-wakaba/5 flex items-center justify-center transition-all duration-500 group-hover:shadow-lg border border-border/40 overflow-hidden relative shadow-md`}>
                     {book.image ? (
                       <img src={book.image} alt={book.title} className="absolute inset-0 w-full h-full object-cover grayscale-[0.3] group-hover:grayscale-0 transition-all duration-700" />
                     ) : (
@@ -211,25 +211,76 @@ function BooksContent({ initialBooks }: BooksClientProps) {
           )}
         </div>
 
-        {/* Dynamic Pagination */}
+        {/* Dynamic Pagination - Show First, Last, and at least 3-page window around current */}
         {totalPages > 1 && (
           <div className="flex justify-center pt-16">
-            <div className="flex flex-wrap gap-3">
-              {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => (
-                <button 
-                  key={pageNum}
-                  onClick={() => {
-                    setCurrentPage(pageNum);
-                    window.scrollTo({ top: 0, behavior: 'instant' });
-                  }}
-                  className={`w-10 h-10 flex items-center justify-center border font-bold font-serif transition-all text-xs ${
-                    currentPage === pageNum
-                    ? "border-accent bg-accent text-white"
-                    : "border-accent/10 text-accent/40 hover:border-accent/40 hover:text-accent hover:bg-wakaba/20"
-                  }`}
-                >
-                  {pageNum}
-                </button>
+            <div className="flex flex-wrap items-center gap-3">
+              {(() => {
+                const pages: (number | string)[] = [];
+                
+                if (totalPages <= 5) {
+                  // If 5 pages or less, just show all
+                  for (let i = 1; i <= totalPages; i++) pages.push(i);
+                } else {
+                  // Always include page 1
+                  pages.push(1);
+
+                  let start, end;
+                  if (currentPage <= 3) {
+                    // Near the start: show 1, 2, 3, 4
+                    start = 2;
+                    end = Math.min(4, totalPages - 1);
+                  } else if (currentPage >= totalPages - 2) {
+                    // Near the end: show last-3, last-2, last-1, last
+                    start = Math.max(2, totalPages - 3);
+                    end = totalPages - 1;
+                  } else {
+                    // Middle: show current-1, current, current+1
+                    start = currentPage - 1;
+                    end = currentPage + 1;
+                  }
+
+                  // Add ellipsis after page 1 if needed
+                  if (start > 2) {
+                    pages.push("...");
+                  }
+
+                  // Add pages in the calculated range
+                  for (let i = start; i <= end; i++) {
+                    pages.push(i);
+                  }
+
+                  // Add ellipsis before the last page if needed
+                  if (end < totalPages - 1) {
+                    pages.push("...");
+                  }
+
+                  // Always include the last page
+                  pages.push(totalPages);
+                }
+
+                return pages;
+              })().map((page, index) => (
+                typeof page === "number" ? (
+                  <button 
+                    key={index}
+                    onClick={() => {
+                      setCurrentPage(page);
+                      window.scrollTo({ top: 0, behavior: 'instant' });
+                    }}
+                    className={`w-10 h-10 flex items-center justify-center border font-bold font-serif transition-all text-xs ${
+                      currentPage === page
+                      ? "border-accent bg-accent text-white"
+                      : "border-accent/10 text-accent/40 hover:border-accent/40 hover:text-accent hover:bg-wakaba/20"
+                    }`}
+                  >
+                    {page}
+                  </button>
+                ) : (
+                  <span key={index} className="w-8 text-center text-accent/20 font-serif">
+                    {page}
+                  </span>
+                )
               ))}
             </div>
           </div>

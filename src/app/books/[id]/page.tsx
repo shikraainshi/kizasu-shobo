@@ -38,8 +38,8 @@ export default async function BookDetailPage({ params }: { params: Promise<{ id:
       <section className="container mx-auto px-6 py-12">
         <div className="flex flex-col md:flex-row gap-16 lg:gap-24 max-w-6xl mx-auto">
           {/* Left: Book Cover Image */}
-          <div className="w-full md:w-2/5 lg:w-1/3 shrink-0">
-            <div className={`aspect-[2/3] w-full bg-wakaba/20 flex items-center justify-center shadow-2xl border border-accent/10 relative overflow-hidden group`}>
+          <div className="w-full md:w-2/5 lg:w-[30%] shrink-0">
+            <div className={`aspect-[2/3] w-full max-w-[320px] mx-auto bg-wakaba/20 flex items-center justify-center shadow-2xl border border-accent/10 relative overflow-hidden group`}>
               {book.image ? (
                 <img src={book.image} alt={book.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
               ) : (

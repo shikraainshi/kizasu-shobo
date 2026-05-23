@@ -31,15 +31,15 @@ export default function LatestBookCarousel({ books }: LatestBookCarouselProps) {
     }
   };
 
-  const activeWidth = 280; // さらにコンパクトに
-  const inactiveWidth = 140; // さらにコンパクトに
-  const gap = 20; // 余白をさらに詰める
-  const offset = 60;
+  const activeWidth = 260; 
+  const inactiveWidth = 130; 
+  const gap = 30; 
+  const offset = 40;
 
   const currentBook = books[currentIndex];
 
   return (
-    <section className="relative w-full bg-background overflow-hidden pt-8 pb-4 md:pt-10 md:pb-6 border-b border-border">
+    <section className="relative w-full bg-background pt-8 pb-12 md:pt-10 md:pb-24 border-b border-border">
       
       <div className="container mx-auto px-6 md:px-12 lg:px-24 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12 items-start">
@@ -86,9 +86,9 @@ export default function LatestBookCarousel({ books }: LatestBookCarouselProps) {
           {/* Right Column: Carousel Track (3/5) */}
           <div className="lg:col-span-3 flex flex-col gap-4">
             {/* Carousel Area */}
-            <div className="relative overflow-hidden -mr-6 md:-mr-12 lg:-mr-24 py-8">
+            <div className="relative -mr-6 md:-mr-12 lg:-mr-24 py-12 md:py-16 overflow-visible">
               <div 
-                className="flex transition-transform duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] items-center"
+                className="flex transition-transform duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] items-center mb-12"
                 style={{ 
                   gap: `${gap}px`,
                   transform: `translateX(calc(${offset}px - ${currentIndex * (inactiveWidth + gap)}px))` 
@@ -102,33 +102,34 @@ export default function LatestBookCarousel({ books }: LatestBookCarouselProps) {
                       animate={{
                         width: isActive ? activeWidth : inactiveWidth,
                         opacity: isActive ? 1 : 0.6,
-                        zIndex: isActive ? 10 : 0
+                        zIndex: isActive ? 10 : 0,
+                        scale: isActive ? 1.05 : 1
                       }}
                       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                      className={`shrink-0 aspect-[2/3] cursor-pointer`}
+                      className="shrink-0 cursor-pointer"
                       onClick={() => handleBookClick(index, book.id)}
                     >
-                      <div className={`w-full h-full bg-wakaba/30 flex items-center justify-center text-center border relative group overflow-hidden transition-all duration-700 
+                      <div className={`w-full aspect-[2/3] bg-wakaba/10 flex items-center justify-center text-center border relative transition-all duration-700 p-2
                         ${isActive 
-                          ? 'border-accent/20 shadow-xl' 
-                          : 'border-transparent'
+                          ? 'border-accent/20 shadow-2xl' 
+                          : 'border-transparent shadow-sm'
                         }`}
                       >
                         {book.image ? (
                           <img 
                             src={book.image} 
                             alt={book.title} 
-                            className={`absolute inset-0 w-full h-full object-cover transition-all duration-700`}
+                            className="w-full h-full object-contain transition-all duration-700 block p-1"
                           />
                         ) : (
-                          <div className="p-3 relative z-10">
+                          <div className="p-3">
                             <h3 className={`${isActive ? 'text-base md:text-lg' : 'text-[9px]'} font-serif font-bold mb-1 leading-tight text-foreground`}>
                               {book.title}
                             </h3>
                           </div>
                         )}
                         {!isActive && (
-                          <div className="absolute inset-0 bg-wakaba/10 opacity-20 transition-opacity duration-300 z-20" />
+                          <div className="absolute inset-0 bg-wakaba/5 opacity-10 transition-opacity duration-300 z-20 pointer-events-none" />
                         )}
                       </div>
                     </motion.div>

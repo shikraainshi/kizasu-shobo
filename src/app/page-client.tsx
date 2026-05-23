@@ -85,11 +85,11 @@ export default function HomeClient({ latestBooks, featuredBooks, initialNews }: 
                   <div className="absolute top-4 right-4 text-[8px] font-serif font-bold tracking-[0.2em] text-white/20 uppercase">Recommend</div>
                   <div className="flex flex-row gap-6 lg:gap-12 items-start relative">
                     <div className="relative w-32 sm:w-40 lg:w-48 shrink-0 -mt-12 lg:-mt-20 -ml-4 lg:-ml-8 drop-shadow-[0_20px_40px_rgba(0,0,0,0.3)] group-hover:drop-shadow-[0_35px_60px_rgba(0,0,0,0.4)] transition-all duration-700">
-                      <Link href={`/books/${book.id}`} className="block relative aspect-[3/4] overflow-hidden transition-all duration-700">
+                      <Link href={`/books/${book.id}`} className="block relative aspect-[2/3] transition-all duration-700">
                         {book.image && <img 
                           src={book.image} 
                           alt={book.title} 
-                          className="w-full h-full object-cover grayscale-[0.1] group-hover:grayscale-0 transition-all duration-1000 scale-100 group-hover:scale-105" 
+                          className="w-full h-full object-contain grayscale-[0.1] group-hover:grayscale-0 transition-all duration-1000 scale-100 group-hover:scale-105" 
                         />}
                       </Link>
                     </div>

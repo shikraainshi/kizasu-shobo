@@ -25,31 +25,42 @@ export async function getBooksFromNotion(): Promise<Book[]> {
   }
 
   try {
-    const response: any = await notion.request({
-      path: `databases/${NOTION_BOOKS_DB_ID}/query`,
-      method: "post",
-      body: {
-        page_size: 100,
-        sorts: [
-          {
-            property: "H%7B%7Cu", // "注目表示"
-            direction: "descending",
-          },
-          {
-            property: "kQ%3ED", // "id"
-            direction: "descending",
-          },
-        ],
-      },
-    });
+    let allResults: any[] = [];
+    let hasMore = true;
+    let nextCursor: string | undefined = undefined;
 
-    const books = response.results.map((page: any) => {
+    // Notion API handles max 100 per request, so we loop to get more
+    // Updated: Using direct request to avoid potential SDK version conflicts
+    while (hasMore && allResults.length < 1000) {
+      const response: any = await notion.request({
+        path: `databases/${NOTION_BOOKS_DB_ID}/query`,
+        method: "post",
+        body: {
+          page_size: 100,
+          start_cursor: nextCursor,
+          sorts: [
+            {
+              property: "H%7B%7Cu", // "注目表示"
+              direction: "descending",
+            },
+            {
+              property: "kQ%3ED", // "id"
+              direction: "descending",
+            },
+          ],
+        },
+      });
+
+      allResults = [...allResults, ...response.results];
+      hasMore = response.has_more;
+      nextCursor = response.next_cursor || undefined;
+    }
+
+    const books = allResults.map((page: any) => {
       const props = page.properties;
       
       const getProp = (name: string, id: string) => {
-        // Try by name first (more reliable if name is known)
         if (props[name]) return props[name];
-        // Try by ID (fallback)
         const propById = Object.values(props).find((p: any) => p.id === id || p.id === decodeURIComponent(id));
         if (propById) return propById as any;
         return null;
