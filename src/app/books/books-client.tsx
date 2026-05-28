@@ -91,7 +91,7 @@ function BooksContent({ initialBooks }: BooksClientProps) {
       {/* Main Content Area */}
       <section className="max-w-7xl mx-auto w-full px-10 md:px-20 lg:px-32">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8">
-          <div className="flex-1">
+          <div className="flex-1 w-full lg:w-auto">
             {searchQuery ? (
               <div className="flex flex-col items-start gap-2 font-serif">
                 <div className="flex items-center gap-2 text-accent/60">
@@ -103,21 +103,43 @@ function BooksContent({ initialBooks }: BooksClientProps) {
                 </p>
               </div>
             ) : (
-              <div className="flex overflow-x-auto pb-2 gap-1.5 no-scrollbar max-w-full">
-                {CATEGORIES.map((cat) => (
-                  <button 
-                    key={cat}
-                    onClick={() => setSelectedCategory(cat)}
-                    className={`whitespace-nowrap px-5 py-2 text-[11px] font-serif transition-all border ${
-                      selectedCategory === cat 
-                      ? "bg-accent text-white border-accent font-bold" 
-                      : "bg-wakaba/10 text-accent/60 border-transparent hover:border-accent/20 hover:text-accent"
-                    }`}
-                  >
-                    {cat}
-                  </button>
-                ))}
-              </div>
+              <>
+                {/* Mobile: Category Dropdown */}
+                <div className="lg:hidden flex items-center gap-3 w-full border border-accent/20 bg-wakaba/10 px-4 py-2.5">
+                  <span className="text-[11px] font-serif font-bold text-accent/60 shrink-0 tracking-widest border-r border-accent/10 pr-3">カテゴリ</span>
+                  <div className="relative flex-1 group">
+                    <select 
+                      value={selectedCategory}
+                      onChange={(e) => setSelectedCategory(e.target.value)}
+                      className="w-full appearance-none bg-transparent text-[13px] font-serif text-accent focus:outline-none cursor-pointer pr-8"
+                    >
+                      {CATEGORIES.map((cat) => (
+                        <option key={cat} value={cat}>{cat}</option>
+                      ))}
+                    </select>
+                    <div className="absolute inset-y-0 right-0 flex items-center pointer-events-none text-accent/40">
+                      <ChevronDown size={14} />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Desktop: Horizontal Category List */}
+                <div className="hidden lg:flex overflow-x-auto pb-2 gap-1.5 no-scrollbar max-w-full">
+                  {CATEGORIES.map((cat) => (
+                    <button 
+                      key={cat}
+                      onClick={() => setSelectedCategory(cat)}
+                      className={`whitespace-nowrap px-5 py-2 text-[11px] font-serif transition-all border ${
+                        selectedCategory === cat 
+                        ? "bg-accent text-white border-accent font-bold" 
+                        : "bg-wakaba/10 text-accent/60 border-transparent hover:border-accent/20 hover:text-accent"
+                      }`}
+                    >
+                      {cat}
+                    </button>
+                  ))}
+                </div>
+              </>
             )}
           </div>
 

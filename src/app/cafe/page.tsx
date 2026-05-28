@@ -127,7 +127,7 @@ export default function CafePage() {
             className="space-y-10"
           >
             <div className="inline-block px-4 py-1 bg-accent text-white text-[10px] font-bold tracking-[0.4em] uppercase font-serif">Concept</div>
-            <h2 className="text-4xl md:text-5xl font-serif font-bold text-foreground leading-tight">奈良の出版社・萌書房が運営する、<br />特別なブックカフェ。</h2>
+            <h2 className="text-4xl md:text-5xl font-serif font-bold text-foreground leading-tight">奈良の出版社・萌書房が運営する、特別なブックカフェ。</h2>
             <div className="space-y-6 text-lg text-foreground/70 font-serif leading-loose">
               <p>
                 2025年4月6日、奈良の街角に新しい「兆し」が生まれます。
@@ -191,7 +191,7 @@ export default function CafePage() {
                     <div>
                       <h3 className="text-[10px] font-bold tracking-widest text-accent uppercase font-serif mb-1">駐車場</h3>
                       <div className="text-sm font-serif text-foreground/70 leading-relaxed space-y-1">
-                        <p>1台分（先着順）</p>
+                        <p>1台分</p>
                         <p className="text-[11px] opacity-80">※満車時は近隣のコインパーキングをご利用ください</p>
                       </div>
                     </div>

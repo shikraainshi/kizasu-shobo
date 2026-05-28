@@ -30,12 +30,14 @@ export default function HomeClient({ latestBooks, featuredBooks, initialNews }: 
             className="w-full h-full"
           >
             <img 
-              src="/sky_background.jpg" 
+              src="/topphoto.png" 
               alt="萌書房の原風景" 
-              className="w-full h-full object-cover grayscale-[0.3] brightness-90 contrast-[1.05]"
+              className="w-full h-full object-cover grayscale-[0.1] brightness-110 opacity-60 blur-[2px] contrast-[0.95]"
             />
           </motion.div>
-          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/10" />
+          {/* Subtle gradient overlay to help text legibility */}
+          <div className="absolute inset-0 bg-gradient-to-l from-black/30 via-transparent to-transparent pointer-events-none" />
+          <div className="absolute inset-0 bg-white/10 pointer-events-none" />
         </div>
 
         <div className="relative z-10 w-full px-6 sm:pl-12 sm:pr-24 md:pl-24 md:pr-48 lg:pl-32 lg:pr-64 flex justify-end">
@@ -45,10 +47,10 @@ export default function HomeClient({ latestBooks, featuredBooks, initialNews }: 
             transition={{ delay: 0.8, duration: 1.5, ease: "easeOut" }}
           >
             <div className="flex flex-col items-start gap-8 md:gap-20 [writing-mode:vertical-rl] h-[400px] sm:h-[450px] md:h-[600px]">
-              <span className="text-base sm:text-lg md:text-2xl lg:text-3xl font-serif font-medium text-white/90 tracking-[0.3em] pt-4 md:pt-8 whitespace-nowrap">
+              <span className="text-base sm:text-lg md:text-2xl lg:text-3xl font-serif font-medium text-white tracking-[0.3em] pt-4 md:pt-8 whitespace-nowrap drop-shadow-[0_2px_8px_rgba(0,0,0,0.4)]">
                 まだ言葉にならない思考を、
               </span>
-              <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-serif font-bold text-white tracking-[0.5em] leading-none drop-shadow-[0_4px_20px_rgba(0,0,0,0.5)] whitespace-nowrap pt-16 sm:pt-24 md:pt-32">
+              <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-serif font-bold text-white tracking-[0.5em] leading-none drop-shadow-[0_4px_25px_rgba(0,0,0,0.6)] whitespace-nowrap pt-16 sm:pt-24 md:pt-32">
                 かたちにする。
               </h1>
             </div>
