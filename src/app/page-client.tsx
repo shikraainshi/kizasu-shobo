@@ -30,7 +30,7 @@ export default function HomeClient({ latestBooks, featuredBooks, initialNews }: 
             className="w-full h-full"
           >
             <img 
-              src="/topphoto.png" 
+              src="/topphoto.jpg" 
               alt="萌書房の原風景" 
               className="w-full h-full object-cover grayscale-[0.1] brightness-110 opacity-60 blur-[2px] contrast-[0.95]"
             />
