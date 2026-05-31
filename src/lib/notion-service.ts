@@ -90,6 +90,12 @@ export async function getBooksFromNotion(): Promise<Book[]> {
       const descProp = getProp("概要", "JM%7CP");
       const description = descProp?.rich_text?.[0]?.plain_text || "";
 
+      // Debug: Log all property names for the first book to see what's available
+      if (allResults.indexOf(page) === 0) {
+        console.log("Notion Page Properties:", Object.keys(props));
+        console.log("Full Description Prop:", props["詳細説明"] || props["B%5Emb"]);
+      }
+
       const fullDescProp = getProp("詳細説明", "B%5Emb");
       const fullDescription = fullDescProp?.rich_text?.[0]?.plain_text || "";
 

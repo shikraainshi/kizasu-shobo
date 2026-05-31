@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 
-export const revalidate = 60;
+export const dynamic = 'force-dynamic';
 
 export default async function BookDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -38,8 +38,8 @@ export default async function BookDetailPage({ params }: { params: Promise<{ id:
       <section className="container mx-auto px-6 py-12">
         <div className="flex flex-col md:flex-row gap-16 lg:gap-24 max-w-6xl mx-auto">
           {/* Left: Book Cover Image */}
-          <div className="w-full md:w-2/5 lg:w-[30%] shrink-0">
-            <div className={`aspect-[2/3] w-full max-w-[320px] mx-auto bg-wakaba/20 flex items-center justify-center shadow-2xl border border-accent/10 relative overflow-hidden group`}>
+          <div className="w-full md:w-1/2 lg:w-[45%] shrink-0">
+            <div className={`aspect-[2/3] w-full max-w-[500px] mx-auto bg-wakaba/20 flex items-center justify-center shadow-2xl border border-accent/10 relative overflow-hidden group`}>
               {book.image ? (
                 <img src={book.image} alt={book.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
               ) : (
@@ -58,12 +58,29 @@ export default async function BookDetailPage({ params }: { params: Promise<{ id:
               <span className="text-[11px] font-bold tracking-[0.3em] text-accent/50 uppercase mb-6 block font-serif">{book.category}</span>
               <h1 className="text-4xl md:text-5xl font-serif font-bold mb-8 text-foreground tracking-tight leading-[1.1]">{book.title}</h1>
               <p className="text-2xl text-accent/70 mb-10 font-serif italic border-l-4 border-accent/20 pl-6">{book.author}</p>
+              
+              {/* DEBUG MARKER */}
+              <div className="hidden">PAGE_UPDATED_V1</div>
+
+              {/* 詳細説明 (Notionの「詳細説明」カラム) */}
+              {book.fullDescription ? (
+                <div className="mt-12 whitespace-pre-wrap text-base md:text-lg leading-relaxed text-foreground/90 font-serif">
+                  {book.fullDescription}
+                </div>
+              ) : (
+                <div className="mt-12 text-sm text-accent/30 italic font-serif">
+                  ※詳細説明は準備中です。
+                </div>
+              )}
             </div>
 
             <div className="space-y-12 text-foreground/80 leading-relaxed font-serif">
-              <div className="whitespace-pre-wrap text-lg md:text-xl">
-                {book.fullDescription}
-              </div>
+              {/* Main Summary / Description */}
+              {book.description && (
+                <div className="whitespace-pre-wrap text-lg md:text-xl border-l-2 border-accent/10 pl-6 italic text-accent/80">
+                  {book.description}
+                </div>
+              )}
 
               {/* Specs Table */}
               <div className="pt-12 border-t border-accent/10">

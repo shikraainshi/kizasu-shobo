@@ -100,18 +100,18 @@ export default function Header() {
                 <Instagram size={20} />
               </a>
 
-              <form onSubmit={handleSearch} className="flex items-center border border-accent/10 focus-within:border-accent/30 transition-all">
+              <form onSubmit={handleSearch} className="flex items-center border border-accent/40 focus-within:border-accent transition-all shadow-sm">
                 <div className="relative flex items-center">
-                  <Search size={14} className="absolute left-3 text-accent/30" />
+                  <Search size={14} className="absolute left-3 text-accent/60" />
                   <input 
                     type="text" 
                     placeholder="書籍を検索" 
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="bg-wakaba/10 py-2 pl-9 pr-4 text-sm font-serif text-foreground placeholder:text-accent/30 focus:outline-none focus:bg-wakaba/30 transition-all w-40 xl:w-52"
+                    className="bg-wakaba/20 py-2 pl-9 pr-4 text-sm font-serif text-foreground placeholder:text-accent/60 focus:outline-none focus:bg-wakaba/40 transition-all w-40 xl:w-52"
                   />
                 </div>
-                <button type="submit" className="bg-accent/5 text-accent text-[11px] font-bold px-4 py-2 border-l border-accent/10 hover:bg-wakaba-hover transition-all font-serif uppercase tracking-wider">
+                <button type="submit" className="bg-accent/10 text-accent text-[11px] font-bold px-4 py-2 border-l border-accent/40 hover:bg-wakaba-hover transition-all font-serif uppercase tracking-wider">
                   検索
                 </button>
               </form>

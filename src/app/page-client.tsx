@@ -167,23 +167,19 @@ export default function HomeClient({ latestBooks, featuredBooks, initialNews }: 
             {/* 左側：画像 */}
             <div className="w-full md:w-1/2 relative md:-mt-24">
               <div className="aspect-video bg-wakaba/10 overflow-hidden border border-border">
-                 <div className="w-full h-full bg-[url('/sky_background.jpg')] bg-cover bg-center grayscale-[0.4] opacity-70" />
+                 <div className="w-full h-full bg-[url('/sky_background.jpg')] bg-cover bg-center grayscale-[0.2] opacity-90" />
               </div>
               <div className="absolute -bottom-4 -right-4 w-20 h-20 border-r border-b border-accent/10 -z-10" />
             </div>
 
             {/* 右側：コンテンツ */}
-            <div className="flex-1 flex flex-col gap-8 md:gap-24 md:pl-8">
-              <h3 className="text-3xl md:text-5xl font-serif font-bold text-accent tracking-[0.3em] z-20">
-                芽生え。
-              </h3>
-
-              <div className="space-y-4 text-foreground/80 text-sm leading-relaxed font-serif max-w-lg">
+            <div className="flex-1 flex flex-col gap-8 md:gap-12 md:pl-2 md:-mt-12">
+              <div className="space-y-6 text-foreground text-base leading-loose font-serif max-w-xl">
                 <p>
-                  いまだ明確な輪郭を結ばないものの、芽生えつつある新世紀の思想を、出版ということを通して世に問い、その強度が増していくことに貢献したいと考えております。
+                  2001年1月，新世紀への移行と軌を一にするかのように，それまで流布・通用し，人々の信頼を得ていた価値観あるいは技術が，急激な変容を迫られるようになりました。
                 </p>
                 <p>
-                  2001年、奈良の地で産声を上げた萌書房は、新しい時代の兆しを支え続けます。
+                  小社はそのような時代状況の下，古都奈良の地に産声を上げました。「萌」という字のごとく，芽生えつつある新たなる思想――それはしばしば茫洋として，等閑視されがちではあるものの――を「本」を通して世に問い，それがより明確なかたちとなって現れることに，微力ながら資することができればと考えております。
                 </p>
               </div>
               <div className="mt-0 md:-mt-4 flex justify-start md:pl-96">

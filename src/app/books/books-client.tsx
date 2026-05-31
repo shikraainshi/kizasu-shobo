@@ -169,7 +169,7 @@ function BooksContent({ initialBooks }: BooksClientProps) {
                   className="group cursor-pointer bg-background p-10 h-full transition-colors hover:bg-wakaba/10 flex flex-col border-r border-b border-border"
                 >
                   {/* 1. 書影 */}
-                  <div className={`aspect-[2/3] w-full max-w-[160px] mx-auto mb-8 bg-wakaba/5 flex items-center justify-center transition-all duration-500 group-hover:shadow-lg border border-border/40 overflow-hidden relative shadow-md`}>
+                  <div className={`aspect-[2/3] w-full max-w-[220px] mx-auto mb-8 bg-wakaba/5 flex items-center justify-center transition-all duration-500 group-hover:shadow-lg border border-border/40 overflow-hidden relative shadow-md`}>
                     {book.image ? (
                       <img src={book.image} alt={book.title} className="absolute inset-0 w-full h-full object-cover grayscale-[0.3] group-hover:grayscale-0 transition-all duration-700" />
                     ) : (

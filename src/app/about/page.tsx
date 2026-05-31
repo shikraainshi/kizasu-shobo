@@ -17,11 +17,10 @@ export default function AboutPage() {
       ========================= */}
       <section className="bg-[#edf4d2] py-24">
         <div className="max-w-4xl mx-auto px-6 md:px-10">
-          <p className="font-serif text-base md:text-lg leading-loose whitespace-pre-wrap text-foreground/80 italic border-l border-accent/20 pl-8">
-{`2001年1月，小社は古都奈良の地に産声を上げました。
-萌という字のごとく，いまだ明確な輪郭を結ばないものの，
-芽生えつつある新世紀の思想を，出版ということを通して世に問い，
-その強度が増していくことに，微力ながら資することができればと考えております。`}
+          <p className="font-serif text-base leading-loose whitespace-pre-wrap text-foreground italic border-l border-accent/20 pl-8">
+{`2001年1月，新世紀への移行と軌を一にするかのように，それまで流布・通用し，人々の信頼を得ていた価値観あるいは技術が，急激な変容を迫られるようになりました。
+小社はそのような時代状況の下，古都奈良の地に産声を上げました。
+「萌」という字のごとく，芽生えつつある新たなる思想――それはしばしば茫洋として，等閑視されがちではあるものの――を「本」を通して世に問い，それがより明確なかたちとなって現れることに，微力ながら資することができればと考えております。`}
           </p>
         </div>
       </section>
