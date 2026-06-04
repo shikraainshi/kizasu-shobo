@@ -32,7 +32,7 @@ export default function HomeClient({ latestBooks, featuredBooks, initialNews }: 
             <img 
               src="/topphoto.jpg" 
               alt="萌書房の原風景" 
-              className="w-full h-full object-cover grayscale-[0.1] brightness-110 opacity-60 blur-[2px] contrast-[0.95]"
+              className="w-full h-full object-cover object-center max-md:object-[85%_center] grayscale-[0.1] brightness-110 opacity-60 blur-[2px] contrast-[0.95]"
             />
           </motion.div>
           {/* Subtle gradient overlay to help text legibility */}
@@ -40,17 +40,17 @@ export default function HomeClient({ latestBooks, featuredBooks, initialNews }: 
           <div className="absolute inset-0 bg-white/10 pointer-events-none" />
         </div>
 
-        <div className="relative z-10 w-full pl-6 pr-24 sm:pl-12 sm:pr-24 md:pl-24 md:pr-48 lg:pl-32 lg:pr-64 flex justify-end">
+        <div className="relative z-10 w-full pl-6 pr-16 sm:pl-12 sm:pr-24 md:pl-24 md:pr-48 lg:pl-32 lg:pr-64 flex justify-end">
           <motion.div
             initial={{ x: 50, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ delay: 0.8, duration: 1.5, ease: "easeOut" }}
           >
-            <div className="flex flex-col items-start gap-4 sm:gap-8 md:gap-20 [writing-mode:vertical-rl] h-[400px] xs:h-[480px] sm:h-[580px] md:h-[650px]">
-              <span className="text-base xs:text-lg sm:text-xl md:text-2xl lg:text-3xl font-serif font-medium text-white tracking-[0.3em] pt-4 md:pt-8 whitespace-nowrap drop-shadow-[0_2px_8px_rgba(0,0,0,0.4)]">
+            <div className="flex flex-col items-start gap-12 sm:gap-16 md:gap-20 [writing-mode:vertical-rl] h-[600px] xs:h-[800px] sm:h-[900px] md:h-[650px]">
+              <span className="text-2xl xs:text-3xl sm:text-4xl md:text-2xl lg:text-3xl font-serif font-medium text-white tracking-[0.3em] pt-4 md:pt-8 whitespace-nowrap drop-shadow-[0_2px_8px_rgba(0,0,0,0.4)]">
                 まだ言葉にならない思考を、
               </span>
-              <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-white tracking-[0.5em] leading-none drop-shadow-[0_4px_25px_rgba(0,0,0,0.6)] whitespace-nowrap pt-28 xs:pt-36 sm:pt-48 md:pt-48">
+              <h1 className="text-5xl xs:text-6xl sm:text-7xl md:text-6xl lg:text-7xl font-serif font-bold text-white tracking-[0.5em] leading-none drop-shadow-[0_4px_25px_rgba(0,0,0,0.6)] whitespace-nowrap pt-48 xs:pt-64 sm:pt-80 md:pt-48 ml-24 xs:ml-32 sm:ml-40 md:ml-0">
                 かたちにする。
               </h1>
             </div>
@@ -160,35 +160,68 @@ export default function HomeClient({ latestBooks, featuredBooks, initialNews }: 
         </div>
       </section>
 
-      {/* 5. 哲学・コンセプト */}
-      <section className="py-40 bg-wakaba/5 overflow-hidden">
-        <div className="container mx-auto px-6">
-          <div className="flex flex-col md:flex-row items-center gap-10 md:gap-16 relative">
-            {/* 左側：画像 */}
-            <div className="w-full md:w-1/2 relative md:-mt-24">
-              <div className="aspect-video bg-wakaba/10 overflow-hidden border border-border">
-                 <div className="w-full h-full bg-[url('/sky_background.jpg')] bg-cover bg-center grayscale-[0.2] opacity-90" />
-              </div>
-              <div className="absolute -bottom-4 -right-4 w-20 h-20 border-r border-b border-accent/10 -z-10" />
-            </div>
+      {/* 5. 哲学・コンセプト (New Design) */}
+      <section className="relative overflow-hidden bg-[#fbfcf8] py-28 border-t border-accent/5">
+        {/* 背景の淡いグリーン */}
+        <div className="absolute right-0 top-0 h-full w-1/2 bg-gradient-to-l from-[#edf6df] via-[#f7fbef] to-transparent" />
 
-            {/* 右側：コンテンツ */}
-            <div className="flex-1 flex flex-col gap-8 md:gap-12 md:pl-2 md:-mt-12">
-              <div className="space-y-6 text-foreground text-base leading-loose font-serif max-w-xl">
-                <p>
-                  2001年1月，新世紀への移行と軌を一にするかのように，それまで流布・通用し，人々の信頼を得ていた価値観あるいは技術が，急激な変容を迫られるようになりました。
-                </p>
-                <p>
-                  小社はそのような時代状況の下，古都奈良の地に産声を上げました。「萌」という字のごとく，芽生えつつある新たなる思想――それはしばしば茫洋として，等閑視されがちではあるものの――を「本」を通して世に問い，それがより明確なかたちとなって現れることに，微力ながら資することができればと考えております。
-                </p>
-              </div>
-              <div className="mt-0 md:-mt-4 flex justify-start md:pl-96">
-                <Link href="/about" className="group flex items-center gap-4">
-                  <span className="text-[12px] font-bold tracking-[0.5em] uppercase text-accent/80 font-serif group-hover:text-accent transition-colors">萌書房について</span>
-                  <div className="w-12 h-[1px] bg-accent/30 group-hover:w-16 group-hover:bg-accent transition-all duration-500" />
-                </Link>
-              </div>
-            </div>
+        {/* 丸い装飾 */}
+        <div className="absolute right-[22%] top-32 h-64 w-64 rounded-full bg-[#dcecc5]/40 blur-sm" />
+        <div className="absolute right-[15%] top-64 h-32 w-32 rounded-full bg-[#cfe4ad]/30" />
+
+        {/* 若葉っぽい装飾 */}
+        <div className="absolute right-20 top-44 h-72 w-72 opacity-60">
+          <div className="absolute left-20 top-20 h-[1px] w-64 rotate-[-18deg] bg-[#9fbd7a]" />
+          <div className="absolute left-44 top-12 h-8 w-4 rotate-45 rounded-full bg-[#b7d58b]" />
+          <div className="absolute left-56 top-20 h-7 w-3 rotate-45 rounded-full bg-[#c5df9c]" />
+          <div className="absolute left-32 top-28 h-6 w-3 rotate-45 rounded-full bg-[#a8c87d]" />
+          <div className="absolute left-64 top-32 h-8 w-4 rotate-45 rounded-full bg-[#b8d98c]" />
+        </div>
+
+        <div className="relative mx-auto grid max-w-7xl grid-cols-1 gap-16 px-6 md:grid-cols-2 md:px-12">
+          {/* 左：タイトル */}
+          <div className="flex items-start relative md:pl-40 md:-mt-12">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.2, ease: "easeOut" }}
+              className="relative"
+            >
+              {/* 装飾的な縦ライン */}
+              <div className="absolute -left-4 top-0 h-full w-[1px] bg-gradient-to-b from-transparent via-[#9ab673]/40 to-transparent" />
+              
+              <h2 className="[writing-mode:vertical-rl] font-serif text-4xl md:text-6xl tracking-[0.5em] text-[#263326] leading-none py-4 italic relative">
+                <span className="relative">
+                  本は人生の伴走者
+                  {/* 小さな葉のアクセント */}
+                  <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-[#9ab673]/60" />
+                </span>
+              </h2>
+            </motion.div>
+          </div>
+
+          {/* 右：本文 */}
+          <div className="font-serif text-[15px] leading-[2.4] tracking-[0.08em] text-stone-700 md:pt-24">
+            <p>
+              2001年1月、新世紀への移行と軌を一にするかのように、
+              それまで流布・通用し、人々の信頼を得ていた価値観あるいは技術が、
+              急激な変容を迫られるようになりました。
+            </p>
+
+            <p className="mt-8">
+              小社はそのような時代状況の下、古都奈良の地に産声を上げました。
+              「萌」という字のごとく、芽生えつつある新たなる思想を、
+              「本」を通して世に問うていきます。
+            </p>
+
+            <Link
+              href="/about"
+              className="mt-12 inline-flex items-center gap-4 border-b border-[#9ab673] pb-3 text-sm tracking-[0.2em] text-[#5f7f4f] transition hover:gap-6"
+            >
+              萌書房について詳しく見る
+              <span>›</span>
+            </Link>
           </div>
         </div>
       </section>

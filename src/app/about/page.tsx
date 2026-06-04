@@ -4,24 +4,52 @@ export default function AboutPage() {
   return (
     <div className="flex flex-col pb-24 bg-background">
       {/* =========================
-          Hero
+          Hero (Unified Design)
       ========================= */}
-      <section className="py-28 text-center bg-wakaba/30">
-        <h1 className="text-4xl font-serif tracking-[0.3em] font-bold text-foreground mb-8">
-          萌書房について
-        </h1>
-      </section>
+      <section className="relative overflow-hidden bg-[#fbfcf8] py-28 border-b border-accent/5">
+        {/* 背景の淡いグリーン */}
+        <div className="absolute right-0 top-0 h-full w-1/2 bg-gradient-to-l from-[#edf6df] via-[#f7fbef] to-transparent" />
 
-      {/* =========================
-          About Content
-      ========================= */}
-      <section className="bg-[#edf4d2] py-24">
-        <div className="max-w-4xl mx-auto px-6 md:px-10">
-          <p className="font-serif text-base leading-loose whitespace-pre-wrap text-foreground italic border-l border-accent/20 pl-8">
-{`2001年1月，新世紀への移行と軌を一にするかのように，それまで流布・通用し，人々の信頼を得ていた価値観あるいは技術が，急激な変容を迫られるようになりました。
-小社はそのような時代状況の下，古都奈良の地に産声を上げました。
-「萌」という字のごとく，芽生えつつある新たなる思想――それはしばしば茫洋として，等閑視されがちではあるものの――を「本」を通して世に問い，それがより明確なかたちとなって現れることに，微力ながら資することができればと考えております。`}
-          </p>
+        {/* 丸い装飾 */}
+        <div className="absolute right-[22%] top-32 h-64 w-64 rounded-full bg-[#dcecc5]/40 blur-sm" />
+        <div className="absolute right-[15%] top-64 h-32 w-32 rounded-full bg-[#cfe4ad]/30" />
+
+        {/* 若葉っぽい装飾 */}
+        <div className="absolute right-20 top-44 h-72 w-72 opacity-60">
+          <div className="absolute left-20 top-20 h-[1px] w-64 rotate-[-18deg] bg-[#9fbd7a]" />
+          <div className="absolute left-44 top-12 h-8 w-4 rotate-45 rounded-full bg-[#b7d58b]" />
+          <div className="absolute left-56 top-20 h-7 w-3 rotate-45 rounded-full bg-[#c5df9c]" />
+          <div className="absolute left-32 top-28 h-6 w-3 rotate-45 rounded-full bg-[#a8c87d]" />
+          <div className="absolute left-64 top-32 h-8 w-4 rotate-45 rounded-full bg-[#b8d98c]" />
+        </div>
+
+        <div className="relative mx-auto grid max-w-7xl grid-cols-1 gap-16 px-6 md:grid-cols-2 md:px-12">
+          {/* 左：タイトル */}
+          <div>
+            <p className="mb-6 font-serif text-sm italic tracking-[0.25em] text-[#9ab673]">
+              About Kizasu Shobo
+            </p>
+
+            <h2 className="font-serif text-4xl md:text-5xl leading-relaxed tracking-[0.12em] text-[#263326]">
+              萌書房について
+            </h2>
+
+            <div className="mt-8 h-px w-16 bg-[#9ab673]" />
+          </div>
+
+          {/* 右：本文 */}
+          <div className="font-serif text-[15px] leading-[2.4] tracking-[0.08em] text-stone-700">
+            <p>
+              2001年1月、新世紀への移行と軌を一にするかのように、
+              それまで流布・通用し、人々の信頼を得ていた価値観あるいは技術が、
+              急激な変容を迫られるようになりました。
+            </p>
+
+            <p className="mt-8">
+              小社はそのような時代状況の下、古都奈良の地に産声を上げました。
+              「萌」という字のごとく、芽生えつつある新たなる思想――それはしばしば茫洋として、等閑視されがちではあるものの――を「本」を通して世に問い、それがより明確なかたちとなって現れることに、微力ながら資することができればと考えております。
+            </p>
+          </div>
         </div>
       </section>
 
