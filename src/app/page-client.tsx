@@ -40,17 +40,17 @@ export default function HomeClient({ latestBooks, featuredBooks, initialNews }: 
           <div className="absolute inset-0 bg-white/10 pointer-events-none" />
         </div>
 
-        <div className="relative z-10 w-full pl-6 pr-16 sm:pl-12 sm:pr-24 md:pl-24 md:pr-48 lg:pl-32 lg:pr-64 flex justify-end">
+        <div className="relative z-10 w-full pl-6 pr-6 sm:pl-12 sm:pr-24 md:pl-24 md:pr-48 lg:pl-32 lg:pr-64 flex justify-end">
           <motion.div
             initial={{ x: 50, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ delay: 0.8, duration: 1.5, ease: "easeOut" }}
           >
-            <div className="flex flex-col items-start gap-12 sm:gap-16 md:gap-20 [writing-mode:vertical-rl] h-[600px] xs:h-[800px] sm:h-[900px] md:h-[650px]">
+            <div className="flex flex-col items-start gap-6 sm:gap-16 md:gap-20 [writing-mode:vertical-rl] h-[600px] xs:h-[800px] sm:h-[900px] md:h-[650px]">
               <span className="text-2xl xs:text-3xl sm:text-4xl md:text-2xl lg:text-3xl font-serif font-medium text-white tracking-[0.3em] pt-4 md:pt-8 whitespace-nowrap drop-shadow-[0_2px_8px_rgba(0,0,0,0.4)]">
                 まだ言葉にならない思考を、
               </span>
-              <h1 className="text-5xl xs:text-6xl sm:text-7xl md:text-6xl lg:text-7xl font-serif font-bold text-white tracking-[0.5em] leading-none drop-shadow-[0_4px_25px_rgba(0,0,0,0.6)] whitespace-nowrap pt-48 xs:pt-64 sm:pt-80 md:pt-48 ml-24 xs:ml-32 sm:ml-40 md:ml-0">
+              <h1 className="text-5xl xs:text-6xl sm:text-7xl md:text-6xl lg:text-7xl font-serif font-bold text-white tracking-[0.5em] leading-none drop-shadow-[0_4px_25px_rgba(0,0,0,0.6)] whitespace-nowrap pt-48 xs:pt-64 sm:pt-80 md:pt-48 ml-0">
                 かたちにする。
               </h1>
             </div>
