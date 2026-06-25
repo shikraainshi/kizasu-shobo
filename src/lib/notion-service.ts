@@ -12,7 +12,10 @@ export interface News {
   content: string;
   category: string;
   important: boolean;
-  relatedUrl?: string;
+  relatedUrl1?: string;
+  relatedUrl2?: string;
+  urlLabel1?: string;
+  urlLabel2?: string;
 }
 
 /**
@@ -187,9 +190,13 @@ export async function getNewsFromNotion(): Promise<News[]> {
       };
 
       const slug = getPropValue("jn%7Cd")?.rich_text?.[0]?.plain_text;
-      
-      // 関連URLをIDまたは名前で探す
-      const relatedUrlProp = getPropValue("v%3BeQ") || props["関連URL"];
+
+      // 関連URL①: 既存フィールド（ID or 旧名「関連URL」or 新名「関連URL①」）
+      const relatedUrl1Prop = getPropValue("v%3BeQ") || props["関連URL①"] || props["関連URL"];
+      // 関連URL②・URL表示①②: 名前で探す
+      const relatedUrl2Prop = props["関連URL②"];
+      const urlLabel1Prop = props["URL表示①"];
+      const urlLabel2Prop = props["URL表示②"];
 
       return {
         id: page.id,
@@ -199,7 +206,10 @@ export async function getNewsFromNotion(): Promise<News[]> {
         content: getPropValue("Ztt%5D")?.rich_text?.[0]?.plain_text || "",
         category: getPropValue("py%7DA")?.select?.name || "",
         important: getPropValue("~tyZ")?.checkbox || false,
-        relatedUrl: relatedUrlProp?.url || "",
+        relatedUrl1: relatedUrl1Prop?.url || relatedUrl1Prop?.rich_text?.[0]?.plain_text || "",
+        relatedUrl2: relatedUrl2Prop?.url || relatedUrl2Prop?.rich_text?.[0]?.plain_text || "",
+        urlLabel1: urlLabel1Prop?.rich_text?.[0]?.plain_text || "",
+        urlLabel2: urlLabel2Prop?.rich_text?.[0]?.plain_text || "",
       };
     });
   } catch (error) {
