@@ -68,19 +68,19 @@ export default function Footer() {
 
   return (
     <>
-      <footer className="border-t border-border bg-wakaba/30 py-24">
+      <footer className="border-t border-border bg-wakaba/30 py-14 md:py-24">
         <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-16 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-10 md:gap-16 mb-10 md:mb-16">
             {/* Left 3/5: Company Name and Contact Info */}
-            <div className="col-span-1 md:col-span-3 border-l border-accent/10 pl-12 md:pl-20">
+            <div className="col-span-1 md:col-span-3 border-l border-accent/10 pl-6 md:pl-12 lg:pl-20">
               <div className="flex flex-col mb-8">
                 <span className="text-[11px] uppercase tracking-[0.5em] text-accent/50 font-serif font-bold mb-2">Kizasu Shobo</span>
                 <span className="text-3xl font-serif font-bold tracking-[0.2em] text-foreground">萌書房</span>
               </div>
               <div className="space-y-4 text-[14px] font-serif text-foreground/80 leading-relaxed">
-                <p>〒630-1242 奈良市大柳生町3619-1</p>
-                <p>Tel: 0742-93-2234</p>
-                <p>Fax: 0742-93-2235</p>
+                <p className="font-bold text-foreground">きたまちオフィス / Book Cafe 川べり</p>
+                <p>〒630-8113 奈良市法蓮町1050-1</p>
+                <p>TEL：0742-42-6986 ／ FAX：0742-90-0044</p>
                 <p>Mail: kizasu-s@m3.kcn.ne.jp</p>
               </div>
             </div>

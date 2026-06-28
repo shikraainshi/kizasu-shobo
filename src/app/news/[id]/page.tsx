@@ -84,7 +84,7 @@ export default async function NewsDetailPage({
           </section>
 
           {/* 4. Back Button */}
-          <div className="flex justify-center mt-48">
+          <div className="flex justify-center mt-16 md:mt-48">
             <Link 
               href="/news" 
               className="inline-block text-base font-serif font-bold tracking-[0.5em] uppercase border-b-2 border-accent/10 pb-3 text-accent/50 hover:text-accent hover:border-accent/40 transition-all"

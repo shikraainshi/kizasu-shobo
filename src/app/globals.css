@@ -27,17 +27,8 @@
   --font-serif: var(--font-noto-serif);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #121212;
-    --foreground: #e5e7eb;
-    --accent: #94a3b8;
-    --muted: #9ca3af;
-    --border: #262626;
-  }
-}
-
 body {
+  color-scheme: light;
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-noto-serif), serif;

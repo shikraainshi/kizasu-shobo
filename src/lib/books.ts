@@ -13,8 +13,9 @@ export interface Book {
   isbn: string;
   pages: string;
   color: string;
-  image?: string; // 画像パス
-  featured?: boolean; // 注目表示
+  image?: string;
+  featured?: boolean;
+  notionPageId?: string;
 }
 
 // JSONデータをBook型の配列として扱う（フォールバック用）
@@ -57,6 +58,16 @@ export async function getLatestBooks(limit?: number): Promise<Book[]> {
   // IDの降順（新しい順）に並べ替えて返す
   const sorted = [...books].sort((a, b) => b.id - a.id);
   return limit ? sorted.slice(0, limit) : sorted;
+}
+
+/**
+ * 刊行日が直近の書籍を取得する関数
+ * @param limit 取得する件数
+ */
+export async function getNewArrivals(limit: number = 2): Promise<Book[]> {
+  const books = await getBooks();
+  const sorted = [...books].sort((a, b) => b.date.localeCompare(a.date));
+  return sorted.slice(0, limit);
 }
 
 /**

@@ -6,17 +6,19 @@ import { News } from "@/lib/notion-service";
 import Link from "next/link";
 import { motion } from 'framer-motion';
 import { getCategoryColor } from "@/lib/category-colors";
+import LatestBookCarousel from "./_components/LatestBookCarousel";
 
 interface HomeClientProps {
   latestBooks: Book[];
   featuredBooks: Book[];
+  newArrivals: Book[];
   initialNews: News[];
 }
 
-export default function HomeClient({ latestBooks, featuredBooks, initialNews }: HomeClientProps) {
+export default function HomeClient({ latestBooks, featuredBooks, newArrivals, initialNews }: HomeClientProps) {
   const [activeTab, setActiveTab] = useState("すべて");
   const [newsTab, setNewsTab] = useState("お知らせ");
-  
+
   const CATEGORIES = ["すべて", "思想・哲学", "歴史", "社会・政治", "文学・論集"];
 
   return (
@@ -69,30 +71,30 @@ export default function HomeClient({ latestBooks, featuredBooks, initialNews }: 
         </motion.div>
       </section>
 
-      {/* 2. 話題の本 */}
-      <section className="py-32 bg-[#f2f0ed] relative overflow-hidden border-y border-accent/5">
+      {/* 2. 新着書籍 */}
+      <section className="py-16 md:py-32 bg-background relative overflow-hidden border-y border-accent/5">
         <div className="absolute top-20 left-[-5%] w-[30%] h-[30%] bg-accent/[0.01] rounded-full blur-[100px] pointer-events-none"></div>
         <div className="absolute bottom-20 right-[-5%] w-[30%] h-[30%] bg-accent/[0.02] rounded-full blur-[100px] pointer-events-none"></div>
 
         <div className="max-w-[1260px] mx-auto px-6 md:px-12 lg:px-16 relative z-10">
           <div className="flex flex-col mb-24 items-center">
             <h2 className="text-3xl font-serif font-bold text-foreground tracking-widest relative">
-              注目の書籍
+              新着書籍
               <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-6 h-[1.5px] bg-accent/40"></div>
             </h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-20 lg:gap-32">
-            {featuredBooks.map((book, i) => {
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 lg:gap-32">
+            {newArrivals.map((book, i) => {
               return (
                 <div key={i} className={`group relative px-8 lg:px-12 py-4 lg:py-8 transition-all duration-500 ease-out hover:-translate-y-2 border border-border/40 shadow-[0_2px_10px_-3px_rgba(0,0,0,0.02),0_10px_30px_-15px_rgba(0,0,0,0.05)] hover:shadow-[0_30px_60px_-12px_rgba(0,0,0,0.12),0_18px_36px_-18px_rgba(0,0,0,0.08)] ${book.color && !book.color.startsWith('#') ? book.color : 'bg-stone-800'}`} style={book.color && book.color.startsWith('#') ? { backgroundColor: book.color } : {}}>
-                  <div className="absolute top-4 right-4 text-[8px] font-serif font-bold tracking-[0.2em] text-white/20 uppercase">Recommend</div>
+                  <div className="absolute top-4 right-4 text-[8px] font-serif font-bold tracking-[0.2em] text-white/40 uppercase">New</div>
                   <div className="flex flex-row gap-6 lg:gap-12 items-start relative">
                     <div className="relative w-32 sm:w-40 lg:w-48 shrink-0 -mt-12 lg:-mt-20 -ml-4 lg:-ml-8 drop-shadow-[0_20px_40px_rgba(0,0,0,0.3)] group-hover:drop-shadow-[0_35px_60px_rgba(0,0,0,0.4)] transition-all duration-700">
                       <Link href={`/books/${book.id}`} className="block relative aspect-[2/3] transition-all duration-700">
-                        {book.image && <img 
-                          src={book.image} 
-                          alt={book.title} 
-                          className="w-full h-full object-contain grayscale-[0.1] group-hover:grayscale-0 transition-all duration-1000 scale-100 group-hover:scale-105" 
+                        {book.image && <img
+                          src={book.image}
+                          alt={book.title}
+                          className="w-full h-full object-contain grayscale-[0.1] group-hover:grayscale-0 transition-all duration-1000 scale-100 group-hover:scale-105"
                         />}
                       </Link>
                     </div>
@@ -132,8 +134,16 @@ export default function HomeClient({ latestBooks, featuredBooks, initialNews }: 
         </div>
       </section>
 
+      {/* 3. 注目の書籍 */}
+      <LatestBookCarousel
+        books={featuredBooks}
+        title="注目の書籍"
+        footerHref="/books"
+        footerLabel="刊行書籍一覧へ"
+      />
+
       {/* 4. お知らせ */}
-      <section className="py-32 bg-background border-t border-accent/5">
+      <section className="py-16 md:py-32 bg-background border-t border-accent/5">
         <div className="container mx-auto px-6 max-w-4xl">
           <div className="flex flex-col mb-20 items-center">
             <h2 className="text-3xl font-serif font-bold text-foreground tracking-widest relative">
@@ -143,8 +153,11 @@ export default function HomeClient({ latestBooks, featuredBooks, initialNews }: 
           </div>
 
           <div className="divide-y divide-accent/5">
-            {initialNews.slice(0, 5).map((item, index) => (
-              <Link key={index} href={`/news/${item.slug}`} className="group block py-5 first:pt-0 last:pb-0">
+            {initialNews.slice(0, 5).map((item, index) => {
+              const href = item.category === '新刊情報'
+                ? (item.relatedUrl1 ? `/books/${item.relatedUrl1}` : null)
+                : `/news/${item.slug}`;
+              const inner = (
                 <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-10">
                   <div className="flex items-center md:w-56 shrink-0 gap-8">
                     <span className="text-sm text-accent/40 font-serif leading-none tracking-wider font-bold w-20">
@@ -156,13 +169,22 @@ export default function HomeClient({ latestBooks, featuredBooks, initialNews }: 
                       </span>
                     </div>
                   </div>
-                  <span className="text-base text-foreground group-hover:text-accent transition-colors flex-1 leading-snug font-serif">
+                  <span className={`text-base text-foreground flex-1 leading-snug font-serif ${href ? 'group-hover:text-accent transition-colors' : ''}`}>
                     {item.important && <span className="text-accent font-bold mr-2">【重要】</span>}
                     {item.title}
                   </span>
                 </div>
-              </Link>
-            ))}
+              );
+              return href ? (
+                <Link key={index} href={href} className="group block py-5 first:pt-0 last:pb-0">
+                  {inner}
+                </Link>
+              ) : (
+                <div key={index} className="block py-5 first:pt-0 last:pb-0">
+                  {inner}
+                </div>
+              );
+            })}
           </div>
           <div className="mt-12 flex justify-end">
             <Link href="/news" className="inline-flex items-center gap-4 border-b border-accent/30 pb-3 text-sm tracking-[0.2em] text-accent/60 font-serif transition hover:gap-6 hover:text-accent hover:border-accent">
@@ -174,7 +196,7 @@ export default function HomeClient({ latestBooks, featuredBooks, initialNews }: 
       </section>
 
       {/* 5. 哲学・コンセプト */}
-      <section className="relative overflow-hidden bg-[#fbfcf8] py-28 border-t border-accent/5">
+      <section className="relative overflow-hidden bg-[#fbfcf8] py-16 md:py-28 border-t border-accent/5">
         {/* 背景の淡いグリーン */}
         <div className="absolute right-0 top-0 h-full w-1/2 bg-gradient-to-l from-[#edf6df] via-[#f7fbef] to-transparent" />
         <div className="absolute right-[15%] top-64 h-32 w-32 rounded-full bg-[#cfe4ad]/30" />

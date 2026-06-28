@@ -85,8 +85,8 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <section className="max-w-6xl mx-auto px-6 py-24">
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-24">
+      <section className="max-w-6xl mx-auto px-6 py-14 md:py-24">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-24">
           
           {/* Left: Contact Info (2/5) */}
           <div className="lg:col-span-2 space-y-16">
@@ -212,7 +212,7 @@ export default function ContactPage() {
                 >
                   {isLoading ? '送信中...' : 'メッセージを送信する'}
                 </button>
-                <p className="text-[9px] text-accent/30 text-center mt-6 font-serif tracking-widest">
+                <p className="text-[11px] text-foreground/50 text-center mt-6 font-serif tracking-widest">
                   ※ 通常2〜3営業日以内にご返信いたします。
                 </p>
               </div>

@@ -51,12 +51,19 @@ function BooksContent({ initialBooks }: BooksClientProps) {
       );
     }
 
+    // "2024.03" のようなドット区切りを数値に変換してソート
+    // new Date("2024.03") は iOS Safari で Invalid Date になるため使用しない
+    const parseDate = (d: string) => {
+      const m = d.match(/(\d{4})[^\d](\d{2})/);
+      return m ? parseInt(m[1]) * 100 + parseInt(m[2]) : 0;
+    };
+
     return filtered.sort((a, b) => {
       switch (sortOption) {
         case "date-desc":
-          return new Date(b.date).getTime() - new Date(a.date).getTime();
+          return parseDate(b.date) - parseDate(a.date);
         case "date-asc":
-          return new Date(a.date).getTime() - new Date(b.date).getTime();
+          return parseDate(a.date) - parseDate(b.date);
         case "title":
           return a.title.localeCompare(b.title, 'ja');
         default:
@@ -89,7 +96,7 @@ function BooksContent({ initialBooks }: BooksClientProps) {
       </section>
 
       {/* Main Content Area */}
-      <section className="max-w-7xl mx-auto w-full px-10 md:px-20 lg:px-32">
+      <section className="max-w-7xl mx-auto w-full px-4 sm:px-6 md:px-10 lg:px-20">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8">
           <div className="flex-1 w-full lg:w-auto">
             {searchQuery ? (
@@ -169,11 +176,15 @@ function BooksContent({ initialBooks }: BooksClientProps) {
                   className="group cursor-pointer bg-background p-10 h-full transition-colors hover:bg-wakaba/10 flex flex-col border-r border-b border-border"
                 >
                   {/* 1. 書影 */}
-                  <div className={`aspect-[2/3] w-full max-w-[220px] mx-auto mb-8 bg-wakaba/5 flex items-center justify-center transition-all duration-500 group-hover:shadow-lg border border-border/40 overflow-hidden relative shadow-md`}>
+                  <div className="h-[280px] w-full flex items-end justify-center mb-8">
                     {book.image ? (
-                      <img src={book.image} alt={book.title} className="absolute inset-0 w-full h-full object-cover grayscale-[0.3] group-hover:grayscale-0 transition-all duration-700" />
+                      <img
+                        src={book.image}
+                        alt={book.title}
+                        className="max-h-[280px] w-auto max-w-full block grayscale-[0.3] group-hover:grayscale-0 transition-all duration-500 group-hover:shadow-lg shadow-md border border-border/40"
+                      />
                     ) : (
-                      <div className="p-6 text-center relative z-10">
+                      <div className="w-full max-w-[220px] h-full bg-wakaba/5 border border-border/40 flex items-center justify-center p-6 text-center shadow-md">
                         <span className="text-[9px] uppercase tracking-[0.2em] text-accent/50 mb-2 block font-serif font-bold">{book.category}</span>
                         <h3 className="text-base font-serif font-bold mb-1 leading-tight text-foreground">{book.title}</h3>
                         <p className="text-[10px] text-accent/50 font-serif">{book.author}</p>

@@ -35,15 +35,15 @@ export default async function BookDetailPage({ params }: { params: Promise<{ id:
       </nav>
 
       {/* Main Content */}
-      <section className="container mx-auto px-6 py-12">
-        <div className="flex flex-col md:flex-row gap-16 lg:gap-24 max-w-6xl mx-auto">
+      <section className="container mx-auto px-6 py-8 md:py-12">
+        <div className="flex flex-col md:flex-row gap-10 md:gap-16 lg:gap-24 max-w-6xl mx-auto">
           {/* Left: Book Cover Image */}
           <div className="w-full md:w-1/2 lg:w-[45%] shrink-0">
-            <div className={`aspect-[2/3] w-full max-w-[500px] mx-auto bg-wakaba/20 flex items-center justify-center shadow-2xl border border-accent/10 relative overflow-hidden group`}>
+            <div className="w-full max-w-[500px] mx-auto shadow-2xl border border-accent/10 overflow-hidden group">
               {book.image ? (
-                <img src={book.image} alt={book.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                <img src={book.image} alt={book.title} className="w-full h-auto block transition-transform duration-700 group-hover:scale-105" />
               ) : (
-                <div className="p-12 text-center relative z-10">
+                <div className="aspect-[2/3] bg-wakaba/20 flex items-center justify-center p-12 text-center">
                   <span className="text-[10px] uppercase tracking-[0.2em] text-accent/40 mb-4 block font-serif font-bold">{book.category}</span>
                   <h1 className="text-2xl font-serif font-bold mb-2 leading-tight text-foreground">{book.title}</h1>
                   <p className="text-sm text-accent/60 font-serif italic">{book.author}</p>
@@ -57,7 +57,7 @@ export default async function BookDetailPage({ params }: { params: Promise<{ id:
             <div className="mb-12">
               <span className="text-[11px] font-bold tracking-[0.3em] text-accent/50 uppercase mb-6 block font-serif">{book.category}</span>
               <h1 className="text-4xl md:text-5xl font-serif font-bold mb-8 text-foreground tracking-tight leading-[1.1]">{book.title}</h1>
-              <p className="text-2xl text-accent/70 mb-10 font-serif italic border-l-4 border-accent/20 pl-6">{book.author}</p>
+              <p className="text-xl md:text-2xl text-accent/70 mb-10 font-serif italic border-l-4 border-accent/20 pl-6">{book.author}</p>
               
               {/* DEBUG MARKER */}
               <div className="hidden">PAGE_UPDATED_V1</div>

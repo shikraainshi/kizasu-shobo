@@ -15,7 +15,7 @@ export async function POST(request: Request) {
     }
 
     const { data, error } = await resend.emails.send({
-      from: '萌書房 お問い合わせ <info@kizasu-shobo.jp>', // ドメイン認証後に使用可能。未認証なら onboarding@resend.dev を一時的に使用
+      from: '萌書房 お問い合わせ <info@kizasu-shobo.jp>',
       to: ['kizasu-s@m3.kcn.ne.jp'], // ユーザー指定のメールアドレス
       replyTo: email,
       subject: `【お問い合わせ】${type} - ${name}様より`,

@@ -116,11 +116,11 @@ export async function getBooksFromNotion(): Promise<Book[]> {
 
       const imageProp = getProp("書影", "mWz%3B");
       let imageUrl = "";
-      
+
       if (imageProp) {
         if (imageProp.type === "files" && imageProp.files?.length > 0) {
-          const file = imageProp.files[0];
-          imageUrl = file.file?.url || file.external?.url || "";
+          // Notion アップロードファイルはプロキシ経由で提供
+          imageUrl = `/api/book-image/${page.id}`;
         } else if (imageProp.type === "rich_text" && imageProp.rich_text?.length > 0) {
           imageUrl = imageProp.rich_text[0].plain_text || "";
         } else if (imageProp.type === "url") {
@@ -128,7 +128,6 @@ export async function getBooksFromNotion(): Promise<Book[]> {
         }
       }
 
-      // If it's a local path from older data, it might need a leading slash
       if (imageUrl && !imageUrl.startsWith("http") && !imageUrl.startsWith("/")) {
         imageUrl = `/${imageUrl}`;
       }
@@ -148,6 +147,7 @@ export async function getBooksFromNotion(): Promise<Book[]> {
         image: imageUrl,
         featured,
         isPublic,
+        notionPageId: page.id,
       };
     });
 

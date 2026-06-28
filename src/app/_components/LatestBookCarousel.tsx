@@ -1,51 +1,68 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Book } from '@/lib/books';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { MoveLeft, MoveRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface LatestBookCarouselProps {
   books: Book[];
+  title?: string;
+  footerHref?: string;
+  footerLabel?: string;
 }
 
-export default function LatestBookCarousel({ books }: LatestBookCarouselProps) {
+export default function LatestBookCarousel({ books, title, footerHref, footerLabel }: LatestBookCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const router = useRouter();
+  const [dims, setDims] = useState({ active: 200, inactive: 120 });
+
+  useEffect(() => {
+    const update = () => {
+      if (window.innerWidth >= 1024) {
+        setDims({ active: 320, inactive: 210 });
+      } else if (window.innerWidth >= 640) {
+        setDims({ active: 240, inactive: 140 });
+      } else {
+        setDims({ active: 200, inactive: 120 });
+      }
+    };
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, []);
 
   const nextBook = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % books.length);
+    setCurrentIndex((prev) => (prev + 1) % books.length);
   };
 
   const prevBook = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + books.length) % books.length);
+    setCurrentIndex((prev) => (prev - 1 + books.length) % books.length);
   };
 
-  const handleBookClick = (index: number, id: number) => {
-    if (index === currentIndex) {
-      router.push(`/books/${id}`);
-    } else {
-      setCurrentIndex(index);
-    }
-  };
-
-  const activeWidth = 260; 
-  const inactiveWidth = 130; 
-  const gap = 30; 
-  const offset = 40;
+  const activeWidth = dims.active;
+  const inactiveWidth = dims.inactive;
+  const gap = 20;
+  const offset = 10;
 
   const currentBook = books[currentIndex];
 
   return (
-    <section className="relative w-full bg-background pt-8 pb-12 md:pt-10 md:pb-24 border-b border-border">
-      
+    <section className="relative w-full bg-[#f2f0ed] pt-6 pb-8 md:pt-8 md:pb-14 border-y border-accent/5 overflow-hidden">
       <div className="container mx-auto px-6 md:px-12 lg:px-24 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12 items-start">
-          
-          {/* Left Column: Book Info (2/5) */}
-          <div className="lg:col-span-2 min-h-[300px] flex flex-col pt-8">
+        {title && (
+          <div className="flex flex-col mb-10 items-center pt-6">
+            <h2 className="text-3xl font-serif font-bold text-foreground tracking-widest relative">
+              {title}
+              <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-6 h-[1.5px] bg-accent/40" />
+            </h2>
+          </div>
+        )}
+
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-start">
+
+          {/* Left: Book Info — fixed width */}
+          <div className="w-full lg:w-[660px] lg:shrink-0 flex flex-col pt-4 min-h-[200px] lg:min-h-[320px] lg:pl-48">
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentIndex}
@@ -66,13 +83,13 @@ export default function LatestBookCarousel({ books }: LatestBookCarouselProps) {
                     {currentBook.author}
                   </p>
                 </div>
-                
-                <p className="text-xs text-muted-foreground leading-relaxed max-w-sm font-serif">
+
+                <p className="text-xs text-muted-foreground leading-relaxed font-serif">
                   {currentBook.description}
                 </p>
 
                 <div className="mt-2">
-                  <Link 
+                  <Link
                     href={`/books/${currentBook.id}`}
                     className="group relative inline-block overflow-hidden border border-accent/20 px-6 py-2.5 rounded-none font-serif font-bold text-[8px] tracking-[0.2em] uppercase transition-all hover:bg-wakaba-hover hover:border-accent/40 text-accent"
                   >
@@ -83,15 +100,19 @@ export default function LatestBookCarousel({ books }: LatestBookCarouselProps) {
             </AnimatePresence>
           </div>
 
-          {/* Right Column: Carousel Track (3/5) */}
-          <div className="lg:col-span-3 flex flex-col gap-4">
-            {/* Carousel Area */}
-            <div className="relative -mr-6 md:-mr-12 lg:-mr-24 py-12 md:py-16 overflow-visible">
-              <div 
-                className="flex transition-transform duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] items-center mb-12"
-                style={{ 
+          {/* Right: Sliding track — left clipped, right overflows */}
+          <div className="flex-1 flex flex-col gap-4 min-w-0 lg:pl-20 w-full">
+            {/* overflow: hidden on left only via padding-right + margin-right trick */}
+            <div
+              className="overflow-hidden py-6 md:py-8"
+              style={{ paddingRight: '9999px', marginRight: '-9999px' }}
+            >
+              <div
+                className="flex items-end"
+                style={{
                   gap: `${gap}px`,
-                  transform: `translateX(calc(${offset}px - ${currentIndex * (inactiveWidth + gap)}px))` 
+                  transform: `translateX(calc(${offset}px - ${currentIndex * (inactiveWidth + gap)}px))`,
+                  transition: 'transform 0.8s cubic-bezier(0.16,1,0.3,1)',
                 }}
               >
                 {books.map((book, index) => {
@@ -101,35 +122,30 @@ export default function LatestBookCarousel({ books }: LatestBookCarouselProps) {
                       key={book.id}
                       animate={{
                         width: isActive ? activeWidth : inactiveWidth,
-                        opacity: isActive ? 1 : 0.6,
-                        zIndex: isActive ? 10 : 0,
-                        scale: isActive ? 1.05 : 1
+                        opacity: isActive ? 1 : 0.5,
                       }}
                       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                       className="shrink-0 cursor-pointer"
-                      onClick={() => handleBookClick(index, book.id)}
+                      onClick={() => {
+                        if (isActive) return;
+                        setCurrentIndex(index);
+                      }}
                     >
-                      <div className={`w-full aspect-[2/3] bg-wakaba/10 flex items-center justify-center text-center border relative transition-all duration-700 p-2
-                        ${isActive 
-                          ? 'border-accent/20 shadow-2xl' 
-                          : 'border-transparent shadow-sm'
-                        }`}
+                      <div className={`w-full overflow-hidden border transition-all duration-700 bg-wakaba/10
+                        ${isActive ? 'border-accent/20 shadow-2xl' : 'border-transparent shadow-sm'}`}
                       >
                         {book.image ? (
-                          <img 
-                            src={book.image} 
-                            alt={book.title} 
-                            className="w-full h-full object-contain transition-all duration-700 block p-1"
+                          <img
+                            src={book.image}
+                            alt={book.title}
+                            className="w-full h-auto block"
                           />
                         ) : (
-                          <div className="p-3">
-                            <h3 className={`${isActive ? 'text-base md:text-lg' : 'text-[9px]'} font-serif font-bold mb-1 leading-tight text-foreground`}>
+                          <div className="aspect-[2/3] flex items-center justify-center p-3">
+                            <h3 className={`${isActive ? 'text-base' : 'text-[9px]'} font-serif font-bold leading-tight text-foreground text-center`}>
                               {book.title}
                             </h3>
                           </div>
-                        )}
-                        {!isActive && (
-                          <div className="absolute inset-0 bg-wakaba/5 opacity-10 transition-opacity duration-300 z-20 pointer-events-none" />
                         )}
                       </div>
                     </motion.div>
@@ -138,38 +154,44 @@ export default function LatestBookCarousel({ books }: LatestBookCarouselProps) {
               </div>
             </div>
 
-            {/* Persistent Navigation */}
-            <div className="flex items-center justify-end gap-8 pr-6 md:pr-12 lg:pr-24">
-              <div className="flex items-center gap-3">
-                <button 
-                  type="button"
-                  onClick={prevBook}
-                  className="group flex items-center justify-center w-9 h-9 border border-accent/10 text-accent/40 hover:text-accent hover:border-accent hover:bg-wakaba-hover transition-all duration-300 bg-background"
-                  aria-label="前の本へ"
-                >
-                  <MoveLeft size={14} className="group-hover:-translate-x-1 transition-transform duration-300 stroke-[1.5px]" />
-                </button>
-                <button 
-                  type="button"
-                  onClick={nextBook}
-                  className="group flex items-center justify-center w-9 h-9 border border-accent/10 text-accent/40 hover:text-accent hover:border-accent hover:bg-wakaba-hover transition-all duration-300 bg-background"
-                  aria-label="次の本へ"
-                >
-                  <MoveRight size={14} className="group-hover:translate-x-1 transition-transform duration-300 stroke-[1.5px]" />
-                </button>
+            {/* Navigation */}
+            <div className="flex items-center gap-6" style={{ paddingLeft: `${offset}px` }}>
+              <button
+                type="button"
+                onClick={prevBook}
+                className="group flex items-center justify-center w-12 h-12 border border-accent/20 text-accent/50 hover:text-accent hover:border-accent bg-background hover:bg-wakaba-hover transition-all duration-200"
+                aria-label="前の本へ"
+              >
+                <MoveLeft size={18} className="group-hover:-translate-x-1 transition-transform duration-200" />
+              </button>
+
+              <div className="flex items-center gap-3 font-mono text-[10px] tracking-[0.25em] text-accent/40">
+                <span className="text-accent font-bold text-sm">{(currentIndex + 1).toString().padStart(2, '0')}</span>
+                <div className="w-8 h-[1px] bg-accent/20" />
+                <span>{books.length.toString().padStart(2, '0')}</span>
               </div>
 
-              <div className="flex flex-col items-end">
-                <div className="flex items-center gap-3 font-mono text-[8px] tracking-[0.3em] text-accent/40 uppercase">
-                  <span className="text-accent font-bold">{(currentIndex + 1).toString().padStart(2, '0')}</span>
-                  <div className="w-6 h-[1px] bg-accent/20"></div>
-                  <span>{books.length.toString().padStart(2, '0')}</span>
-                </div>
-              </div>
+              <button
+                type="button"
+                onClick={nextBook}
+                className="group flex items-center justify-center w-12 h-12 border border-accent/20 text-accent/50 hover:text-accent hover:border-accent bg-background hover:bg-wakaba-hover transition-all duration-200"
+                aria-label="次の本へ"
+              >
+                <MoveRight size={18} className="group-hover:translate-x-1 transition-transform duration-200" />
+              </button>
             </div>
-
           </div>
+
         </div>
+
+        {footerHref && (
+          <div className="mt-8 flex justify-end">
+            <Link href={footerHref} className="inline-flex items-center gap-4 border-b border-accent/30 pb-3 text-sm tracking-[0.2em] text-accent/60 font-serif transition hover:gap-6 hover:text-accent hover:border-accent">
+              {footerLabel ?? '一覧へ'}
+              <span>›</span>
+            </Link>
+          </div>
+        )}
       </div>
     </section>
   );

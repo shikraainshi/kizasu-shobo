@@ -74,7 +74,7 @@ export default function Header() {
           </div>
 
           {/* Center: Navigation (Desktop) */}
-          <nav className="hidden lg:flex items-center gap-10 text-[15px] font-medium tracking-[0.05em] text-foreground/80 font-serif">
+          <nav className="hidden xl:flex items-center gap-6 text-[15px] font-medium tracking-[0.05em] text-foreground/80 font-serif">
             {navLinks.slice(0, 4).map((link) => (
               <Link 
                 key={link.href} 
@@ -87,7 +87,7 @@ export default function Header() {
           </nav>
 
           {/* Right: Buttons & Hamburger */}
-          <div className="flex items-center justify-end gap-4 md:gap-10">
+          <div className="flex items-center justify-end gap-3 md:gap-6">
             {/* Social & Search Unit (Desktop) */}
             <div className="hidden xl:flex items-center gap-6">
               <a 
@@ -117,13 +117,13 @@ export default function Header() {
               </form>
             </div>
 
-            <Link href="/for-bookstores" className="hidden sm:block text-[10px] md:text-[12px] font-bold tracking-[0.2em] uppercase px-6 md:px-10 py-2 md:py-3 bg-wakaba-base text-accent border border-accent/10 hover:bg-wakaba-hover hover:border-accent/20 transition-all font-serif whitespace-nowrap shadow-sm">
+            <Link href="/for-bookstores" className="hidden sm:block text-[10px] md:text-[12px] font-bold tracking-[0.2em] uppercase px-5 md:px-6 xl:px-8 py-2 md:py-3 bg-wakaba-base text-accent border border-accent/10 hover:bg-wakaba-hover hover:border-accent/20 transition-all font-serif whitespace-nowrap shadow-sm">
               書店様へ
             </Link>
 
             {/* Hamburger Button */}
-            <button 
-              className="lg:hidden p-2 text-accent"
+            <button
+              className="xl:hidden p-2 text-accent"
               onClick={() => setIsMenuOpen(true)}
               aria-label="メニューを開く"
             >
@@ -136,7 +136,7 @@ export default function Header() {
       {/* Mobile Menu Overlay - Outside Header */}
       <AnimatePresence>
         {isMenuOpen && (
-          <div className="fixed inset-0 z-[9999] lg:hidden">
+          <div className="fixed inset-0 z-[9999] xl:hidden">
             {/* Backdrop */}
             <motion.div 
               initial={{ opacity: 0 }}

@@ -6,7 +6,7 @@ export default function AboutPage() {
       {/* =========================
           Hero (Unified Design)
       ========================= */}
-      <section className="relative overflow-hidden bg-[#fbfcf8] py-28 border-b border-accent/5">
+      <section className="relative overflow-hidden bg-[#fbfcf8] py-16 md:py-28 border-b border-accent/5">
         {/* 背景の淡いグリーン */}
         <div className="absolute right-0 top-0 h-full w-1/2 bg-gradient-to-l from-[#edf6df] via-[#f7fbef] to-transparent" />
 
@@ -54,13 +54,13 @@ export default function AboutPage() {
       </section>
 
       {/* Business Activities Section (事業内容) */}
-      <section id="activities" className="bg-wakaba/20 py-32 border-y border-border">
+      <section id="activities" className="bg-wakaba/20 py-16 md:py-32 border-y border-border">
         <div className="container mx-auto px-6">
           <div className="max-w-5xl mx-auto">
             <h2 className="text-[10px] font-bold tracking-[0.3em] uppercase text-accent/40 mb-4 text-center font-serif">Business Activities</h2>
             <h3 className="text-3xl font-serif font-bold mb-20 text-center text-foreground">事業内容</h3>
             
-            <div className="space-y-32">
+            <div className="space-y-16 md:space-y-32">
               {/* Publishing Activity */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
                 <div className="order-2 md:order-1">
@@ -114,7 +114,7 @@ export default function AboutPage() {
       </section>
 
       {/* Company Overview Section (会社概要) */}
-      <section id="company" className="container mx-auto px-6 py-32">
+      <section id="company" className="container mx-auto px-6 py-16 md:py-32">
         <div className="max-w-2xl mx-auto">
           <h2 className="text-[20px] font-bold tracking-[0.4em] uppercase text-accent/30 mb-20 text-center font-serif">会社概要</h2>
           <div className="space-y-12">
@@ -162,12 +162,15 @@ export default function AboutPage() {
               </span>
               <div className="flex flex-col gap-10 font-serif text-sm text-foreground/70">
                 <div className="space-y-2">
-                  <p className="font-bold text-accent/60">［本社］</p>
-                  <p>TEL：0742-93-2234 / FAX：0742-93-2235</p>
+                  <div className="flex items-center gap-2">
+                    <p className="font-bold text-accent/60">［きたまちオフィス／Book Cafe 川べり］</p>
+                    <span className="text-[9px] px-2 py-0.5 bg-accent/10 text-accent font-bold tracking-widest">主連絡先</span>
+                  </div>
+                  <p>TEL：0742-42-6986 / FAX：0742-90-0044</p>
                 </div>
                 <div className="space-y-2">
-                  <p className="font-bold text-accent/60">［きたまちオフィス／Book Cafe 川べり］</p>
-                  <p>TEL：0742-42-6986 / FAX：0742-90-0044</p>
+                  <p className="font-bold text-accent/60">［本社］</p>
+                  <p>TEL：0742-93-2234</p>
                 </div>
                 <p>Mail：kizasu-s@m3.kcn.ne.jp</p>
               </div>
