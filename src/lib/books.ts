@@ -15,6 +15,7 @@ export interface Book {
   color: string;
   image?: string;
   featured?: boolean;
+  isPublic?: boolean;
   notionPageId?: string;
 }
 

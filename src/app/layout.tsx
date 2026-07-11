@@ -24,6 +24,10 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://kizasu-shobo.jp"),
   title: "萌書房 | Kizasu Shobo",
   description: "奈良の地から、新世紀の思想を世に問う。萌書房。",
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({

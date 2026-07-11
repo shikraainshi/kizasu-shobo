@@ -19,9 +19,10 @@ export interface News {
 }
 
 /**
- * Fetch all books from Notion
+ * Notionから書籍ページをクエリし、生のプロパティをパースする（公開/非公開を問わず全件）。
+ * 公開サイト向け（isPublicでフィルタ）と管理画面向け（フィルタなし）の両方から呼ばれる。
  */
-export async function getBooksFromNotion(): Promise<Book[]> {
+async function queryAllBookPages(): Promise<Book[]> {
   if (!NOTION_BOOKS_DB_ID) {
     console.warn("NOTION_BOOKS_DB_ID is not defined. Using local JSON data.");
     return booksData as Book[];
@@ -151,12 +152,26 @@ export async function getBooksFromNotion(): Promise<Book[]> {
       };
     });
 
-    const publicBooks = books.filter((b: any) => b.isPublic);
-    return publicBooks;
+    return books;
   } catch (error) {
     console.error("Error fetching books from Notion:", error);
     return booksData as Book[];
   }
+}
+
+/**
+ * Fetch all books from Notion (公開サイト向け: 公開フラグがtrueのもののみ)
+ */
+export async function getBooksFromNotion(): Promise<Book[]> {
+  const books = await queryAllBookPages();
+  return books.filter((b) => b.isPublic);
+}
+
+/**
+ * Fetch all books from Notion (管理画面向け: 公開/非公開を問わず全件)
+ */
+export async function getBooksFromNotionAdmin(): Promise<Book[]> {
+  return queryAllBookPages();
 }
 
 /**

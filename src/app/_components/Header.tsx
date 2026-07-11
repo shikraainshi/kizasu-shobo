@@ -30,6 +30,10 @@ export default function Header() {
     };
   }, [isMenuOpen]);
 
+  if (pathname?.startsWith('/admin')) {
+    return null;
+  }
+
   const logoSrc = "/kizasu-logo-ogp.jpg";
   const mainTitle = "萌書房";
   const subTitle = "Kizasu Shobo";

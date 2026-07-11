@@ -1,12 +1,18 @@
 'use client';
 
 import { useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { Instagram, X } from 'lucide-react';
 
 export default function Footer() {
+  const pathname = usePathname();
   const [modalType, setModalType] = useState<'privacy' | 'terms' | null>(null);
 
   const closeModal = () => setModalType(null);
+
+  if (pathname?.startsWith('/admin')) {
+    return null;
+  }
 
   const legalContent = {
     privacy: {
