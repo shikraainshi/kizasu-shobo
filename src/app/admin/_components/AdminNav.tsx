@@ -3,12 +3,20 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { LayoutDashboard, BookOpen, Newspaper, LogOut } from 'lucide-react';
+import { LayoutDashboard, BookOpen, Newspaper, CalendarDays, LogOut } from 'lucide-react';
 
 const links = [
-  { href: '/admin', label: 'ダッシュボード', icon: LayoutDashboard, exact: true },
-  { href: '/admin/books', label: '書籍', icon: BookOpen, exact: false },
-  { href: '/admin/news', label: 'お知らせ', icon: Newspaper, exact: false },
+  { href: '/admin', label: 'ダッシュボード', icon: LayoutDashboard, exact: true, extraPrefixes: [] as string[] },
+  { href: '/admin/books', label: '書籍', icon: BookOpen, exact: false, extraPrefixes: [] as string[] },
+  { href: '/admin/news', label: 'お知らせ', icon: Newspaper, exact: false, extraPrefixes: [] as string[] },
+  {
+    href: '/admin/events',
+    label: 'イベント',
+    icon: CalendarDays,
+    exact: false,
+    // 申し込み履歴・キャンセルポリシー設定はイベントタブ内のサブナビに統合しているため、ここも「イベント」をアクティブにする
+    extraPrefixes: ['/admin/applications', '/admin/settings'],
+  },
 ];
 
 export default function AdminNav() {
@@ -35,8 +43,10 @@ export default function AdminNav() {
             萌書房 管理画面
           </Link>
           <nav className="hidden md:flex items-center gap-1">
-            {links.map(({ href, label, icon: Icon, exact }) => {
-              const active = exact ? pathname === href : pathname?.startsWith(href);
+            {links.map(({ href, label, icon: Icon, exact, extraPrefixes }) => {
+              const active = exact
+                ? pathname === href
+                : pathname?.startsWith(href) || extraPrefixes.some((p) => pathname?.startsWith(p));
               return (
                 <Link
                   key={href}

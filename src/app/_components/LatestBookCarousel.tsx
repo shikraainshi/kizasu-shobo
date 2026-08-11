@@ -125,29 +125,36 @@ export default function LatestBookCarousel({ books, title, footerHref, footerLab
                         opacity: isActive ? 1 : 0.5,
                       }}
                       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                      className="shrink-0 cursor-pointer"
-                      onClick={() => {
-                        if (isActive) return;
-                        setCurrentIndex(index);
-                      }}
+                      className="shrink-0"
                     >
-                      <div className={`w-full overflow-hidden border transition-all duration-700 bg-wakaba/10
-                        ${isActive ? 'border-accent/20 shadow-2xl' : 'border-transparent shadow-sm'}`}
+                      <Link
+                        href={`/books/${book.id}`}
+                        onClick={(e) => {
+                          if (!isActive) {
+                            e.preventDefault();
+                            setCurrentIndex(index);
+                          }
+                        }}
+                        className="block w-full cursor-pointer"
                       >
-                        {book.image ? (
-                          <img
-                            src={book.image}
-                            alt={book.title}
-                            className="w-full h-auto block"
-                          />
-                        ) : (
-                          <div className="aspect-[2/3] flex items-center justify-center p-3">
-                            <h3 className={`${isActive ? 'text-base' : 'text-[9px]'} font-serif font-bold leading-tight text-foreground text-center`}>
-                              {book.title}
-                            </h3>
-                          </div>
-                        )}
-                      </div>
+                        <div className={`w-full aspect-[2/3] overflow-hidden border transition-all duration-700 bg-wakaba/10
+                          ${isActive ? 'border-accent/20 shadow-2xl' : 'border-transparent shadow-sm'}`}
+                        >
+                          {book.image ? (
+                            <img
+                              src={book.image}
+                              alt={book.title}
+                              className="w-full h-full object-contain block"
+                            />
+                          ) : (
+                            <div className="w-full h-full flex items-center justify-center p-3">
+                              <h3 className={`${isActive ? 'text-base' : 'text-[9px]'} font-serif font-bold leading-tight text-foreground text-center`}>
+                                {book.title}
+                              </h3>
+                            </div>
+                          )}
+                        </div>
+                      </Link>
                     </motion.div>
                   );
                 })}

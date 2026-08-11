@@ -34,3 +34,15 @@ export interface NewsInput {
   urlLabel2?: string;
   slug?: string;
 }
+
+export interface EventInput {
+  title: string;
+  description: string;
+  coverImageUrl?: string;
+  venue: string;
+  startAt: string;
+  endAt?: string;
+  price: number;
+  capacity?: number | null;
+  status: "draft" | "published" | "closed";
+}

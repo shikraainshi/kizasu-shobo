@@ -1,6 +1,8 @@
 import Link from "next/link";
-import { BookOpen, Newspaper, Plus } from "lucide-react";
+import { BookOpen, Newspaper, CalendarDays, Plus } from "lucide-react";
 import { getAllBooksForAdmin, getAllNewsForAdmin } from "@/lib/admin/notion-admin";
+import { getAllEventsForAdmin } from "@/lib/admin/events-admin";
+import { getAllApplicationsForAdmin } from "@/lib/admin/applications-admin";
 
 export const dynamic = "force-dynamic";
 
@@ -8,6 +10,19 @@ export default async function AdminDashboardPage() {
   const [books, news] = await Promise.all([getAllBooksForAdmin(), getAllNewsForAdmin()]);
   const publicCount = books.filter((b) => b.isPublic).length;
   const draftCount = books.length - publicCount;
+
+  // Firestore未設定でもダッシュボード全体がクラッシュしないようにする
+  let firestoreError = false;
+  let events: Awaited<ReturnType<typeof getAllEventsForAdmin>> = [];
+  let applications: Awaited<ReturnType<typeof getAllApplicationsForAdmin>> = [];
+  try {
+    [events, applications] = await Promise.all([getAllEventsForAdmin(), getAllApplicationsForAdmin()]);
+  } catch (error) {
+    console.warn("Failed to load events/applications for dashboard:", error);
+    firestoreError = true;
+  }
+  const publishedEventCount = events.filter((e) => e.status === "published").length;
+  const paidApplicationCount = applications.filter((a) => a.status === "paid").length;
 
   const cards = [
     {
@@ -30,6 +45,22 @@ export default async function AdminDashboardPage() {
       newHref: "/admin/news/new",
       newLabel: "新規お知らせを追加",
     },
+    {
+      href: "/admin/events",
+      icon: CalendarDays,
+      label: "イベント",
+      stats: firestoreError
+        ? []
+        : [
+            { value: events.length, label: "総数" },
+            { value: publishedEventCount, label: "公開中" },
+            { value: applications.length, label: "累計申込" },
+            { value: paidApplicationCount, label: "決済済み" },
+          ],
+      newHref: "/admin/events/new",
+      newLabel: "新規イベントを追加",
+      note: firestoreError ? "Firestoreが未設定のため、統計を表示できません。" : undefined,
+    },
   ];
 
   return (
@@ -40,7 +71,7 @@ export default async function AdminDashboardPage() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {cards.map(({ href, icon: Icon, label, stats, newHref, newLabel }) => (
+        {cards.map(({ href, icon: Icon, label, stats, newHref, newLabel, note }) => (
           <div key={href} className="border border-border bg-wakaba/5 p-8 space-y-6">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
@@ -55,14 +86,18 @@ export default async function AdminDashboardPage() {
               </Link>
             </div>
 
-            <div className="flex gap-8">
-              {stats.map((s) => (
-                <div key={s.label}>
-                  <div className="text-3xl font-serif font-bold text-foreground tabular-nums">{s.value}</div>
-                  <div className="text-[11px] text-foreground/50 font-serif tracking-wider">{s.label}</div>
-                </div>
-              ))}
-            </div>
+            {note ? (
+              <p className="text-xs text-foreground/50 font-serif">{note}</p>
+            ) : (
+              <div className="flex gap-8">
+                {stats.map((s) => (
+                  <div key={s.label}>
+                    <div className="text-3xl font-serif font-bold text-foreground tabular-nums">{s.value}</div>
+                    <div className="text-[11px] text-foreground/50 font-serif tracking-wider">{s.label}</div>
+                  </div>
+                ))}
+              </div>
+            )}
 
             <Link
               href={newHref}

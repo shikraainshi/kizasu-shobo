@@ -1,4 +1,4 @@
-import type { BookInput, NewsInput } from "@/lib/admin/types";
+import type { BookInput, EventInput, NewsInput } from "@/lib/admin/types";
 import { BOOK_CATEGORIES, NEWS_CATEGORIES } from "@/lib/admin/constants";
 
 const MAX_IMAGE_BYTES = 20 * 1024 * 1024; // 20MB (Notion単一パートアップロードの目安上限)
@@ -46,6 +46,37 @@ export function validateNewsInput(input: Partial<NewsInput>, isCreate: boolean):
       errors.push("カテゴリを選択してください。");
     } else if (!(NEWS_CATEGORIES as readonly string[]).includes(input.category)) {
       errors.push("カテゴリの値が不正です。");
+    }
+  }
+
+  return errors;
+}
+
+export function validateEventInput(input: Partial<EventInput>, isCreate: boolean): string[] {
+  const errors: string[] = [];
+
+  if (isCreate || input.title !== undefined) {
+    if (!input.title?.trim()) errors.push("イベント名を入力してください。");
+  }
+  if (isCreate || input.venue !== undefined) {
+    if (!input.venue?.trim()) errors.push("開催場所を入力してください。");
+  }
+  if (isCreate || input.startAt !== undefined) {
+    if (!input.startAt?.trim()) errors.push("開催日時を入力してください。");
+  }
+  if (isCreate || input.price !== undefined) {
+    if (input.price === undefined || Number.isNaN(input.price) || input.price < 0) {
+      errors.push("参加費は0以上の数字で入力してください。");
+    }
+  }
+  if (input.capacity !== undefined && input.capacity !== null) {
+    if (Number.isNaN(input.capacity) || input.capacity < 1) {
+      errors.push("定員は1以上の数字で入力してください（空欄で無制限）。");
+    }
+  }
+  if (isCreate || input.status !== undefined) {
+    if (!["draft", "published", "closed"].includes(input.status || "")) {
+      errors.push("公開状態の値が不正です。");
     }
   }
 
