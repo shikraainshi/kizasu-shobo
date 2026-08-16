@@ -3,7 +3,13 @@ export type LineTextMessage = {
   text: string;
 };
 
-export type LineMessage = LineTextMessage;
+export type LineFlexMessage = {
+  type: "flex";
+  altText: string;
+  contents: unknown;
+};
+
+export type LineMessage = LineTextMessage | LineFlexMessage;
 
 export type LineWebhookEvent = {
   type: string;
@@ -11,6 +17,13 @@ export type LineWebhookEvent = {
   message?: {
     type: string;
     text?: string;
+  };
+  postback?: {
+    data: string;
+  };
+  source?: {
+    type: string;
+    userId?: string;
   };
 };
 

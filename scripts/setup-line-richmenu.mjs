@@ -1,8 +1,9 @@
 // LINE公式アカウントのリッチメニューを作成・画像アップロード・全員適用まで行うスクリプト。
 // 使い方: node scripts/setup-line-richmenu.mjs ./path/to/richmenu.png
 // 画像はPNG形式、横800〜2500px・縦250〜1686pxの範囲で用意すること。
-// レイアウトは画像を3列x2行に分割し、右上にEVENT（縦長）、
-// 下段にWEB／INSTAGRAM／CONTACTを3等分で配置（左上はボタンなしの背景領域）。
+// レイアウトは画像を3列x2行の均等グリッドに分割:
+//   上段: 左=ロゴ（ボタンなし） / 中央=イベント（postback） / 右=レンタルスペース（postback）
+//   下段: 左=WEB（uri） / 中央=INSTAGRAM（uri） / 右=お問い合わせ（postback）
 // ボタン領域は画像の実サイズから自動計算する。
 
 import { readFileSync } from "fs";
@@ -32,12 +33,8 @@ if (!imagePath) {
 const ext = extname(imagePath).toLowerCase();
 const contentType = ext === ".jpg" || ext === ".jpeg" ? "image/jpeg" : "image/png";
 
-const SITE_URL = "https://kizasu-shobo.jp";
 const HOMEPAGE_URL = "https://www.kizasu-shobo.jp/";
 const INSTAGRAM_URL = "https://www.instagram.com/kawaberi_bookandcafe/";
-const LIFF_ID = env.NEXT_PUBLIC_LIFF_ID;
-// LIFF ID未設定時は通常のサイトURLで代替（申込完了時のLINEトーク通知は無効）
-const EVENT_URL = LIFF_ID ? `https://liff.line.me/${LIFF_ID}/events` : `${SITE_URL}/events`;
 
 function getPngDimensions(buffer) {
   const isPng =
@@ -54,9 +51,11 @@ function buildRichMenuDefinition(width, height) {
   const colWidths = [Math.round(width / 3), Math.round(width / 3)];
   colWidths.push(width - colWidths[0] - colWidths[1]);
   const rowHeight = Math.round(height / 2);
+  const col1X = colWidths[0];
   const col2X = colWidths[0] + colWidths[1];
+  const row2Height = height - rowHeight;
 
-  // 3列x2行に分割し、左上2列(y:0〜rowHeight)はボタンなしの背景領域として残す。
+  // 3列x2行の均等グリッド。左上（ロゴ）はボタンなしの背景領域として残す。
   return {
     size: { width, height },
     selected: true,
@@ -64,24 +63,34 @@ function buildRichMenuDefinition(width, height) {
     chatBarText: "メニュー",
     areas: [
       {
-        // 右上: EVENT（縦長）
+        // 上段中央: イベント（準備中メッセージ）
+        bounds: { x: col1X, y: 0, width: colWidths[1], height: rowHeight },
+        action: { type: "postback", label: "イベント", data: "event_placeholder", displayText: "イベント" },
+      },
+      {
+        // 上段右: レンタルスペース（準備中メッセージ）
         bounds: { x: col2X, y: 0, width: colWidths[2], height: rowHeight },
-        action: { type: "uri", label: "イベント", uri: EVENT_URL },
+        action: {
+          type: "postback",
+          label: "レンタルスペース",
+          data: "rental_placeholder",
+          displayText: "レンタルスペース",
+        },
       },
       {
         // 下段左: WEB
-        bounds: { x: 0, y: rowHeight, width: colWidths[0], height: height - rowHeight },
+        bounds: { x: 0, y: rowHeight, width: colWidths[0], height: row2Height },
         action: { type: "uri", label: "ホームページ", uri: HOMEPAGE_URL },
       },
       {
         // 下段中央: INSTAGRAM
-        bounds: { x: colWidths[0], y: rowHeight, width: colWidths[1], height: height - rowHeight },
+        bounds: { x: col1X, y: rowHeight, width: colWidths[1], height: row2Height },
         action: { type: "uri", label: "インスタグラム", uri: INSTAGRAM_URL },
       },
       {
-        // 下段右: CONTACT
-        bounds: { x: col2X, y: rowHeight, width: colWidths[2], height: height - rowHeight },
-        action: { type: "uri", label: "お問合せ", uri: `${SITE_URL}/contact` },
+        // 下段右: お問い合わせ（カテゴリ選択フロー）
+        bounds: { x: col2X, y: rowHeight, width: colWidths[2], height: row2Height },
+        action: { type: "postback", label: "お問い合わせ", data: "contact_menu", displayText: "お問い合わせ" },
       },
     ],
   };

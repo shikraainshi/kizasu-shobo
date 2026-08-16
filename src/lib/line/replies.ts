@@ -30,15 +30,9 @@ export const GREETING_MESSAGE = `友だち追加ありがとうございます�
 
 川べりで過ごす時間が、日々のなかの小さな楽しみになれば幸いです。`;
 
-export const DEFAULT_REPLY = `メッセージありがとうございます。
-こちらのメッセージには自動でお答えすることができません。
-
-お問い合わせの際は、下のメニューから「お問い合わせ」をお選びください。
-内容に応じてご案内いたします。`;
-
-export function resolveReply(text: string): string {
+export function resolveReply(text: string): string | undefined {
   const matched = KEYWORD_REPLIES.find(({ keywords }) =>
     keywords.some((keyword) => text.includes(keyword))
   );
-  return matched?.reply ?? DEFAULT_REPLY;
+  return matched?.reply;
 }
