@@ -92,3 +92,16 @@ export async function getBookById(id: number): Promise<Book | undefined> {
   const books = await getBooks();
   return books.find(book => book.id === id);
 }
+
+const KINOKUNIYA_BASE_URL = "https://www.kinokuniya.co.jp/f/dsg-01-";
+
+/**
+ * ISBNから紀伊國屋書店の商品ページURLを生成する。
+ * ISBNが空、またはハイフン・空白を除去した結果が空の場合はundefinedを返す。
+ */
+export function getKinokuniyaUrl(isbn: string | undefined | null): string | undefined {
+  if (!isbn) return undefined;
+  const normalized = isbn.replace(/[-\s　]/g, "");
+  if (!normalized) return undefined;
+  return `${KINOKUNIYA_BASE_URL}${normalized}`;
+}

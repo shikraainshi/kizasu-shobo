@@ -1,4 +1,4 @@
-import { getBookById } from "@/lib/books";
+import { getBookById, getKinokuniyaUrl } from "@/lib/books";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
@@ -12,6 +12,8 @@ export default async function BookDetailPage({ params }: { params: Promise<{ id:
   if (!book) {
     notFound();
   }
+
+  const kinokuniyaUrl = getKinokuniyaUrl(book.isbn);
 
   return (
     <div className="flex flex-col gap-16 pb-24 bg-background">
@@ -101,15 +103,17 @@ export default async function BookDetailPage({ params }: { params: Promise<{ id:
 
               {/* Purchase Button */}
               <div className="pt-12 flex flex-col sm:flex-row gap-6">
-                <a 
-                  href="https://www.kinokuniya.co.jp/disp/CSfDispListPage_001.jsp?qsd=true&ptk=01&publisher-key=%E8%90%8C%E6%9B%B8%E6%88%BF"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-wakaba-base text-accent border border-accent/10 px-12 py-5 rounded-none font-bold tracking-[0.2em] text-[11px] uppercase hover:bg-wakaba-hover hover:border-accent/30 transition-all font-serif shadow-sm text-center"
-                >
-                  購入する（紀伊國屋書店）
-                </a>
-                <Link 
+                {kinokuniyaUrl && (
+                  <a
+                    href={kinokuniyaUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-wakaba-base text-accent border border-accent/10 px-12 py-5 rounded-none font-bold tracking-[0.2em] text-[11px] uppercase hover:bg-wakaba-hover hover:border-accent/30 transition-all font-serif shadow-sm text-center"
+                  >
+                    購入する（紀伊國屋書店）
+                  </a>
+                )}
+                <Link
                   href="/contact" 
                   className="border border-accent/20 text-accent/60 px-12 py-5 rounded-none font-bold tracking-[0.2em] text-[11px] uppercase hover:bg-wakaba-hover hover:text-accent transition-all font-serif text-center"
                 >
