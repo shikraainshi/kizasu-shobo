@@ -10,6 +10,7 @@ import {
   FREE_TEXT_PROMPT,
   RENTAL_PLACEHOLDER_MESSAGE,
 } from "@/lib/line/contact-content";
+import type { ContactAnswer } from "@/lib/line/contact-content";
 import { markAwaitingFreeText } from "@/lib/line/contact-state";
 import { LineFlexMessage, LineMessage } from "@/lib/line/types";
 
@@ -77,6 +78,35 @@ function buildMenuFlex(
   };
 }
 
+function buildLinkFlex(text: string, linkLabel: string, linkUrl: string): LineFlexMessage {
+  return {
+    type: "flex",
+    altText: text,
+    contents: {
+      type: "bubble",
+      body: {
+        type: "box",
+        layout: "vertical",
+        backgroundColor: FLEX_COLORS.background,
+        paddingAll: "20px",
+        spacing: "md",
+        contents: [
+          { type: "text", text, size: "sm", color: FLEX_COLORS.title, wrap: true },
+          { type: "separator", margin: "md", color: FLEX_COLORS.separator },
+          {
+            type: "button",
+            style: "primary",
+            color: FLEX_COLORS.button,
+            height: "sm",
+            margin: "md",
+            action: { type: "uri", label: linkLabel, uri: linkUrl },
+          },
+        ],
+      },
+    },
+  };
+}
+
 export function showContactMenu(intro?: string): LineFlexMessage {
   return buildMenuFlex(
     intro ?? "お問い合わせ",
@@ -118,11 +148,14 @@ async function sendContactAnswer(
     return { type: "text", text: promptText };
   }
 
-  const answer = CONTACT_ANSWERS[`${categoryId}:${itemId}`];
+  const answer: ContactAnswer | undefined = CONTACT_ANSWERS[`${categoryId}:${itemId}`];
   if (!answer) {
     return showContactMenu();
   }
-  return { type: "text", text: answer };
+  if (typeof answer === "string") {
+    return { type: "text", text: answer };
+  }
+  return buildLinkFlex(answer.text, answer.linkLabel, answer.linkUrl);
 }
 
 async function handleContactCategory(categoryId: string, userId?: string): Promise<LineMessage> {
