@@ -5,6 +5,7 @@ import { getEventById } from "@/lib/events";
 import { getPaidParticipantCount } from "@/lib/applications";
 import { getCancelPolicy } from "@/lib/settings";
 import { formatEventDateTime } from "@/lib/events-format";
+import EventFlyer from "@/app/events/_components/EventFlyer";
 
 export const dynamic = "force-dynamic";
 
@@ -17,7 +18,8 @@ export default async function EventDetailPage({
   const event = await getEventById(eventId);
   if (!event || event.status !== "published") notFound();
 
-  const cancelPolicy = await getCancelPolicy();
+  const commonCancelPolicy = await getCancelPolicy();
+  const cancelPolicy = event.cancellationPolicy || commonCancelPolicy;
   const remaining =
     event.capacity !== null ? event.capacity - (await getPaidParticipantCount(event.id)) : null;
   const isFull = remaining !== null && remaining <= 0;
@@ -31,16 +33,22 @@ export default async function EventDetailPage({
       </section>
 
       <section className="max-w-3xl mx-auto px-6 py-14 space-y-10">
+        <EventFlyer url={event.coverImageUrl} mediaType={event.mediaType} title={event.title} />
+
         <div className="flex flex-wrap gap-x-10 gap-y-3 text-sm text-foreground/70 font-serif border-b border-border/40 pb-8">
-          <span className="flex items-center gap-2">
-            <CalendarDays size={18} className="text-accent/60" />
-            {formatEventDateTime(event.startAt)}
-            {event.endAt ? ` 〜 ${formatEventDateTime(event.endAt)}` : ""}
-          </span>
-          <span className="flex items-center gap-2">
-            <MapPin size={18} className="text-accent/60" />
-            {event.venue}
-          </span>
+          {event.startAt && (
+            <span className="flex items-center gap-2">
+              <CalendarDays size={18} className="text-accent/60" />
+              {formatEventDateTime(event.startAt)}
+              {event.endAt ? ` 〜 ${formatEventDateTime(event.endAt)}` : ""}
+            </span>
+          )}
+          {event.venue && (
+            <span className="flex items-center gap-2">
+              <MapPin size={18} className="text-accent/60" />
+              {event.venue}
+            </span>
+          )}
           <span className="flex items-center gap-2">
             <Ticket size={18} className="text-accent/60" />
             {event.price > 0 ? `${event.price.toLocaleString()}円` : "参加無料"}
@@ -70,7 +78,7 @@ export default async function EventDetailPage({
               href={`/events/${event.id}/apply`}
               className="inline-flex items-center justify-center w-full bg-accent text-white py-5 font-bold tracking-[0.3em] text-[12px] uppercase hover:bg-accent/90 transition-all font-serif shadow-lg"
             >
-              申し込む
+              申し込みへ進む
             </Link>
           )}
           {remaining !== null && !isFull && (

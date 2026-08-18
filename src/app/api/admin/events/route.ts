@@ -9,11 +9,13 @@ function parseEventInput(body: Record<string, unknown>): EventInput {
     title: String(body.title || ""),
     description: String(body.description || ""),
     coverImageUrl: String(body.coverImageUrl || ""),
+    mediaType: body.mediaType === "pdf" ? "pdf" : "image",
     venue: String(body.venue || ""),
     startAt: String(body.startAt || ""),
     endAt: String(body.endAt || ""),
     price: Number(body.price) || 0,
     capacity: body.capacity === "" || body.capacity === null || body.capacity === undefined ? null : Number(body.capacity),
+    cancellationPolicy: String(body.cancellationPolicy || ""),
     status: body.status === "published" || body.status === "closed" ? body.status : "draft",
   };
 }

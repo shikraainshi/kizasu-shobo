@@ -97,9 +97,9 @@ export default function EventsAdminClient({ events }: { events: EventDoc[] }) {
               >
                 <td className="p-3 text-sm font-serif text-foreground font-bold max-w-[280px]">{event.title}</td>
                 <td className="p-3 text-sm font-serif text-foreground/90 whitespace-nowrap">
-                  {formatEventDateTime(event.startAt)}
+                  {event.startAt ? formatEventDateTime(event.startAt) : "—"}
                 </td>
-                <td className="p-3 text-sm font-serif text-foreground/90 whitespace-nowrap">{event.venue}</td>
+                <td className="p-3 text-sm font-serif text-foreground/90 whitespace-nowrap">{event.venue || "—"}</td>
                 <td className="p-3 text-sm font-serif text-foreground/90 text-right whitespace-nowrap tabular-nums">
                   {event.price > 0 ? `${event.price.toLocaleString()}円` : '無料'}
                 </td>

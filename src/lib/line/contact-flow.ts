@@ -5,13 +5,13 @@ import {
   ContactCategoryId,
   ContactQuestionCategoryId,
   EVENT_FREE_TEXT_PROMPT,
-  EVENT_PLACEHOLDER_MESSAGE,
   FREE_TEXT_ITEMS,
   FREE_TEXT_PROMPT,
   RENTAL_PLACEHOLDER_MESSAGE,
 } from "@/lib/line/contact-content";
 import type { ContactAnswer } from "@/lib/line/contact-content";
 import { markAwaitingFreeText } from "@/lib/line/contact-state";
+import { resolveEventListMessage } from "@/lib/line/event-flow";
 import { LineFlexMessage, LineMessage } from "@/lib/line/types";
 
 // ブックカフェ「川べり」のトーンに合わせた落ち着いた配色（LINEグリーンは使わない）。
@@ -155,6 +155,9 @@ async function sendContactAnswer(
   if (typeof answer === "string") {
     return { type: "text", text: answer };
   }
+  if (answer.type === "image") {
+    return { type: "image", originalContentUrl: answer.url, previewImageUrl: answer.url };
+  }
   return buildLinkFlex(answer.text, answer.linkLabel, answer.linkUrl);
 }
 
@@ -167,8 +170,8 @@ async function handleContactCategory(categoryId: string, userId?: string): Promi
 }
 
 export async function resolvePostbackMessage(data: string, userId?: string): Promise<LineMessage> {
-  if (data === "event_placeholder") {
-    return { type: "text", text: EVENT_PLACEHOLDER_MESSAGE };
+  if (data === "event_list") {
+    return resolveEventListMessage();
   }
   if (data === "rental_placeholder") {
     return { type: "text", text: RENTAL_PLACEHOLDER_MESSAGE };

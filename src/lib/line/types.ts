@@ -9,7 +9,13 @@ export type LineFlexMessage = {
   contents: unknown;
 };
 
-export type LineMessage = LineTextMessage | LineFlexMessage;
+export type LineImageMessage = {
+  type: "image";
+  originalContentUrl: string;
+  previewImageUrl: string;
+};
+
+export type LineMessage = LineTextMessage | LineFlexMessage | LineImageMessage;
 
 export type LineWebhookEvent = {
   type: string;

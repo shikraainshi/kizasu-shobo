@@ -58,12 +58,6 @@ export function validateEventInput(input: Partial<EventInput>, isCreate: boolean
   if (isCreate || input.title !== undefined) {
     if (!input.title?.trim()) errors.push("イベント名を入力してください。");
   }
-  if (isCreate || input.venue !== undefined) {
-    if (!input.venue?.trim()) errors.push("開催場所を入力してください。");
-  }
-  if (isCreate || input.startAt !== undefined) {
-    if (!input.startAt?.trim()) errors.push("開催日時を入力してください。");
-  }
   if (isCreate || input.price !== undefined) {
     if (input.price === undefined || Number.isNaN(input.price) || input.price < 0) {
       errors.push("参加費は0以上の数字で入力してください。");
@@ -79,6 +73,11 @@ export function validateEventInput(input: Partial<EventInput>, isCreate: boolean
       errors.push("公開状態の値が不正です。");
     }
   }
+  if (isCreate || input.mediaType !== undefined) {
+    if (!["image", "pdf"].includes(input.mediaType || "")) {
+      errors.push("チラシの種類の値が不正です。");
+    }
+  }
 
   return errors;
 }
@@ -90,6 +89,21 @@ export function validateImageFile(image: File | null | undefined): string | null
   }
   if (image.size > MAX_IMAGE_BYTES) {
     return "画像サイズは20MB以下にしてください。";
+  }
+  return null;
+}
+
+export function validateFlyerFile(file: File | null | undefined, mediaType: "image" | "pdf"): string | null {
+  if (!file || file.size === 0) return null;
+  if (mediaType === "pdf") {
+    if (file.type !== "application/pdf") {
+      return "PDFファイルを選択してください。";
+    }
+  } else if (!file.type.startsWith("image/")) {
+    return "画像ファイルを選択してください。";
+  }
+  if (file.size > MAX_IMAGE_BYTES) {
+    return "ファイルサイズは20MB以下にしてください。";
   }
   return null;
 }

@@ -20,11 +20,13 @@ export async function createEvent(input: EventInput): Promise<{ id: string }> {
     title: input.title,
     description: input.description || "",
     coverImageUrl: input.coverImageUrl || "",
+    mediaType: input.mediaType,
     venue: input.venue,
     startAt: input.startAt,
     endAt: input.endAt || "",
     price: input.price,
     capacity: input.capacity ?? null,
+    cancellationPolicy: input.cancellationPolicy || "",
     status: input.status,
     createdAt: now,
     updatedAt: now,
@@ -37,11 +39,13 @@ export async function updateEvent(eventId: string, input: Partial<EventInput>): 
   if (input.title !== undefined) updates.title = input.title;
   if (input.description !== undefined) updates.description = input.description;
   if (input.coverImageUrl !== undefined) updates.coverImageUrl = input.coverImageUrl;
+  if (input.mediaType !== undefined) updates.mediaType = input.mediaType;
   if (input.venue !== undefined) updates.venue = input.venue;
   if (input.startAt !== undefined) updates.startAt = input.startAt;
   if (input.endAt !== undefined) updates.endAt = input.endAt;
   if (input.price !== undefined) updates.price = input.price;
   if (input.capacity !== undefined) updates.capacity = input.capacity;
+  if (input.cancellationPolicy !== undefined) updates.cancellationPolicy = input.cancellationPolicy;
   if (input.status !== undefined) updates.status = input.status;
 
   await getDb().collection(EVENTS_COLLECTION).doc(eventId).update(updates);

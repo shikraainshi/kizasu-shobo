@@ -1,4 +1,5 @@
 import { getDb } from "@/lib/firebase/admin";
+import { EVENTS_COLLECTION } from "@/lib/events";
 
 export type ApplicationStatus = "pending_payment" | "paid" | "canceled" | "failed";
 
@@ -12,6 +13,10 @@ export interface ApplicationDoc {
   participantCount: number;
   amount: number;
   cancelPolicyAgreed: boolean;
+  lineUserId?: string;
+  area?: string;
+  source?: string;
+  overbooked?: boolean;
   status: ApplicationStatus;
   stripeCheckoutSessionId: string;
   stripePaymentIntentId?: string;
@@ -20,6 +25,10 @@ export interface ApplicationDoc {
 }
 
 export const APPLICATIONS_COLLECTION = "applications";
+
+// 居住エリア・きっかけの選択肢。後から増減しやすいようここで一元管理する。
+export const AREA_OPTIONS = ["奈良市内", "奈良県内", "大阪府", "京都府", "その他県外"] as const;
+export const SOURCE_OPTIONS = ["Instagram", "LINE", "店頭", "知人紹介", "HP", "その他"] as const;
 
 export function toApplication(doc: FirebaseFirestore.DocumentSnapshot): ApplicationDoc {
   const data = doc.data() || {};
@@ -33,6 +42,10 @@ export function toApplication(doc: FirebaseFirestore.DocumentSnapshot): Applicat
     participantCount: data.participantCount || 1,
     amount: data.amount || 0,
     cancelPolicyAgreed: !!data.cancelPolicyAgreed,
+    lineUserId: data.lineUserId || undefined,
+    area: data.area || undefined,
+    source: data.source || undefined,
+    overbooked: data.overbooked || undefined,
     status: data.status || "pending_payment",
     stripeCheckoutSessionId: data.stripeCheckoutSessionId || "",
     stripePaymentIntentId: data.stripePaymentIntentId || undefined,
@@ -49,6 +62,10 @@ export interface CreatePendingApplicationInput {
   email: string;
   participantCount: number;
   amount: number;
+  cancelPolicyAgreed: boolean;
+  lineUserId?: string;
+  area?: string;
+  source?: string;
 }
 
 export async function createPendingApplication(
@@ -63,7 +80,10 @@ export async function createPendingApplication(
     email: input.email,
     participantCount: input.participantCount,
     amount: input.amount,
-    cancelPolicyAgreed: true,
+    cancelPolicyAgreed: input.cancelPolicyAgreed,
+    ...(input.lineUserId ? { lineUserId: input.lineUserId } : {}),
+    ...(input.area ? { area: input.area } : {}),
+    ...(input.source ? { source: input.source } : {}),
     status: "pending_payment" as ApplicationStatus,
     stripeCheckoutSessionId: "",
     createdAt: new Date().toISOString(),
@@ -78,15 +98,42 @@ export async function attachStripeSession(applicationId: string, sessionId: stri
   });
 }
 
+// 決済確定の唯一の入口。Webhookの重複配信や、無料イベントの即時確定と衝突しても
+// 安全なようトランザクションで冪等性と定員の再チェックを行う。
+// 決済自体は既に完了しているため、超過が判明しても申込は"paid"のまま維持し、
+// overbookedフラグで管理画面から把握できるようにする。
 export async function markApplicationPaid(applicationId: string, paymentIntentId?: string): Promise<void> {
-  await getDb()
-    .collection(APPLICATIONS_COLLECTION)
-    .doc(applicationId)
-    .update({
+  const db = getDb();
+  const appRef = db.collection(APPLICATIONS_COLLECTION).doc(applicationId);
+
+  await db.runTransaction(async (tx) => {
+    const appSnap = await tx.get(appRef);
+    if (!appSnap.exists) return;
+    const application = toApplication(appSnap);
+    if (application.status === "paid") return; // 冪等性: 既に確定済みなら何もしない
+
+    const eventSnap = await tx.get(db.collection(EVENTS_COLLECTION).doc(application.eventId));
+    const capacity: number | null = eventSnap.exists ? eventSnap.data()?.capacity ?? null : null;
+
+    let overbooked = false;
+    if (capacity !== null) {
+      const paidSnap = await tx.get(
+        db
+          .collection(APPLICATIONS_COLLECTION)
+          .where("eventId", "==", application.eventId)
+          .where("status", "==", "paid")
+      );
+      const alreadyPaid = paidSnap.docs.reduce((sum, d) => sum + (d.data().participantCount || 0), 0);
+      overbooked = alreadyPaid + application.participantCount > capacity;
+    }
+
+    tx.update(appRef, {
       status: "paid",
       paidAt: new Date().toISOString(),
       ...(paymentIntentId ? { stripePaymentIntentId: paymentIntentId } : {}),
+      ...(overbooked ? { overbooked: true } : {}),
     });
+  });
 }
 
 export async function getApplicationById(applicationId: string): Promise<ApplicationDoc | undefined> {

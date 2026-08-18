@@ -63,9 +63,9 @@ function buildRichMenuDefinition(width, height) {
     chatBarText: "メニュー",
     areas: [
       {
-        // 上段中央: イベント（準備中メッセージ）
+        // 上段中央: イベント（受付中イベント一覧をカルーセル表示）
         bounds: { x: col1X, y: 0, width: colWidths[1], height: rowHeight },
-        action: { type: "postback", label: "イベント", data: "event_placeholder", displayText: "イベント" },
+        action: { type: "postback", label: "イベント", data: "event_list", displayText: "イベント" },
       },
       {
         // 上段右: レンタルスペース（準備中メッセージ）

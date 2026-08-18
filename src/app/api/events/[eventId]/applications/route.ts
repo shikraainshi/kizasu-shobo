@@ -15,9 +15,12 @@ export async function POST(request: Request, { params }: { params: Promise<{ eve
     const email = String(body.email || "").trim();
     const participantCount = Math.max(1, Math.floor(Number(body.participantCount) || 1));
     const cancelPolicyAgreed = !!body.cancelPolicyAgreed;
+    const area = body.area ? String(body.area).trim() : undefined;
+    const source = body.source ? String(body.source).trim() : undefined;
+    const lineUserId = body.lineUserId ? String(body.lineUserId).trim() : undefined;
 
-    if (!name || !phone || !email) {
-      return NextResponse.json({ error: "お名前・電話番号・メールアドレスを入力してください。" }, { status: 400 });
+    if (!name || !phone) {
+      return NextResponse.json({ error: "お名前・電話番号を入力してください。" }, { status: 400 });
     }
     if (!cancelPolicyAgreed) {
       return NextResponse.json({ error: "キャンセルポリシーへの同意が必要です。" }, { status: 400 });
@@ -45,6 +48,10 @@ export async function POST(request: Request, { params }: { params: Promise<{ eve
       email,
       participantCount,
       amount,
+      cancelPolicyAgreed,
+      area,
+      source,
+      lineUserId,
     });
 
     // LIFF ID未設定時は通常のサイトURLで戻す（LINEトーク完了通知は送信されない）

@@ -1,17 +1,20 @@
 import { getDb } from "@/lib/firebase/admin";
 
 export type EventStatus = "draft" | "published" | "closed";
+export type EventMediaType = "image" | "pdf";
 
 export interface EventDoc {
   id: string;
   title: string;
   description: string;
-  coverImageUrl?: string;
+  coverImageUrl?: string; // mediaTypeに応じて画像またはPDFのURL
+  mediaType: EventMediaType;
   venue: string;
   startAt: string; // ISO
   endAt?: string; // ISO
   price: number; // 円
   capacity: number | null; // nullは無制限
+  cancellationPolicy?: string; // 未設定時は共通のキャンセルポリシー（settings）にフォールバック
   status: EventStatus;
   createdAt: string;
   updatedAt: string;
@@ -26,11 +29,13 @@ export function toEvent(doc: FirebaseFirestore.DocumentSnapshot): EventDoc {
     title: data.title || "",
     description: data.description || "",
     coverImageUrl: data.coverImageUrl || undefined,
+    mediaType: data.mediaType === "pdf" ? "pdf" : "image",
     venue: data.venue || "",
     startAt: data.startAt || "",
     endAt: data.endAt || undefined,
     price: data.price || 0,
     capacity: data.capacity ?? null,
+    cancellationPolicy: data.cancellationPolicy || undefined,
     status: data.status || "draft",
     createdAt: data.createdAt || "",
     updatedAt: data.updatedAt || "",

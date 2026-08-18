@@ -34,6 +34,19 @@ export async function sendLineCompletionMessage(text: string): Promise<boolean> 
   }
 }
 
+// トーク画面から開かれている場合のみLINEユーザーIDを返す。それ以外はundefined。
+export async function getLiffUserId(): Promise<string | undefined> {
+  try {
+    await initLiff();
+    if (!liff.isInClient()) return undefined;
+    const context = liff.getContext();
+    return context?.userId || undefined;
+  } catch (err) {
+    console.error('liff getContext failed', err);
+    return undefined;
+  }
+}
+
 export function closeLiffWindow(): void {
   if (liff.isInClient()) {
     liff.closeWindow();

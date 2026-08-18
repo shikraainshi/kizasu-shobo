@@ -52,9 +52,20 @@ export default async function EventApplyCompletePage({
     );
   }
 
-  const notifyText = `【申込完了】${event.title}\nお申し込みありがとうございました。決済が完了しました。\n開催日時: ${formatEventDateTime(
-    event.startAt
-  )}\n参加人数: ${application?.participantCount ?? 1}名`;
+  const participantName = application?.name || "";
+  const participantCount = application?.participantCount ?? 1;
+  const eventDateTime = formatEventDateTime(event.startAt);
+
+  const notifyText = [
+    "【イベント申込完了】",
+    "",
+    `イベント：${event.title}`,
+    eventDateTime ? `日時：${eventDateTime}` : null,
+    `参加者：${participantName}`,
+    `人数：${participantCount}名`,
+  ]
+    .filter((line): line is string => line !== null)
+    .join("\n");
 
   return (
     <div className="min-h-[70vh] flex items-center justify-center px-6 bg-background">
@@ -63,11 +74,33 @@ export default async function EventApplyCompletePage({
         <div className="space-y-3">
           <h1 className="text-2xl font-serif font-bold text-foreground">お申し込みが完了しました</h1>
           <p className="text-sm text-foreground/60 font-serif leading-relaxed">
-            {event.title} へのお申し込み・決済が完了しました。
-            <br />
             ご参加をお待ちしております。
           </p>
         </div>
+
+        <dl className="text-left border border-border/40 bg-wakaba/5 p-6 grid grid-cols-[80px_1fr] gap-y-4 text-sm">
+          <dt className="text-accent/40 font-serif font-bold uppercase tracking-widest text-[9px] self-center">
+            イベント
+          </dt>
+          <dd className="text-foreground/80 font-serif">{event.title}</dd>
+          {eventDateTime && (
+            <>
+              <dt className="text-accent/40 font-serif font-bold uppercase tracking-widest text-[9px] self-center">
+                日時
+              </dt>
+              <dd className="text-foreground/80 font-serif">{eventDateTime}</dd>
+            </>
+          )}
+          <dt className="text-accent/40 font-serif font-bold uppercase tracking-widest text-[9px] self-center">
+            参加者
+          </dt>
+          <dd className="text-foreground/80 font-serif">{participantName}</dd>
+          <dt className="text-accent/40 font-serif font-bold uppercase tracking-widest text-[9px] self-center">
+            人数
+          </dt>
+          <dd className="text-foreground/80 font-serif">{participantCount}名</dd>
+        </dl>
+
         <CompleteNotifier message={notifyText} />
       </div>
     </div>

@@ -20,7 +20,19 @@ const STATUS_BADGE: Record<ApplicationStatus, string> = {
 };
 
 function toCsv(applications: ApplicationDoc[]): string {
-  const header = ['イベント', '氏名', '電話番号', 'メール', '人数', '金額', 'ステータス', '申込日時'];
+  const header = [
+    'イベント',
+    '氏名',
+    '電話番号',
+    'メール',
+    '人数',
+    '金額',
+    '居住エリア',
+    'きっかけ',
+    'ステータス',
+    '定員超過',
+    '申込日時',
+  ];
   const rows = applications.map((a) => [
     a.eventTitle,
     a.name,
@@ -28,7 +40,10 @@ function toCsv(applications: ApplicationDoc[]): string {
     a.email,
     String(a.participantCount),
     String(a.amount),
+    a.area || '',
+    a.source || '',
     STATUS_LABEL[a.status],
+    a.overbooked ? 'はい' : '',
     a.createdAt,
   ]);
   return [header, ...rows]
@@ -143,7 +158,7 @@ export default function ApplicationsAdminClient({ applications }: { applications
       </div>
 
       <div className="border-2 border-foreground/15 overflow-x-auto bg-background">
-        <table className="w-full min-w-[900px] border-collapse">
+        <table className="w-full min-w-[1100px] border-collapse">
           <thead>
             <tr className="bg-wakaba-base/40 text-left text-[11px] font-bold tracking-[0.1em] uppercase text-foreground/80 font-serif border-b-2 border-foreground/15">
               <th className="p-3">イベント</th>
@@ -152,6 +167,8 @@ export default function ApplicationsAdminClient({ applications }: { applications
               <th className="p-3">メール</th>
               <th className="p-3">人数</th>
               <th className="p-3 text-right">金額</th>
+              <th className="p-3">エリア</th>
+              <th className="p-3">きっかけ</th>
               <th className="p-3">申込日時</th>
               <th className="p-3">ステータス</th>
             </tr>
@@ -167,28 +184,37 @@ export default function ApplicationsAdminClient({ applications }: { applications
                 <td className="p-3 text-sm font-serif text-foreground/90 text-right whitespace-nowrap tabular-nums">
                   {a.amount.toLocaleString()}円
                 </td>
+                <td className="p-3 text-sm font-serif text-foreground/70 whitespace-nowrap">{a.area || '—'}</td>
+                <td className="p-3 text-sm font-serif text-foreground/70 whitespace-nowrap">{a.source || '—'}</td>
                 <td className="p-3 text-sm font-serif text-foreground/70 whitespace-nowrap">
                   {a.createdAt ? new Date(a.createdAt).toLocaleString('ja-JP') : '—'}
                 </td>
                 <td className="p-3">
-                  <select
-                    value={a.status}
-                    disabled={updatingId === a.id}
-                    onChange={(e) => handleStatusChange(a.id, e.target.value as ApplicationStatus)}
-                    className={`text-[10px] font-bold px-2 py-1 tracking-wider border-0 focus:outline-none cursor-pointer ${STATUS_BADGE[a.status]}`}
-                  >
-                    {(Object.keys(STATUS_LABEL) as ApplicationStatus[]).map((s) => (
-                      <option key={s} value={s}>
-                        {STATUS_LABEL[s]}
-                      </option>
-                    ))}
-                  </select>
+                  <div className="flex items-center gap-2">
+                    <select
+                      value={a.status}
+                      disabled={updatingId === a.id}
+                      onChange={(e) => handleStatusChange(a.id, e.target.value as ApplicationStatus)}
+                      className={`text-[10px] font-bold px-2 py-1 tracking-wider border-0 focus:outline-none cursor-pointer ${STATUS_BADGE[a.status]}`}
+                    >
+                      {(Object.keys(STATUS_LABEL) as ApplicationStatus[]).map((s) => (
+                        <option key={s} value={s}>
+                          {STATUS_LABEL[s]}
+                        </option>
+                      ))}
+                    </select>
+                    {a.overbooked && (
+                      <span className="text-[10px] font-bold px-2 py-1 tracking-wider bg-red-100 text-red-600 whitespace-nowrap">
+                        定員超過
+                      </span>
+                    )}
+                  </div>
                 </td>
               </tr>
             ))}
             {filtered.length === 0 && (
               <tr>
-                <td colSpan={8} className="p-10 text-center text-sm text-foreground/60 font-serif">
+                <td colSpan={10} className="p-10 text-center text-sm text-foreground/60 font-serif">
                   該当する申し込みがありません
                 </td>
               </tr>

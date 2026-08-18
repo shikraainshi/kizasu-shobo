@@ -39,10 +39,12 @@ export interface EventInput {
   title: string;
   description: string;
   coverImageUrl?: string;
+  mediaType: "image" | "pdf";
   venue: string;
   startAt: string;
   endAt?: string;
   price: number;
   capacity?: number | null;
+  cancellationPolicy?: string;
   status: "draft" | "published" | "closed";
 }
