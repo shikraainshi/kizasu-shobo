@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import type { EventDoc } from '@/lib/events';
-import { AREA_OPTIONS, SOURCE_OPTIONS } from '@/lib/applications';
+import { AREA_OPTIONS, SOURCE_OPTIONS } from '@/lib/applications-constants';
 import { getLiffUserId } from '@/lib/line/liff-client';
 
 const optionButtonClass = (selected: boolean) =>

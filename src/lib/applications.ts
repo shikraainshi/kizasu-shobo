@@ -1,6 +1,8 @@
 import { getDb } from "@/lib/firebase/admin";
 import { EVENTS_COLLECTION } from "@/lib/events";
 
+export { AREA_OPTIONS, SOURCE_OPTIONS } from "@/lib/applications-constants";
+
 export type ApplicationStatus = "pending_payment" | "paid" | "canceled" | "failed";
 
 export interface ApplicationDoc {
@@ -25,10 +27,6 @@ export interface ApplicationDoc {
 }
 
 export const APPLICATIONS_COLLECTION = "applications";
-
-// 居住エリア・きっかけの選択肢。後から増減しやすいようここで一元管理する。
-export const AREA_OPTIONS = ["奈良市内", "奈良県内", "大阪府", "京都府", "その他県外"] as const;
-export const SOURCE_OPTIONS = ["Instagram", "LINE", "店頭", "知人紹介", "HP", "その他"] as const;
 
 export function toApplication(doc: FirebaseFirestore.DocumentSnapshot): ApplicationDoc {
   const data = doc.data() || {};
