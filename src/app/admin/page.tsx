@@ -1,8 +1,9 @@
 import Link from "next/link";
-import { BookOpen, Newspaper, CalendarDays, Plus } from "lucide-react";
+import { BookOpen, Newspaper, CalendarDays, ClipboardList, Settings } from "lucide-react";
 import { getAllBooksForAdmin, getAllNewsForAdmin } from "@/lib/admin/notion-admin";
 import { getAllEventsForAdmin } from "@/lib/admin/events-admin";
 import { getAllApplicationsForAdmin } from "@/lib/admin/applications-admin";
+import DashboardCard from "@/app/admin/_components/DashboardCard";
 
 export const dynamic = "force-dynamic";
 
@@ -27,7 +28,7 @@ export default async function AdminDashboardPage() {
   const cards = [
     {
       href: "/admin/books",
-      icon: BookOpen,
+      icon: <BookOpen size={20} />,
       label: "書籍",
       stats: [
         { value: books.length, label: "総数" },
@@ -39,7 +40,7 @@ export default async function AdminDashboardPage() {
     },
     {
       href: "/admin/news",
-      icon: Newspaper,
+      icon: <Newspaper size={20} />,
       label: "お知らせ",
       stats: [{ value: news.length, label: "総数" }],
       newHref: "/admin/news/new",
@@ -47,7 +48,7 @@ export default async function AdminDashboardPage() {
     },
     {
       href: "/admin/events",
-      icon: CalendarDays,
+      icon: <CalendarDays size={20} />,
       label: "イベント",
       stats: firestoreError
         ? []
@@ -63,50 +64,36 @@ export default async function AdminDashboardPage() {
     },
   ];
 
+  const quickLinks = [
+    { href: "/admin/applications", icon: ClipboardList, label: "申し込み履歴" },
+    { href: "/admin/settings", icon: Settings, label: "設定" },
+  ];
+
   return (
     <div className="space-y-10">
       <div>
         <h1 className="text-2xl font-serif font-bold text-foreground tracking-[0.1em]">ダッシュボード</h1>
-        <p className="text-sm text-foreground/50 font-serif mt-1">書籍情報とお知らせをここから管理できます。</p>
+        <p className="text-sm text-foreground/50 font-serif mt-1">
+          書籍・お知らせ・イベントをここから管理できます。カードをクリックすると一覧に移動します。
+        </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {cards.map(({ href, icon: Icon, label, stats, newHref, newLabel, note }) => (
-          <div key={href} className="border border-border bg-wakaba/5 p-8 space-y-6">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <Icon className="text-accent" size={22} />
-                <h2 className="text-lg font-serif font-bold text-foreground">{label}</h2>
-              </div>
-              <Link
-                href={href}
-                className="text-[11px] font-bold tracking-[0.2em] uppercase text-accent/60 hover:text-accent transition-colors"
-              >
-                一覧を見る →
-              </Link>
-            </div>
+        {cards.map((card) => (
+          <DashboardCard key={card.href} {...card} />
+        ))}
+      </div>
 
-            {note ? (
-              <p className="text-xs text-foreground/50 font-serif">{note}</p>
-            ) : (
-              <div className="flex gap-8">
-                {stats.map((s) => (
-                  <div key={s.label}>
-                    <div className="text-3xl font-serif font-bold text-foreground tabular-nums">{s.value}</div>
-                    <div className="text-[11px] text-foreground/50 font-serif tracking-wider">{s.label}</div>
-                  </div>
-                ))}
-              </div>
-            )}
-
-            <Link
-              href={newHref}
-              className="inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.2em] uppercase bg-accent text-white px-5 py-3 hover:bg-accent/90 transition-all font-serif"
-            >
-              <Plus size={14} />
-              {newLabel}
-            </Link>
-          </div>
+      <div className="flex flex-wrap gap-4">
+        {quickLinks.map(({ href, icon: Icon, label }) => (
+          <Link
+            key={href}
+            href={href}
+            className="flex items-center gap-2 text-xs font-bold tracking-[0.15em] uppercase text-foreground/60 hover:text-accent border border-border px-5 py-3 hover:border-accent/40 hover:bg-wakaba/20 transition-all font-serif"
+          >
+            <Icon size={14} />
+            {label}
+          </Link>
         ))}
       </div>
     </div>
