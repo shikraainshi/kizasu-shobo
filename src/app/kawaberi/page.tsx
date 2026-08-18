@@ -2,7 +2,41 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { MapPin, Instagram, ChevronDown, BookOpen, Waves, Users, CalendarHeart } from 'lucide-react';
+import {
+  MapPin,
+  Instagram,
+  ChevronDown,
+  BookOpen,
+  Waves,
+  Users,
+  CalendarHeart,
+  Leaf,
+  Feather,
+  Coffee,
+  Clock,
+  CalendarOff,
+  Phone,
+  TrainFront,
+  Car,
+} from 'lucide-react';
+
+function IconBadge({
+  icon: Icon,
+  size = 20,
+  className = '',
+}: {
+  icon: React.ComponentType<{ size?: number }>;
+  size?: number;
+  className?: string;
+}) {
+  return (
+    <div
+      className={`flex items-center justify-center rounded-full bg-[#8a7d63]/10 text-[#8a7d63] ${className}`}
+    >
+      <Icon size={size} />
+    </div>
+  );
+}
 
 const fadeUp = {
   initial: { opacity: 0, y: 32 },
@@ -68,14 +102,14 @@ export default function KawaberiPage() {
 
       {/* リード文 — 見開きの扉ページのような余白 */}
       <section className="py-28 md:py-40 px-6">
-        <motion.p
-          {...fadeUp}
-          className="max-w-3xl mx-auto text-center font-serif text-2xl md:text-[2.15rem] leading-[2] md:leading-[2.1] text-[#2a2622]/90"
-        >
-          佐保川のほとりで、
-          <br className="hidden md:block" />
-          本のページをめくるような静けさを。
-        </motion.p>
+        <motion.div {...fadeUp} className="max-w-3xl mx-auto flex flex-col items-center text-center">
+          <IconBadge icon={Leaf} size={20} className="w-14 h-14 mb-8" />
+          <p className="font-serif text-2xl md:text-[2.15rem] leading-[2] md:leading-[2.1] text-[#2a2622]/90">
+            佐保川のほとりで、
+            <br className="hidden md:block" />
+            本のページをめくるような静けさを。
+          </p>
+        </motion.div>
       </section>
 
       {/* Story — テキストと写真、フラットな編集レイアウト */}
@@ -83,9 +117,7 @@ export default function KawaberiPage() {
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-[1fr_1.2fr] gap-12 md:gap-20 items-center">
           <motion.div {...fadeUp} className="order-2 md:order-1">
             <div className="flex items-center gap-3 mb-6">
-              <div className="flex items-center justify-center w-8 h-8 rounded-full border border-[#8a7d63]/40 text-[#8a7d63]">
-                <BookOpen size={14} />
-              </div>
+              <IconBadge icon={BookOpen} size={14} className="w-8 h-8" />
               <span className="text-[10px] tracking-[0.5em] uppercase font-serif text-[#8a7d63]">About</span>
             </div>
             <div className="space-y-6 font-serif text-[15px] leading-loose text-[#2a2622]/80">
@@ -106,8 +138,8 @@ export default function KawaberiPage() {
                 { icon: Waves, label: '佐保川のほとり' },
                 { icon: BookOpen, label: '萌書房が運営' },
               ].map(({ icon: Icon, label }) => (
-                <div key={label} className="flex flex-col items-center text-center gap-2">
-                  <Icon size={18} className="text-[#8a7d63]" />
+                <div key={label} className="flex flex-col items-center text-center gap-3">
+                  <IconBadge icon={Icon} size={18} className="w-11 h-11" />
                   <span className="text-[10px] tracking-widest font-serif text-[#2a2622]/60">{label}</span>
                 </div>
               ))}
@@ -162,17 +194,13 @@ export default function KawaberiPage() {
             ].map((item) => (
               <motion.div key={item.num} {...fadeUp} className="py-10">
                 <div className="flex items-center gap-5 mb-4 md:hidden">
-                  <div className="flex items-center justify-center w-12 h-12 shrink-0 rounded-full border border-[#8a7d63]/30 text-[#8a7d63]">
-                    <item.icon size={20} />
-                  </div>
+                  <IconBadge icon={item.icon} size={22} className="w-14 h-14 shrink-0" />
                   <h3 className="font-serif text-xl">{item.title}</h3>
                 </div>
                 <p className="font-serif text-sm leading-loose text-[#2a2622]/70 md:hidden">{item.desc}</p>
 
-                <div className="hidden md:grid md:grid-cols-[64px_120px_140px_1fr] gap-x-8 items-center">
-                  <div className="flex items-center justify-center w-12 h-12 rounded-full border border-[#8a7d63]/30 text-[#8a7d63]">
-                    <item.icon size={20} />
-                  </div>
+                <div className="hidden md:grid md:grid-cols-[72px_120px_140px_1fr] gap-x-8 items-center">
+                  <IconBadge icon={item.icon} size={24} className="w-16 h-16" />
                   <span className="font-serif text-sm text-[#8a7d63] tracking-[0.2em]">{item.num}</span>
                   <h3 className="font-serif text-2xl">{item.title}</h3>
                   <p className="font-serif text-sm leading-loose text-[#2a2622]/70 max-w-xl">{item.desc}</p>
@@ -190,9 +218,10 @@ export default function KawaberiPage() {
             <img src="/S__15638541.jpg" alt="川べり店内の本棚" className="w-full h-full object-cover" />
           </motion.div>
           <motion.div {...fadeUp} className="flex flex-col justify-center">
-            <span className="block text-[10px] tracking-[0.5em] uppercase font-serif text-[#8a7d63] mb-4">
-              Menu
-            </span>
+            <div className="flex items-center gap-3 mb-4">
+              <IconBadge icon={Coffee} size={14} className="w-8 h-8" />
+              <span className="text-[10px] tracking-[0.5em] uppercase font-serif text-[#8a7d63]">Menu</span>
+            </div>
             <h2 className="font-serif text-2xl md:text-3xl mb-8">珈琲と、軽食を。</h2>
             <div className="border border-[#2a2622]/15 bg-white/60 p-3">
               <img src="/menu.jpg" alt="川べり ドリンク・軽食メニュー" className="w-full h-auto" />
@@ -204,7 +233,8 @@ export default function KawaberiPage() {
       {/* Hours & Access — フラットな情報パネル */}
       <section className="px-6 pb-28 md:pb-40">
         <div className="max-w-5xl mx-auto">
-          <motion.div {...fadeUp} className="mb-16 text-center">
+          <motion.div {...fadeUp} className="mb-16 text-center flex flex-col items-center">
+            <IconBadge icon={Clock} size={20} className="w-12 h-12 mb-5" />
             <span className="block text-[10px] tracking-[0.5em] uppercase font-serif text-[#8a7d63] mb-4">
               Hours &amp; Access
             </span>
@@ -212,43 +242,53 @@ export default function KawaberiPage() {
           </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.3fr] gap-12 lg:gap-20">
-            <motion.div {...fadeUp} className="space-y-10 font-serif">
-              <div className="flex justify-between border-b border-[#2a2622]/10 pb-4">
-                <span className="text-sm text-[#8a7d63] tracking-widest">営業時間</span>
-                <span className="text-base">10:30 - 18:00</span>
-              </div>
-              <div className="flex justify-between border-b border-[#2a2622]/10 pb-4">
-                <span className="text-sm text-[#8a7d63] tracking-widest">定休日</span>
-                <span className="text-base text-right">
-                  月曜日
-                  <br />
-                  <span className="text-xs text-[#2a2622]/50">（祝日の場合は翌火曜）</span>
-                </span>
-              </div>
-              <div className="flex justify-between border-b border-[#2a2622]/10 pb-4">
-                <span className="text-sm text-[#8a7d63] tracking-widest">住所</span>
-                <span className="text-base text-right">
-                  〒630-8113
-                  <br />
-                  奈良県奈良市法蓮町1050-1
-                </span>
-              </div>
-              <div className="flex justify-between border-b border-[#2a2622]/10 pb-4">
-                <span className="text-sm text-[#8a7d63] tracking-widest">電話</span>
-                <span className="text-base">0742-42-6986</span>
-              </div>
-              <div className="flex justify-between border-b border-[#2a2622]/10 pb-4">
-                <span className="text-sm text-[#8a7d63] tracking-widest">最寄り駅</span>
-                <span className="text-base">近鉄奈良駅より徒歩約15分</span>
-              </div>
-              <div className="flex justify-between pb-2">
-                <span className="text-sm text-[#8a7d63] tracking-widest">駐車場</span>
-                <span className="text-base text-right">
-                  1台分
-                  <br />
-                  <span className="text-xs text-[#2a2622]/50">満車時は近隣コインパーキングへ</span>
-                </span>
-              </div>
+            <motion.div {...fadeUp} className="space-y-8 font-serif">
+              {[
+                { icon: Clock, label: '営業時間', value: <>10:30 - 18:00</> },
+                {
+                  icon: CalendarOff,
+                  label: '定休日',
+                  value: (
+                    <>
+                      月曜日
+                      <br />
+                      <span className="text-xs text-[#2a2622]/50">（祝日の場合は翌火曜）</span>
+                    </>
+                  ),
+                },
+                {
+                  icon: MapPin,
+                  label: '住所',
+                  value: (
+                    <>
+                      〒630-8113
+                      <br />
+                      奈良県奈良市法蓮町1050-1
+                    </>
+                  ),
+                },
+                { icon: Phone, label: '電話', value: <>0742-42-6986</> },
+                { icon: TrainFront, label: '最寄り駅', value: <>近鉄奈良駅より徒歩約15分</> },
+                {
+                  icon: Car,
+                  label: '駐車場',
+                  value: (
+                    <>
+                      1台分
+                      <br />
+                      <span className="text-xs text-[#2a2622]/50">満車時は近隣コインパーキングへ</span>
+                    </>
+                  ),
+                },
+              ].map(({ icon: Icon, label, value }) => (
+                <div key={label} className="flex items-start justify-between gap-6 border-b border-[#2a2622]/10 pb-4">
+                  <span className="flex items-center gap-3 text-sm text-[#8a7d63] tracking-widest shrink-0">
+                    <IconBadge icon={Icon} size={14} className="w-8 h-8" />
+                    {label}
+                  </span>
+                  <span className="text-base text-right pt-1">{value}</span>
+                </div>
+              ))}
 
               <a
                 href="https://maps.google.com/?q=奈良県奈良市法蓮町1050-1"
@@ -283,7 +323,8 @@ export default function KawaberiPage() {
 
       {/* Closing */}
       <section className="px-6 pb-28 md:pb-36 text-center">
-        <motion.div {...fadeUp} className="max-w-xl mx-auto space-y-8">
+        <motion.div {...fadeUp} className="max-w-xl mx-auto flex flex-col items-center space-y-8">
+          <IconBadge icon={Feather} size={20} className="w-14 h-14" />
           <p className="font-serif text-lg leading-loose text-[#2a2622]/70">
             歴史ある奈良の街で、本とともに、
             <br />
