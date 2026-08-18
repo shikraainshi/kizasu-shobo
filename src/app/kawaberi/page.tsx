@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { MapPin, Instagram, ChevronDown } from 'lucide-react';
+import { MapPin, Instagram, ChevronDown, BookOpen, Waves, Users, CalendarHeart } from 'lucide-react';
 
 const fadeUp = {
   initial: { opacity: 0, y: 32 },
@@ -21,8 +21,8 @@ export default function KawaberiPage() {
         萌書房 TOPへ
       </Link>
 
-      {/* Hero — 没入型、写真主体 */}
-      <section className="relative h-screen min-h-[640px] w-full overflow-hidden">
+      {/* Hero — 没入型、写真主体（控えめな高さ） */}
+      <section className="relative h-[58vh] min-h-[380px] max-h-[560px] w-full overflow-hidden">
         <img
           src="/ESEF5280.JPEG"
           alt="Book Cafe 川べり 外観"
@@ -30,20 +30,20 @@ export default function KawaberiPage() {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/10" />
 
-        <div className="relative z-10 h-full flex flex-col items-center justify-end pb-24 px-6 text-center text-white">
+        <div className="relative z-10 h-full flex flex-col items-center justify-end pb-16 px-6 text-center text-white">
           <motion.img
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1.2, delay: 0.2 }}
             src="/kawaberilogo.jpg"
             alt=""
-            className="h-14 w-auto object-contain mb-8 opacity-90 mix-blend-screen"
+            className="h-10 w-auto object-contain mb-6 opacity-90 mix-blend-screen"
           />
           <motion.h1
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.4 }}
-            className="font-serif text-[15vw] sm:text-7xl md:text-8xl leading-none tracking-[0.02em]"
+            className="font-serif text-[11vw] sm:text-5xl md:text-6xl leading-none tracking-[0.02em]"
           >
             川べり
           </motion.h1>
@@ -51,7 +51,7 @@ export default function KawaberiPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.8 }}
-            className="mt-6 text-[11px] sm:text-xs tracking-[0.5em] uppercase font-serif text-white/70"
+            className="mt-5 text-[11px] sm:text-xs tracking-[0.5em] uppercase font-serif text-white/70"
           >
             Book Cafe, Nara
           </motion.p>
@@ -60,9 +60,9 @@ export default function KawaberiPage() {
         <motion.div
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 text-white/70"
+          className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 text-white/70"
         >
-          <ChevronDown size={22} />
+          <ChevronDown size={20} />
         </motion.div>
       </section>
 
@@ -82,9 +82,12 @@ export default function KawaberiPage() {
       <section className="px-6 pb-28 md:pb-40">
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-[1fr_1.2fr] gap-12 md:gap-20 items-center">
           <motion.div {...fadeUp} className="order-2 md:order-1">
-            <span className="block text-[10px] tracking-[0.5em] uppercase font-serif text-[#8a7d63] mb-6">
-              About
-            </span>
+            <div className="flex items-center gap-3 mb-6">
+              <div className="flex items-center justify-center w-8 h-8 rounded-full border border-[#8a7d63]/40 text-[#8a7d63]">
+                <BookOpen size={14} />
+              </div>
+              <span className="text-[10px] tracking-[0.5em] uppercase font-serif text-[#8a7d63]">About</span>
+            </div>
             <div className="space-y-6 font-serif text-[15px] leading-loose text-[#2a2622]/80">
               <p>
                 2025年4月6日、奈良・佐保川のほとりに「Book Cafe 川べり」は生まれました。
@@ -95,6 +98,19 @@ export default function KawaberiPage() {
               <p>
                 「川べり」という名前は、店の前を静かに流れる佐保川に由来しています。四季折々に表情を変える川の流れのように、ゆったりと本と向き合い、新しい考えや思いに出会える場所でありたいという願いを込めました。
               </p>
+            </div>
+
+            <div className="mt-10 pt-8 border-t border-[#2a2622]/10 grid grid-cols-3 gap-4">
+              {[
+                { icon: CalendarHeart, label: '2025.4.6 OPEN' },
+                { icon: Waves, label: '佐保川のほとり' },
+                { icon: BookOpen, label: '萌書房が運営' },
+              ].map(({ icon: Icon, label }) => (
+                <div key={label} className="flex flex-col items-center text-center gap-2">
+                  <Icon size={18} className="text-[#8a7d63]" />
+                  <span className="text-[10px] tracking-widest font-serif text-[#2a2622]/60">{label}</span>
+                </div>
+              ))}
             </div>
           </motion.div>
           <motion.div
@@ -127,30 +143,40 @@ export default function KawaberiPage() {
             {[
               {
                 num: '01',
+                icon: BookOpen,
                 title: '選書',
                 desc: '専門書の編集に長く携わってきたスタッフが、一冊一冊を丁寧に選び抜いています。萌書房の刊行書をはじめ、思想・文学・芸術・社会など、静かに思考を深めるための本を幅広く揃えています。',
               },
               {
                 num: '02',
+                icon: Waves,
                 title: '空間',
                 desc: '佐保川のせせらぎを背景に、ゆったりとした時間が流れる読書空間。日常から少し距離を置き、本と向き合い、思考に身を委ねる場所です。',
               },
               {
                 num: '03',
+                icon: Users,
                 title: 'つながり',
                 desc: '読書会や小さな演奏会など、本を中心とした静かな集いの場としてもご利用いただけます。人と人、思考と時間がゆるやかに交わる空間です。',
               },
             ].map((item) => (
-              <motion.div
-                key={item.num}
-                {...fadeUp}
-                className="grid grid-cols-[auto_1fr] md:grid-cols-[120px_140px_1fr] gap-x-6 md:gap-x-10 gap-y-2 py-10 items-baseline"
-              >
-                <span className="font-serif text-sm text-[#8a7d63] tracking-[0.2em]">{item.num}</span>
-                <h3 className="font-serif text-xl md:text-2xl">{item.title}</h3>
-                <p className="col-span-2 md:col-span-1 font-serif text-sm leading-loose text-[#2a2622]/70 max-w-xl">
-                  {item.desc}
-                </p>
+              <motion.div key={item.num} {...fadeUp} className="py-10">
+                <div className="flex items-center gap-5 mb-4 md:hidden">
+                  <div className="flex items-center justify-center w-12 h-12 shrink-0 rounded-full border border-[#8a7d63]/30 text-[#8a7d63]">
+                    <item.icon size={20} />
+                  </div>
+                  <h3 className="font-serif text-xl">{item.title}</h3>
+                </div>
+                <p className="font-serif text-sm leading-loose text-[#2a2622]/70 md:hidden">{item.desc}</p>
+
+                <div className="hidden md:grid md:grid-cols-[64px_120px_140px_1fr] gap-x-8 items-center">
+                  <div className="flex items-center justify-center w-12 h-12 rounded-full border border-[#8a7d63]/30 text-[#8a7d63]">
+                    <item.icon size={20} />
+                  </div>
+                  <span className="font-serif text-sm text-[#8a7d63] tracking-[0.2em]">{item.num}</span>
+                  <h3 className="font-serif text-2xl">{item.title}</h3>
+                  <p className="font-serif text-sm leading-loose text-[#2a2622]/70 max-w-xl">{item.desc}</p>
+                </div>
               </motion.div>
             ))}
           </div>
