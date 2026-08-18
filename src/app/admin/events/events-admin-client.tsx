@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Search, Plus } from 'lucide-react';
 import type { EventDoc, EventStatus } from '@/lib/events';
-import { formatEventDateTime } from '@/lib/events-format';
 
 const STATUS_LABEL: Record<EventStatus, string> = {
   draft: '下書き',
@@ -22,7 +21,7 @@ export default function EventsAdminClient({ events }: { events: EventDoc[] }) {
     return events.filter((event) => {
       if (query) {
         const q = query.toLowerCase();
-        const haystack = `${event.title}${event.venue}`.toLowerCase();
+        const haystack = event.title.toLowerCase();
         if (!haystack.includes(q)) return false;
       }
       if (statusFilter && event.status !== statusFilter) return false;
@@ -52,7 +51,7 @@ export default function EventsAdminClient({ events }: { events: EventDoc[] }) {
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="イベント名・場所で検索"
+            placeholder="イベント名で検索"
             className="w-full bg-background border border-accent/30 pl-9 pr-4 py-2.5 text-sm font-serif text-foreground focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/10 transition-all"
           />
         </div>
@@ -72,12 +71,10 @@ export default function EventsAdminClient({ events }: { events: EventDoc[] }) {
       </div>
 
       <div className="border-2 border-foreground/15 overflow-x-auto bg-background">
-        <table className="w-full min-w-[720px] border-collapse">
+        <table className="w-full min-w-[600px] border-collapse">
           <thead>
             <tr className="bg-wakaba-base/40 text-left text-[11px] font-bold tracking-[0.1em] uppercase text-foreground/80 font-serif border-b-2 border-foreground/15">
               <th className="p-3">イベント名</th>
-              <th className="p-3">開催日時</th>
-              <th className="p-3">場所</th>
               <th className="p-3 text-right">参加費</th>
               <th className="p-3">定員</th>
               <th className="p-3">状態</th>
@@ -96,10 +93,6 @@ export default function EventsAdminClient({ events }: { events: EventDoc[] }) {
                 className="border-t border-foreground/10 hover:bg-wakaba/40 focus:bg-wakaba/40 focus:outline-none cursor-pointer transition-colors"
               >
                 <td className="p-3 text-sm font-serif text-foreground font-bold max-w-[280px]">{event.title}</td>
-                <td className="p-3 text-sm font-serif text-foreground/90 whitespace-nowrap">
-                  {event.startAt ? formatEventDateTime(event.startAt) : "—"}
-                </td>
-                <td className="p-3 text-sm font-serif text-foreground/90 whitespace-nowrap">{event.venue || "—"}</td>
                 <td className="p-3 text-sm font-serif text-foreground/90 text-right whitespace-nowrap tabular-nums">
                   {event.price > 0 ? `${event.price.toLocaleString()}円` : '無料'}
                 </td>
@@ -123,7 +116,7 @@ export default function EventsAdminClient({ events }: { events: EventDoc[] }) {
             ))}
             {filtered.length === 0 && (
               <tr>
-                <td colSpan={6} className="p-10 text-center text-sm text-foreground/60 font-serif">
+                <td colSpan={4} className="p-10 text-center text-sm text-foreground/60 font-serif">
                   該当するイベントがありません
                 </td>
               </tr>

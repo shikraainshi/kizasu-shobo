@@ -1,10 +1,9 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { CalendarDays, MapPin, Ticket } from "lucide-react";
+import { Ticket } from "lucide-react";
 import { getEventById } from "@/lib/events";
 import { getPaidParticipantCount } from "@/lib/applications";
 import { getCancelPolicy } from "@/lib/settings";
-import { formatEventDateTime } from "@/lib/events-format";
 import EventFlyer from "@/app/events/_components/EventFlyer";
 
 export const dynamic = "force-dynamic";
@@ -18,8 +17,7 @@ export default async function EventDetailPage({
   const event = await getEventById(eventId);
   if (!event || event.status !== "published") notFound();
 
-  const commonCancelPolicy = await getCancelPolicy();
-  const cancelPolicy = event.cancellationPolicy || commonCancelPolicy;
+  const cancelPolicy = await getCancelPolicy();
   const remaining =
     event.capacity !== null ? event.capacity - (await getPaidParticipantCount(event.id)) : null;
   const isFull = remaining !== null && remaining <= 0;
@@ -36,26 +34,11 @@ export default async function EventDetailPage({
         <EventFlyer url={event.coverImageUrl} mediaType={event.mediaType} title={event.title} />
 
         <div className="flex flex-wrap gap-x-10 gap-y-3 text-sm text-foreground/70 font-serif border-b border-border/40 pb-8">
-          {event.startAt && (
-            <span className="flex items-center gap-2">
-              <CalendarDays size={18} className="text-accent/60" />
-              {formatEventDateTime(event.startAt)}
-              {event.endAt ? ` 〜 ${formatEventDateTime(event.endAt)}` : ""}
-            </span>
-          )}
-          {event.venue && (
-            <span className="flex items-center gap-2">
-              <MapPin size={18} className="text-accent/60" />
-              {event.venue}
-            </span>
-          )}
           <span className="flex items-center gap-2">
             <Ticket size={18} className="text-accent/60" />
             {event.price > 0 ? `${event.price.toLocaleString()}円` : "参加無料"}
           </span>
         </div>
-
-        <p className="text-foreground/80 font-serif leading-loose whitespace-pre-wrap">{event.description}</p>
 
         {cancelPolicy && (
           <div className="bg-wakaba/5 border border-border/40 p-6 space-y-2">

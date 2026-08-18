@@ -20,8 +20,7 @@ export default async function EventApplyPage({
     if (paidCount >= event.capacity) notFound();
   }
 
-  const commonCancelPolicy = await getCancelPolicy();
-  const cancelPolicy = event.cancellationPolicy || commonCancelPolicy;
+  const cancelPolicy = await getCancelPolicy();
 
   return (
     <div className="pb-24 bg-background">

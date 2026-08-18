@@ -3,7 +3,6 @@ import { CheckCircle2, XCircle } from "lucide-react";
 import { stripe } from "@/lib/stripe/client";
 import { getApplicationById } from "@/lib/applications";
 import { getEventById } from "@/lib/events";
-import { formatEventDateTime } from "@/lib/events-format";
 import CompleteNotifier from "@/app/events/_components/CompleteNotifier";
 
 export const dynamic = "force-dynamic";
@@ -54,18 +53,14 @@ export default async function EventApplyCompletePage({
 
   const participantName = application?.name || "";
   const participantCount = application?.participantCount ?? 1;
-  const eventDateTime = formatEventDateTime(event.startAt);
 
   const notifyText = [
     "【イベント申込完了】",
     "",
     `イベント：${event.title}`,
-    eventDateTime ? `日時：${eventDateTime}` : null,
     `参加者：${participantName}`,
     `人数：${participantCount}名`,
-  ]
-    .filter((line): line is string => line !== null)
-    .join("\n");
+  ].join("\n");
 
   return (
     <div className="min-h-[70vh] flex items-center justify-center px-6 bg-background">
@@ -83,14 +78,6 @@ export default async function EventApplyCompletePage({
             イベント
           </dt>
           <dd className="text-foreground/80 font-serif">{event.title}</dd>
-          {eventDateTime && (
-            <>
-              <dt className="text-accent/40 font-serif font-bold uppercase tracking-widest text-[9px] self-center">
-                日時
-              </dt>
-              <dd className="text-foreground/80 font-serif">{eventDateTime}</dd>
-            </>
-          )}
           <dt className="text-accent/40 font-serif font-bold uppercase tracking-widest text-[9px] self-center">
             参加者
           </dt>

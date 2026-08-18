@@ -4,7 +4,7 @@ import type { EventInput } from "@/lib/admin/types";
 
 export async function getAllEventsForAdmin(): Promise<EventDoc[]> {
   const snap = await getDb().collection(EVENTS_COLLECTION).get();
-  return snap.docs.map(toEvent).sort((a, b) => b.startAt.localeCompare(a.startAt));
+  return snap.docs.map(toEvent).sort((a, b) => b.createdAt.localeCompare(a.createdAt));
 }
 
 export async function getEventForAdmin(eventId: string): Promise<EventDoc | undefined> {
@@ -18,15 +18,10 @@ export async function createEvent(input: EventInput): Promise<{ id: string }> {
   const ref = getDb().collection(EVENTS_COLLECTION).doc();
   await ref.set({
     title: input.title,
-    description: input.description || "",
     coverImageUrl: input.coverImageUrl || "",
     mediaType: input.mediaType,
-    venue: input.venue,
-    startAt: input.startAt,
-    endAt: input.endAt || "",
     price: input.price,
     capacity: input.capacity ?? null,
-    cancellationPolicy: input.cancellationPolicy || "",
     status: input.status,
     createdAt: now,
     updatedAt: now,
@@ -37,15 +32,10 @@ export async function createEvent(input: EventInput): Promise<{ id: string }> {
 export async function updateEvent(eventId: string, input: Partial<EventInput>): Promise<void> {
   const updates: Record<string, unknown> = { updatedAt: new Date().toISOString() };
   if (input.title !== undefined) updates.title = input.title;
-  if (input.description !== undefined) updates.description = input.description;
   if (input.coverImageUrl !== undefined) updates.coverImageUrl = input.coverImageUrl;
   if (input.mediaType !== undefined) updates.mediaType = input.mediaType;
-  if (input.venue !== undefined) updates.venue = input.venue;
-  if (input.startAt !== undefined) updates.startAt = input.startAt;
-  if (input.endAt !== undefined) updates.endAt = input.endAt;
   if (input.price !== undefined) updates.price = input.price;
   if (input.capacity !== undefined) updates.capacity = input.capacity;
-  if (input.cancellationPolicy !== undefined) updates.cancellationPolicy = input.cancellationPolicy;
   if (input.status !== undefined) updates.status = input.status;
 
   await getDb().collection(EVENTS_COLLECTION).doc(eventId).update(updates);
