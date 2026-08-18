@@ -30,7 +30,7 @@ export default function Header() {
     };
   }, [isMenuOpen]);
 
-  if (pathname?.startsWith('/admin')) {
+  if (pathname?.startsWith('/admin') || pathname?.startsWith('/events')) {
     return null;
   }
 
