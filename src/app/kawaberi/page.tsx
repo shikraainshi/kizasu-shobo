@@ -38,6 +38,33 @@ function IconBadge({
   );
 }
 
+// 開いた本のシルエットのフレーム。中央のテキストは本の中に書かれているように見せる。
+function OpenBookFrame({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="relative w-full min-h-[300px] md:min-h-[340px]">
+      <svg
+        viewBox="0 0 700 500"
+        preserveAspectRatio="none"
+        className="absolute inset-0 w-full h-full"
+        aria-hidden="true"
+      >
+        <path
+          d="M40,95 Q350,-15 660,95 L660,420 Q350,535 40,420 Z"
+          fill="#fffdf8"
+          stroke="#2a2622"
+          strokeWidth="6"
+          strokeLinejoin="round"
+          strokeLinecap="round"
+          vectorEffect="non-scaling-stroke"
+        />
+      </svg>
+      <div className="relative h-full flex items-center justify-center text-center px-10 py-16 md:px-14 md:py-20">
+        {children}
+      </div>
+    </div>
+  );
+}
+
 const fadeUp = {
   initial: { opacity: 0, y: 32 },
   whileInView: { opacity: 1, y: 0 },
@@ -171,11 +198,7 @@ export default function KawaberiPage() {
             <h2 className="font-serif text-3xl md:text-4xl">川べりで過ごす、三つの時間</h2>
           </motion.div>
 
-          {/* 見開きの本のイラストの上に3項目を配置 */}
-          <motion.div
-            {...fadeUp}
-            className="flex flex-col md:flex-row bg-[#fffdf8] shadow-[0_35px_70px_-25px_rgba(42,38,34,0.3)]"
-          >
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-16">
             {[
               {
                 num: '01',
@@ -195,26 +218,17 @@ export default function KawaberiPage() {
                 title: 'つながり',
                 desc: '読書会や小さな演奏会など、本を中心とした静かな集いの場としてもご利用いただけます。人と人、思考と時間がゆるやかに交わる空間です。',
               },
-            ].map((item, i) => (
-              <div
-                key={item.num}
-                style={{
-                  backgroundImage:
-                    'repeating-linear-gradient(to bottom, transparent, transparent 27px, rgba(42,38,34,0.06) 28px)',
-                }}
-                className={`flex-1 flex flex-col items-center text-center gap-4 px-8 py-14 md:py-20 border border-[#2a2622]/10
-                  ${i === 0 ? 'rounded-t-[70px] md:rounded-t-none md:rounded-l-[90px] md:border-r-0' : ''}
-                  ${i === 1 ? 'border-t-0 md:border-t md:border-x-0' : ''}
-                  ${i === 2 ? 'rounded-b-[70px] md:rounded-b-none md:rounded-r-[90px] border-t-0 md:border-t md:border-l-0' : ''}
-                `}
-              >
-                <IconBadge icon={item.icon} size={26} className="w-16 h-16" />
+            ].map((item) => (
+              <motion.div key={item.num} {...fadeUp} className="flex flex-col items-center text-center gap-5">
+                <IconBadge icon={item.icon} size={22} className="w-14 h-14" />
                 <span className="font-serif text-xs text-[#8a7d63] tracking-[0.3em]">{item.num}</span>
-                <h3 className="font-serif text-2xl">{item.title}</h3>
-                <p className="font-serif text-sm leading-loose text-[#2a2622]/70 max-w-[22rem]">{item.desc}</p>
-              </div>
+                <h3 className="font-serif text-3xl md:text-4xl font-bold">{item.title}</h3>
+                <OpenBookFrame>
+                  <p className="font-serif text-sm leading-loose text-[#2a2622]/70">{item.desc}</p>
+                </OpenBookFrame>
+              </motion.div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
