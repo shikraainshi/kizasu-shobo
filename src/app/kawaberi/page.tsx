@@ -161,7 +161,7 @@ export default function KawaberiPage() {
         </div>
       </section>
 
-      {/* 3つの時間 — 番号付きの横並びリスト */}
+      {/* 3つの時間 — カード3枚横並び */}
       <section className="px-6 pb-28 md:pb-40">
         <div className="max-w-5xl mx-auto">
           <motion.div {...fadeUp} className="mb-16 text-center">
@@ -171,7 +171,7 @@ export default function KawaberiPage() {
             <h2 className="font-serif text-3xl md:text-4xl">川べりで過ごす、三つの時間</h2>
           </motion.div>
 
-          <div className="divide-y divide-[#2a2622]/10 border-t border-b border-[#2a2622]/10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             {[
               {
                 num: '01',
@@ -192,19 +192,15 @@ export default function KawaberiPage() {
                 desc: '読書会や小さな演奏会など、本を中心とした静かな集いの場としてもご利用いただけます。人と人、思考と時間がゆるやかに交わる空間です。',
               },
             ].map((item) => (
-              <motion.div key={item.num} {...fadeUp} className="py-10">
-                <div className="flex items-center gap-5 mb-4 md:hidden">
-                  <IconBadge icon={item.icon} size={22} className="w-14 h-14 shrink-0" />
-                  <h3 className="font-serif text-xl">{item.title}</h3>
-                </div>
-                <p className="font-serif text-sm leading-loose text-[#2a2622]/70 md:hidden">{item.desc}</p>
-
-                <div className="hidden md:grid md:grid-cols-[72px_120px_140px_1fr] gap-x-8 items-center">
-                  <IconBadge icon={item.icon} size={24} className="w-16 h-16" />
-                  <span className="font-serif text-sm text-[#8a7d63] tracking-[0.2em]">{item.num}</span>
-                  <h3 className="font-serif text-2xl">{item.title}</h3>
-                  <p className="font-serif text-sm leading-loose text-[#2a2622]/70 max-w-xl">{item.desc}</p>
-                </div>
+              <motion.div
+                key={item.num}
+                {...fadeUp}
+                className="border border-[#2a2622]/15 bg-white/40 p-8 md:p-10 flex flex-col items-center text-center gap-4 hover:border-[#8a7d63]/50 hover:bg-white/70 transition-colors"
+              >
+                <IconBadge icon={item.icon} size={26} className="w-16 h-16" />
+                <span className="font-serif text-xs text-[#8a7d63] tracking-[0.3em]">{item.num}</span>
+                <h3 className="font-serif text-2xl">{item.title}</h3>
+                <p className="font-serif text-sm leading-loose text-[#2a2622]/70">{item.desc}</p>
               </motion.div>
             ))}
           </div>
