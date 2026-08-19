@@ -171,7 +171,11 @@ export default function KawaberiPage() {
             <h2 className="font-serif text-3xl md:text-4xl">川べりで過ごす、三つの時間</h2>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+          {/* 見開きの本のイラストの上に3項目を配置 */}
+          <motion.div
+            {...fadeUp}
+            className="flex flex-col md:flex-row bg-[#fffdf8] shadow-[0_35px_70px_-25px_rgba(42,38,34,0.3)]"
+          >
             {[
               {
                 num: '01',
@@ -191,19 +195,26 @@ export default function KawaberiPage() {
                 title: 'つながり',
                 desc: '読書会や小さな演奏会など、本を中心とした静かな集いの場としてもご利用いただけます。人と人、思考と時間がゆるやかに交わる空間です。',
               },
-            ].map((item) => (
-              <motion.div
+            ].map((item, i) => (
+              <div
                 key={item.num}
-                {...fadeUp}
-                className="border border-[#2a2622]/15 bg-white/40 p-8 md:p-10 flex flex-col items-center text-center gap-4 hover:border-[#8a7d63]/50 hover:bg-white/70 transition-colors"
+                style={{
+                  backgroundImage:
+                    'repeating-linear-gradient(to bottom, transparent, transparent 27px, rgba(42,38,34,0.06) 28px)',
+                }}
+                className={`flex-1 flex flex-col items-center text-center gap-4 px-8 py-14 md:py-20 border border-[#2a2622]/10
+                  ${i === 0 ? 'rounded-t-[70px] md:rounded-t-none md:rounded-l-[90px] md:border-r-0' : ''}
+                  ${i === 1 ? 'border-t-0 md:border-t md:border-x-0' : ''}
+                  ${i === 2 ? 'rounded-b-[70px] md:rounded-b-none md:rounded-r-[90px] border-t-0 md:border-t md:border-l-0' : ''}
+                `}
               >
                 <IconBadge icon={item.icon} size={26} className="w-16 h-16" />
                 <span className="font-serif text-xs text-[#8a7d63] tracking-[0.3em]">{item.num}</span>
                 <h3 className="font-serif text-2xl">{item.title}</h3>
-                <p className="font-serif text-sm leading-loose text-[#2a2622]/70">{item.desc}</p>
-              </motion.div>
+                <p className="font-serif text-sm leading-loose text-[#2a2622]/70 max-w-[22rem]">{item.desc}</p>
+              </div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
