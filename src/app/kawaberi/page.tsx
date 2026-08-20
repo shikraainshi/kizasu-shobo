@@ -38,39 +38,32 @@ function IconBadge({
   );
 }
 
-// 開いた本のシルエットのフレーム（lucideのbook-openアイコンと同じ輪郭を拡大して使用）。
-// 中央のテキストは本の中に書かれているように見せる。
+// 開いた本のシルエットのフレーム。中央のテキストは本の中に書かれているように見せる。
 function OpenBookFrame({ children }: { children: React.ReactNode }) {
   return (
-    <div className="relative w-full min-h-[340px] md:min-h-[380px]">
-      <svg
-        viewBox="0 0 24 24"
-        preserveAspectRatio="none"
-        className="absolute inset-0 w-full h-full"
-        aria-hidden="true"
-      >
+    <div className="relative mx-auto w-full max-w-[650px] min-h-[340px] md:min-h-[400px]">
+      {/* 本の輪郭（文章量に応じて枠の高さが伸びても形が保たれるよう、高さいっぱいに伸縮させる） */}
+      <svg viewBox="0 0 650 500" className="absolute inset-0 w-full h-full" preserveAspectRatio="none">
         <path
-          d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"
-          fill="#fffdf8"
-          stroke="#2a2622"
-          strokeWidth="3.5"
+          d="
+            M 20 50
+            Q 170 0, 325 45
+            Q 480 0, 630 50
+            L 630 450
+            Q 480 410, 325 465
+            Q 170 410, 20 450
+            Z
+          "
+          fill="#fff"
+          stroke="#27231f"
+          strokeWidth="6"
           strokeLinejoin="round"
-          strokeLinecap="round"
-          vectorEffect="non-scaling-stroke"
-        />
-        <path
-          d="M12 7v14"
-          fill="none"
-          stroke="#2a2622"
-          strokeOpacity="0.5"
-          strokeWidth="2"
-          strokeLinecap="round"
           vectorEffect="non-scaling-stroke"
         />
       </svg>
-      <div className="relative h-full flex items-center justify-center text-center px-10 pt-20 pb-14 md:px-14 md:pt-24 md:pb-16">
-        {children}
-      </div>
+
+      {/* 本の中の文章 */}
+      <div className="relative flex items-center justify-center h-full px-[12%] py-[12%]">{children}</div>
     </div>
   );
 }
@@ -234,7 +227,9 @@ export default function KawaberiPage() {
                 <span className="font-serif text-xs text-[#8a7d63] tracking-[0.3em]">{item.num}</span>
                 <h3 className="font-serif text-3xl md:text-4xl font-bold">{item.title}</h3>
                 <OpenBookFrame>
-                  <p className="font-serif text-sm leading-loose text-[#2a2622]/70">{item.desc}</p>
+                  <p className="text-center text-[#27231f] leading-[1.8] text-[clamp(15px,2.3vw,24px)] font-medium font-serif">
+                    {item.desc}
+                  </p>
                 </OpenBookFrame>
               </motion.div>
             ))}
