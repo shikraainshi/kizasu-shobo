@@ -38,48 +38,37 @@ function IconBadge({
   );
 }
 
-// 開いた本のシルエットのフレーム。中央のテキストは本の中に書かれているように見せる。
+// 開いた本のシルエットのフレーム（lucideのbook-openアイコンと同じ輪郭を拡大して使用）。
+// 中央のテキストは本の中に書かれているように見せる。
 function OpenBookFrame({ children }: { children: React.ReactNode }) {
   return (
-    <div className="relative w-full min-h-[300px] md:min-h-[340px]">
+    <div className="relative w-full min-h-[340px] md:min-h-[380px]">
       <svg
-        viewBox="0 0 700 500"
+        viewBox="0 0 24 24"
         preserveAspectRatio="none"
         className="absolute inset-0 w-full h-full"
         aria-hidden="true"
       >
         <path
-          d="M40,95 Q350,-15 660,95 L660,420 Q350,535 40,420 Z"
+          d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"
           fill="#fffdf8"
           stroke="#2a2622"
-          strokeWidth="6"
+          strokeWidth="3.5"
           strokeLinejoin="round"
           strokeLinecap="round"
           vectorEffect="non-scaling-stroke"
         />
-        {/* 綴じ目（背表紙）— 左右2ページに分かれていることを示す */}
-        <line
-          x1="350"
-          y1="10"
-          x2="350"
-          y2="500"
-          stroke="#2a2622"
-          strokeOpacity="0.5"
-          strokeWidth="4"
-          strokeLinecap="round"
-          vectorEffect="non-scaling-stroke"
-        />
         <path
-          d="M330,10 Q300,255 330,500"
+          d="M12 7v14"
           fill="none"
           stroke="#2a2622"
-          strokeOpacity="0.12"
-          strokeWidth="18"
+          strokeOpacity="0.5"
+          strokeWidth="2"
           strokeLinecap="round"
           vectorEffect="non-scaling-stroke"
         />
       </svg>
-      <div className="relative h-full flex items-center justify-center text-center px-10 py-16 md:px-14 md:py-20">
+      <div className="relative h-full flex items-center justify-center text-center px-10 pt-20 pb-14 md:px-14 md:pt-24 md:pb-16">
         {children}
       </div>
     </div>
