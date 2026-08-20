@@ -57,6 +57,27 @@ function OpenBookFrame({ children }: { children: React.ReactNode }) {
           strokeLinecap="round"
           vectorEffect="non-scaling-stroke"
         />
+        {/* 綴じ目（背表紙）— 左右2ページに分かれていることを示す */}
+        <line
+          x1="350"
+          y1="10"
+          x2="350"
+          y2="500"
+          stroke="#2a2622"
+          strokeOpacity="0.5"
+          strokeWidth="4"
+          strokeLinecap="round"
+          vectorEffect="non-scaling-stroke"
+        />
+        <path
+          d="M330,10 Q300,255 330,500"
+          fill="none"
+          stroke="#2a2622"
+          strokeOpacity="0.12"
+          strokeWidth="18"
+          strokeLinecap="round"
+          vectorEffect="non-scaling-stroke"
+        />
       </svg>
       <div className="relative h-full flex items-center justify-center text-center px-10 py-16 md:px-14 md:py-20">
         {children}
