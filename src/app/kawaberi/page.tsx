@@ -41,8 +41,8 @@ function IconBadge({
 // 開いた本のシルエットのフレーム。中央のテキストは本の中に書かれているように見せる。
 function OpenBookFrame({ children }: { children: React.ReactNode }) {
   return (
-    <div className="relative mx-auto w-full max-w-[650px] min-h-[340px] md:min-h-[400px]">
-      {/* 本の輪郭（文章量に応じて枠の高さが伸びても形が保たれるよう、高さいっぱいに伸縮させる） */}
+    <div className="relative mx-auto w-full max-w-[650px] h-[300px] md:h-[340px]">
+      {/* 本の輪郭（3項目とも同じ高さで固定） */}
       <svg viewBox="0 0 650 500" className="absolute inset-0 w-full h-full" preserveAspectRatio="none">
         <path
           d="
@@ -63,7 +63,7 @@ function OpenBookFrame({ children }: { children: React.ReactNode }) {
       </svg>
 
       {/* 本の中の文章 */}
-      <div className="relative flex items-center justify-center h-full px-[12%] py-[12%]">{children}</div>
+      <div className="relative flex items-center justify-center h-full px-[14%] py-[14%]">{children}</div>
     </div>
   );
 }
@@ -227,7 +227,7 @@ export default function KawaberiPage() {
                 <span className="font-serif text-xs text-[#8a7d63] tracking-[0.3em]">{item.num}</span>
                 <h3 className="font-serif text-3xl md:text-4xl font-bold">{item.title}</h3>
                 <OpenBookFrame>
-                  <p className="text-center text-[#27231f] leading-[1.8] text-[clamp(15px,2.3vw,24px)] font-medium font-serif">
+                  <p className="text-center text-[#27231f] leading-[1.65] text-[clamp(11px,1.05vw,13px)] font-medium font-serif">
                     {item.desc}
                   </p>
                 </OpenBookFrame>
