@@ -12,7 +12,6 @@ import {
   CalendarHeart,
   Leaf,
   Feather,
-  Coffee,
   Clock,
   CalendarOff,
   Phone,
@@ -244,10 +243,9 @@ export default function KawaberiPage() {
             <img src="/S__15638541.jpg" alt="川べり店内の本棚" className="w-full h-full object-cover" />
           </motion.div>
           <motion.div {...fadeUp} className="flex flex-col justify-center">
-            <div className="flex items-center gap-3 mb-4">
-              <IconBadge icon={Coffee} size={14} className="w-8 h-8" />
-              <span className="text-[10px] tracking-[0.5em] uppercase font-serif text-[#8a7d63]">Menu</span>
-            </div>
+            <span className="block text-[10px] tracking-[0.5em] uppercase font-serif text-[#8a7d63] mb-4">
+              Menu
+            </span>
             <h2 className="font-serif text-2xl md:text-3xl mb-8">珈琲と、軽食を。</h2>
             <div className="border border-[#2a2622]/15 bg-white/60 p-3">
               <img src="/menu.jpg" alt="川べり ドリンク・軽食メニュー" className="w-full h-auto" />
