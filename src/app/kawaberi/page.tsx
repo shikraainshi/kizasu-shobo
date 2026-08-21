@@ -2,40 +2,6 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import {
-  MapPin,
-  Instagram,
-  ChevronDown,
-  BookOpen,
-  Waves,
-  Users,
-  CalendarHeart,
-  Leaf,
-  Feather,
-  Clock,
-  CalendarOff,
-  Phone,
-  TrainFront,
-  Car,
-} from 'lucide-react';
-
-function IconBadge({
-  icon: Icon,
-  size = 20,
-  className = '',
-}: {
-  icon: React.ComponentType<{ size?: number }>;
-  size?: number;
-  className?: string;
-}) {
-  return (
-    <div
-      className={`flex items-center justify-center rounded-full bg-[#8a7d63]/10 text-[#8a7d63] ${className}`}
-    >
-      <Icon size={size} />
-    </div>
-  );
-}
 
 // 開いた本のシルエットのフレーム。中央のテキストは本の中に書かれているように見せる。
 function OpenBookFrame({ children }: { children: React.ReactNode }) {
@@ -119,20 +85,11 @@ export default function KawaberiPage() {
             Book Cafe, Nara
           </motion.p>
         </div>
-
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
-          className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 text-white/70"
-        >
-          <ChevronDown size={20} />
-        </motion.div>
       </section>
 
       {/* リード文 — 見開きの扉ページのような余白 */}
       <section className="py-28 md:py-40 px-6">
         <motion.div {...fadeUp} className="max-w-3xl mx-auto flex flex-col items-center text-center">
-          <IconBadge icon={Leaf} size={20} className="w-14 h-14 mb-8" />
           <p className="font-serif text-2xl md:text-[2.15rem] leading-[2] md:leading-[2.1] text-[#2a2622]/90">
             佐保川のほとりで、
             <br className="hidden md:block" />
@@ -145,10 +102,9 @@ export default function KawaberiPage() {
       <section className="px-6 pb-28 md:pb-40">
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-[1fr_1.2fr] gap-12 md:gap-20 items-center">
           <motion.div {...fadeUp} className="order-2 md:order-1">
-            <div className="flex items-center gap-3 mb-6">
-              <IconBadge icon={BookOpen} size={14} className="w-8 h-8" />
-              <span className="text-[10px] tracking-[0.5em] uppercase font-serif text-[#8a7d63]">About</span>
-            </div>
+            <span className="block text-[10px] tracking-[0.5em] uppercase font-serif text-[#8a7d63] mb-6">
+              About
+            </span>
             <div className="space-y-6 font-serif text-[15px] leading-loose text-[#2a2622]/80">
               <p>
                 2025年4月6日、奈良・佐保川のほとりに「Book Cafe 川べり」は生まれました。
@@ -162,13 +118,8 @@ export default function KawaberiPage() {
             </div>
 
             <div className="mt-10 pt-8 border-t border-[#2a2622]/10 grid grid-cols-3 gap-4">
-              {[
-                { icon: CalendarHeart, label: '2025.4.6 OPEN' },
-                { icon: Waves, label: '佐保川のほとり' },
-                { icon: BookOpen, label: '萌書房が運営' },
-              ].map(({ icon: Icon, label }) => (
-                <div key={label} className="flex flex-col items-center text-center gap-3">
-                  <IconBadge icon={Icon} size={18} className="w-11 h-11" />
+              {['2025.4.6 OPEN', '佐保川のほとり', '萌書房が運営'].map((label) => (
+                <div key={label} className="text-center">
                   <span className="text-[10px] tracking-widest font-serif text-[#2a2622]/60">{label}</span>
                 </div>
               ))}
@@ -204,25 +155,21 @@ export default function KawaberiPage() {
             {[
               {
                 num: '01',
-                icon: BookOpen,
                 title: '選書',
                 desc: '専門書の編集に長く携わってきたスタッフが、一冊一冊を丁寧に選び抜いています。萌書房の刊行書をはじめ、思想・文学・芸術・社会など、静かに思考を深めるための本を幅広く揃えています。',
               },
               {
                 num: '02',
-                icon: Waves,
                 title: '空間',
                 desc: '佐保川のせせらぎを背景に、ゆったりとした時間が流れる読書空間。日常から少し距離を置き、本と向き合い、思考に身を委ねる場所です。',
               },
               {
                 num: '03',
-                icon: Users,
                 title: 'つながり',
                 desc: '読書会や小さな演奏会など、本を中心とした静かな集いの場としてもご利用いただけます。人と人、思考と時間がゆるやかに交わる空間です。',
               },
             ].map((item) => (
               <motion.div key={item.num} {...fadeUp} className="flex flex-col items-center text-center gap-5">
-                <IconBadge icon={item.icon} size={22} className="w-14 h-14" />
                 <span className="font-serif text-xs text-[#8a7d63] tracking-[0.3em]">{item.num}</span>
                 <h3 className="font-serif text-3xl md:text-4xl font-bold">{item.title}</h3>
                 <OpenBookFrame>
@@ -257,8 +204,7 @@ export default function KawaberiPage() {
       {/* Hours & Access — フラットな情報パネル */}
       <section className="px-6 pb-28 md:pb-40">
         <div className="max-w-5xl mx-auto">
-          <motion.div {...fadeUp} className="mb-16 text-center flex flex-col items-center">
-            <IconBadge icon={Clock} size={20} className="w-12 h-12 mb-5" />
+          <motion.div {...fadeUp} className="mb-16 text-center">
             <span className="block text-[10px] tracking-[0.5em] uppercase font-serif text-[#8a7d63] mb-4">
               Hours &amp; Access
             </span>
@@ -268,9 +214,8 @@ export default function KawaberiPage() {
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.3fr] gap-12 lg:gap-20">
             <motion.div {...fadeUp} className="space-y-8 font-serif">
               {[
-                { icon: Clock, label: '営業時間', value: <>10:30 - 18:00</> },
+                { label: '営業時間', value: <>10:30 - 18:00</> },
                 {
-                  icon: CalendarOff,
                   label: '定休日',
                   value: (
                     <>
@@ -281,7 +226,6 @@ export default function KawaberiPage() {
                   ),
                 },
                 {
-                  icon: MapPin,
                   label: '住所',
                   value: (
                     <>
@@ -291,10 +235,9 @@ export default function KawaberiPage() {
                     </>
                   ),
                 },
-                { icon: Phone, label: '電話', value: <>0742-42-6986</> },
-                { icon: TrainFront, label: '最寄り駅', value: <>近鉄奈良駅より徒歩約15分</> },
+                { label: '電話', value: <>0742-42-6986</> },
+                { label: '最寄り駅', value: <>近鉄奈良駅より徒歩約15分</> },
                 {
-                  icon: Car,
                   label: '駐車場',
                   value: (
                     <>
@@ -304,12 +247,9 @@ export default function KawaberiPage() {
                     </>
                   ),
                 },
-              ].map(({ icon: Icon, label, value }) => (
+              ].map(({ label, value }) => (
                 <div key={label} className="flex items-start justify-between gap-6 border-b border-[#2a2622]/10 pb-4">
-                  <span className="flex items-center gap-3 text-sm text-[#8a7d63] tracking-widest shrink-0">
-                    <IconBadge icon={Icon} size={14} className="w-8 h-8" />
-                    {label}
-                  </span>
+                  <span className="text-sm text-[#8a7d63] tracking-widest shrink-0">{label}</span>
                   <span className="text-base text-right pt-1">{value}</span>
                 </div>
               ))}
@@ -318,9 +258,8 @@ export default function KawaberiPage() {
                 href="https://maps.google.com/?q=奈良県奈良市法蓮町1050-1"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.3em] uppercase border-b border-[#2a2622]/30 pb-1 hover:border-[#2a2622] transition-colors"
+                className="inline-block text-xs font-bold tracking-[0.3em] uppercase border-b border-[#2a2622]/30 pb-1 hover:border-[#2a2622] transition-colors"
               >
-                <MapPin size={14} />
                 Googleマップで見る
               </a>
             </motion.div>
@@ -348,7 +287,6 @@ export default function KawaberiPage() {
       {/* Closing */}
       <section className="px-6 pb-28 md:pb-36 text-center">
         <motion.div {...fadeUp} className="max-w-xl mx-auto flex flex-col items-center space-y-8">
-          <IconBadge icon={Feather} size={20} className="w-14 h-14" />
           <p className="font-serif text-lg leading-loose text-[#2a2622]/70">
             歴史ある奈良の街で、本とともに、
             <br />
@@ -358,9 +296,8 @@ export default function KawaberiPage() {
             href="https://www.instagram.com/kawaberi_bookandcafe/"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.3em] uppercase text-[#2a2622]/70 hover:text-[#2a2622] transition-colors border-b border-[#2a2622]/20 pb-1"
+            className="inline-block text-xs font-bold tracking-[0.3em] uppercase text-[#2a2622]/70 hover:text-[#2a2622] transition-colors border-b border-[#2a2622]/20 pb-1"
           >
-            <Instagram size={14} />
             @kawaberi_bookandcafe
           </a>
         </motion.div>
