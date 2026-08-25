@@ -102,7 +102,7 @@ export default function AboutPage() {
                     </p>
                   </div>
                   <div className="mt-10">
-                    <Link href="/cafe" className="inline-block text-[11px] font-bold tracking-[0.3em] uppercase border border-accent/20 px-8 py-3 hover:bg-wakaba-hover hover:text-accent transition-all font-serif text-accent/70">
+                    <Link href="/kawaberi" target="_blank" rel="noopener noreferrer" className="inline-block text-[11px] font-bold tracking-[0.3em] uppercase border border-accent/20 px-8 py-3 hover:bg-wakaba-hover hover:text-accent transition-all font-serif text-accent/70">
                       カフェの詳細を見る
                     </Link>
                   </div>

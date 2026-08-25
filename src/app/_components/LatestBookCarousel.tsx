@@ -44,6 +44,7 @@ export default function LatestBookCarousel({ books, title, footerHref, footerLab
   const inactiveWidth = dims.inactive;
   const gap = 20;
   const offset = 10;
+  const coverShift = 48;
 
   const currentBook = books[currentIndex];
 
@@ -101,7 +102,7 @@ export default function LatestBookCarousel({ books, title, footerHref, footerLab
           </div>
 
           {/* Right: Sliding track — left clipped, right overflows */}
-          <div className="flex-1 flex flex-col gap-4 min-w-0 lg:pl-20 w-full">
+          <div className="flex-1 flex flex-col gap-4 min-w-0 lg:pl-20 w-full" style={{ marginLeft: `-${coverShift}px` }}>
             {/* overflow: hidden on left only via padding-right + margin-right trick */}
             <div
               className="overflow-hidden py-6 md:py-8"
@@ -137,23 +138,22 @@ export default function LatestBookCarousel({ books, title, footerHref, footerLab
                         }}
                         className="block w-full cursor-pointer"
                       >
-                        <div className={`w-full aspect-[2/3] overflow-hidden border transition-all duration-700 bg-wakaba/10
-                          ${isActive ? 'border-accent/20 shadow-2xl' : 'border-transparent shadow-sm'}`}
-                        >
-                          {book.image ? (
-                            <img
-                              src={book.image}
-                              alt={book.title}
-                              className="w-full h-full object-contain block"
-                            />
-                          ) : (
-                            <div className="w-full h-full flex items-center justify-center p-3">
-                              <h3 className={`${isActive ? 'text-base' : 'text-[9px]'} font-serif font-bold leading-tight text-foreground text-center`}>
-                                {book.title}
-                              </h3>
-                            </div>
-                          )}
-                        </div>
+                        {book.image ? (
+                          <img
+                            src={book.image}
+                            alt={book.title}
+                            className={`w-full h-auto block overflow-hidden border transition-all duration-700
+                              ${isActive ? 'border-accent/20 shadow-2xl' : 'border-transparent shadow-sm'}`}
+                          />
+                        ) : (
+                          <div className={`w-full aspect-[2/3] overflow-hidden border transition-all duration-700 bg-wakaba/10 flex items-center justify-center p-3
+                            ${isActive ? 'border-accent/20 shadow-2xl' : 'border-transparent shadow-sm'}`}
+                          >
+                            <h3 className={`${isActive ? 'text-base' : 'text-[9px]'} font-serif font-bold leading-tight text-foreground text-center`}>
+                              {book.title}
+                            </h3>
+                          </div>
+                        )}
                       </Link>
                     </motion.div>
                   );
@@ -162,7 +162,7 @@ export default function LatestBookCarousel({ books, title, footerHref, footerLab
             </div>
 
             {/* Navigation */}
-            <div className="flex items-center gap-6" style={{ paddingLeft: `${offset}px` }}>
+            <div className="flex items-center gap-6" style={{ paddingLeft: `${offset + coverShift}px` }}>
               <button
                 type="button"
                 onClick={prevBook}

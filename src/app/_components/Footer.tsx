@@ -97,7 +97,7 @@ export default function Footer() {
                 <h4 className="font-serif font-bold text-[10px] mb-8 uppercase tracking-[0.3em] text-accent/40 border-b border-accent/5 pb-2">コンテンツ</h4>
                 <ul className="space-y-4 text-sm text-foreground/80 font-serif">
                   <li><a href="/books" className="hover:text-accent transition-colors">書籍案内</a></li>
-                  <li><a href="/cafe" className="hover:text-accent transition-colors">ブックカフェ</a></li>
+                  <li><a href="/kawaberi" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">ブックカフェ</a></li>
                   <li><a href="/about" className="hover:text-accent transition-colors">萌書房について</a></li>
                   <li><a href="/for-bookstores" className="hover:text-accent transition-colors">書店様へ</a></li>
                 </ul>
