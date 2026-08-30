@@ -33,11 +33,24 @@ export default async function EventDetailPage({
       <section className="max-w-3xl mx-auto px-6 py-14 space-y-10">
         <EventFlyer url={event.coverImageUrl} mediaType={event.mediaType} title={event.title} />
 
-        <div className="flex flex-wrap gap-x-10 gap-y-3 text-sm text-foreground/70 font-serif border-b border-border/40 pb-8">
-          <span className="flex items-center gap-2">
-            <Ticket size={18} className="text-accent/60" />
-            {event.price > 0 ? `${event.price.toLocaleString()}円` : "参加無料"}
-          </span>
+        <div className="flex items-center gap-4 border border-border/40 bg-wakaba/10 px-6 py-5">
+          <Ticket size={22} className="text-accent/70 shrink-0" />
+          <div className="flex items-baseline gap-2">
+            <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-accent/60 font-serif">
+              参加費
+            </span>
+            {event.price > 0 ? (
+              <span className="font-serif">
+                <span className="text-2xl font-bold text-foreground tabular-nums">
+                  {event.price.toLocaleString()}
+                </span>
+                <span className="text-sm text-foreground/70 ml-1">円</span>
+                <span className="text-xs text-foreground/50 ml-2">／ 1名</span>
+              </span>
+            ) : (
+              <span className="text-2xl font-bold text-foreground font-serif">参加無料</span>
+            )}
+          </div>
         </div>
 
         {cancelPolicy && (

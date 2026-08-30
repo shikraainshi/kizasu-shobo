@@ -3,7 +3,7 @@
 // 画像はPNG形式、横800〜2500px・縦250〜1686pxの範囲で用意すること。
 // レイアウトは画像を3列x2行の均等グリッドに分割:
 //   上段: 左=ロゴ（ボタンなし） / 中央=イベント（postback） / 右=レンタルスペース（postback）
-//   下段: 左=WEB（uri） / 中央=INSTAGRAM（uri） / 右=お問い合わせ（postback）
+//   下段: 左=ブックカフェ川べり（uri） / 中央=INSTAGRAM（uri） / 右=お問い合わせ（postback）
 // ボタン領域は画像の実サイズから自動計算する。
 
 import { readFileSync } from "fs";
@@ -33,7 +33,7 @@ if (!imagePath) {
 const ext = extname(imagePath).toLowerCase();
 const contentType = ext === ".jpg" || ext === ".jpeg" ? "image/jpeg" : "image/png";
 
-const HOMEPAGE_URL = "https://www.kizasu-shobo.jp/";
+const KAWABERI_URL = "https://www.kizasu-shobo.jp/kawaberi";
 const INSTAGRAM_URL = "https://www.instagram.com/kawaberi_bookandcafe/";
 
 function getPngDimensions(buffer) {
@@ -78,9 +78,9 @@ function buildRichMenuDefinition(width, height) {
         },
       },
       {
-        // 下段左: WEB
+        // 下段左: ブックカフェ川べり
         bounds: { x: 0, y: rowHeight, width: colWidths[0], height: row2Height },
-        action: { type: "uri", label: "ホームページ", uri: HOMEPAGE_URL },
+        action: { type: "uri", label: "ブックカフェ川べり", uri: KAWABERI_URL },
       },
       {
         // 下段中央: INSTAGRAM

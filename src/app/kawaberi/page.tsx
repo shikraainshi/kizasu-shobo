@@ -100,7 +100,7 @@ export default function KawaberiPage() {
       <section className="py-16 md:py-24 px-6">
         <motion.div {...fadeUp} className="max-w-3xl mx-auto flex flex-col items-center text-center">
           <p className="font-serif text-2xl md:text-[2.15rem] leading-[2] md:leading-[2.1] text-[#2a2622]/90">
-            水のさざやきと紙の音が、
+            水のささやきと紙の音が、
             <br className="hidden md:block" />
             そっと重なる場所。
           </p>
