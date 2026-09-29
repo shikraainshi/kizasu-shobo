@@ -60,10 +60,10 @@ export default function LatestBookCarousel({ books, title, footerHref, footerLab
           </div>
         )}
 
-        <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-start">
+        <div className="flex flex-col lg:flex-row gap-6 lg:gap-16 items-start">
 
           {/* Left: Book Info — fixed width */}
-          <div className="w-full lg:w-[660px] lg:shrink-0 flex flex-col pt-4 min-h-[200px] lg:min-h-[320px] lg:pl-48">
+          <div className="order-2 lg:order-1 w-full lg:w-[660px] lg:shrink-0 flex flex-col pt-4 min-h-[200px] lg:min-h-[320px] lg:pl-48">
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentIndex}
@@ -102,7 +102,7 @@ export default function LatestBookCarousel({ books, title, footerHref, footerLab
           </div>
 
           {/* Right: Sliding track — left clipped, right overflows */}
-          <div className="flex-1 flex flex-col gap-4 min-w-0 lg:pl-20 w-full" style={{ marginLeft: `-${coverShift}px` }}>
+          <div className="order-1 lg:order-2 flex-1 flex flex-col gap-4 min-w-0 lg:pl-20 w-full" style={{ marginLeft: `-${coverShift}px` }}>
             {/* overflow: hidden on left only via padding-right + margin-right trick */}
             <div
               className="overflow-hidden py-6 md:py-8"
