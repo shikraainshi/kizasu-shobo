@@ -15,16 +15,16 @@ interface LatestBookCarouselProps {
 
 export default function LatestBookCarousel({ books, title, footerHref, footerLabel }: LatestBookCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [dims, setDims] = useState({ active: 200, inactive: 120 });
+  const [dims, setDims] = useState({ active: 200, inactive: 120, shift: 0 });
 
   useEffect(() => {
     const update = () => {
       if (window.innerWidth >= 1024) {
-        setDims({ active: 320, inactive: 210 });
+        setDims({ active: 320, inactive: 210, shift: 48 });
       } else if (window.innerWidth >= 640) {
-        setDims({ active: 240, inactive: 140 });
+        setDims({ active: 240, inactive: 140, shift: 48 });
       } else {
-        setDims({ active: 200, inactive: 120 });
+        setDims({ active: 200, inactive: 120, shift: 0 });
       }
     };
     update();
@@ -44,7 +44,7 @@ export default function LatestBookCarousel({ books, title, footerHref, footerLab
   const inactiveWidth = dims.inactive;
   const gap = 20;
   const offset = 10;
-  const coverShift = 48;
+  const coverShift = dims.shift;
 
   const currentBook = books[currentIndex];
 
