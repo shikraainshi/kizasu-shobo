@@ -1,4 +1,4 @@
-import { getBookById, getKinokuniyaUrl } from "@/lib/books";
+import { getBookById, getPurchaseUrl } from "@/lib/books";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
@@ -13,7 +13,7 @@ export default async function BookDetailPage({ params }: { params: Promise<{ id:
     notFound();
   }
 
-  const kinokuniyaUrl = getKinokuniyaUrl(book.isbn);
+  const purchaseUrl = getPurchaseUrl(book.isbn);
 
   return (
     <div className="flex flex-col gap-16 pb-24 bg-background">
@@ -103,14 +103,14 @@ export default async function BookDetailPage({ params }: { params: Promise<{ id:
 
               {/* Purchase Button */}
               <div className="pt-12 flex flex-col sm:flex-row gap-6">
-                {kinokuniyaUrl && (
+                {purchaseUrl && (
                   <a
-                    href={kinokuniyaUrl}
+                    href={purchaseUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="bg-wakaba-base text-accent border border-accent/10 px-12 py-5 rounded-none font-bold tracking-[0.2em] text-[11px] uppercase hover:bg-wakaba-hover hover:border-accent/30 transition-all font-serif shadow-sm text-center"
                   >
-                    購入する（紀伊國屋書店）
+                    購入する（外部リンク）
                   </a>
                 )}
                 <Link
