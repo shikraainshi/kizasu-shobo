@@ -169,6 +169,8 @@ function newsProperties(input: Partial<NewsInput>, includeAll: boolean): Record<
   if (includeAll || input.urlLabel1 !== undefined) props["URL表示①"] = richText(input.urlLabel1);
   if (includeAll || input.urlLabel2 !== undefined) props["URL表示②"] = richText(input.urlLabel2);
   if (includeAll || input.slug !== undefined) props["slug"] = richText(input.slug);
+  if (includeAll || input.attachmentUrl !== undefined) props["添付ファイルURL"] = urlProp(input.attachmentUrl);
+  if (includeAll || input.attachmentName !== undefined) props["添付ファイル名"] = richText(input.attachmentName);
 
   return props;
 }

@@ -16,6 +16,8 @@ export interface News {
   relatedUrl2?: string;
   urlLabel1?: string;
   urlLabel2?: string;
+  attachmentUrl?: string;
+  attachmentName?: string;
 }
 
 /**
@@ -212,6 +214,8 @@ export async function getNewsFromNotion(): Promise<News[]> {
       const relatedUrl2Prop = props["関連URL②"];
       const urlLabel1Prop = props["URL表示①"];
       const urlLabel2Prop = props["URL表示②"];
+      const attachmentUrlProp = props["添付ファイルURL"];
+      const attachmentNameProp = props["添付ファイル名"];
 
       return {
         id: page.id,
@@ -225,6 +229,8 @@ export async function getNewsFromNotion(): Promise<News[]> {
         relatedUrl2: relatedUrl2Prop?.url || relatedUrl2Prop?.rich_text?.[0]?.plain_text || "",
         urlLabel1: urlLabel1Prop?.rich_text?.[0]?.plain_text || "",
         urlLabel2: urlLabel2Prop?.rich_text?.[0]?.plain_text || "",
+        attachmentUrl: attachmentUrlProp?.url || "",
+        attachmentName: attachmentNameProp?.rich_text?.[0]?.plain_text || "",
       };
     });
   } catch (error) {

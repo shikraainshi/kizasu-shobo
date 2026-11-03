@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { getCategoryColor } from "@/lib/category-colors";
+import NewsAttachment from "../_components/NewsAttachment";
 
 export const revalidate = 60;
 
@@ -61,7 +62,9 @@ export default async function NewsDetailPage({
           {/* 3. Main Content */}
           <section className="max-w-none font-serif text-base leading-relaxed text-foreground/80 mb-20 whitespace-pre-wrap space-y-8">
             <div>{newsItem.content}</div>
-            
+
+            <NewsAttachment url={newsItem.attachmentUrl} name={newsItem.attachmentName} title={newsItem.title} />
+
             <div className="flex flex-col gap-0.5">
               {[
                 { url: newsItem.relatedUrl1, label: newsItem.urlLabel1 },

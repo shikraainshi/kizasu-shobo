@@ -33,6 +33,8 @@ export interface NewsInput {
   urlLabel1?: string;
   urlLabel2?: string;
   slug?: string;
+  attachmentUrl?: string;
+  attachmentName?: string;
 }
 
 export interface EventInput {

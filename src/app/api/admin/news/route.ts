@@ -21,6 +21,8 @@ function parseNewsInput(form: FormData): NewsInput {
     urlLabel1: str(form, "urlLabel1"),
     urlLabel2: str(form, "urlLabel2"),
     slug: str(form, "slug"),
+    attachmentUrl: str(form, "attachmentUrl"),
+    attachmentName: str(form, "attachmentName"),
   };
 }
 

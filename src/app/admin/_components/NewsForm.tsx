@@ -2,10 +2,11 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { FileText } from 'lucide-react';
 import { News } from '@/lib/notion-service';
 import { NewsInput } from '@/lib/admin/types';
 import { NEWS_CATEGORIES } from '@/lib/admin/constants';
-import { validateNewsInput } from '@/lib/admin/validation';
+import { validateNewsAttachment, validateNewsInput } from '@/lib/admin/validation';
 import Field from './ui/Field';
 import TextInput from './ui/TextInput';
 import TextArea from './ui/TextArea';
@@ -26,6 +27,8 @@ function newsToInput(news?: News): NewsInput {
     urlLabel1: news?.urlLabel1 || '',
     urlLabel2: news?.urlLabel2 || '',
     slug: news?.slug || '',
+    attachmentUrl: news?.attachmentUrl || '',
+    attachmentName: news?.attachmentName || '',
   };
 }
 
@@ -33,6 +36,7 @@ export default function NewsForm({ news }: { news?: News }) {
   const router = useRouter();
   const isCreate = !news;
   const [input, setInput] = useState<NewsInput>(() => newsToInput(news));
+  const [attachmentFile, setAttachmentFile] = useState<File | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -40,6 +44,23 @@ export default function NewsForm({ news }: { news?: News }) {
     setInput((prev) => ({ ...prev, [key]: value }));
 
   const isNewRelease = input.category === '新刊情報';
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0] || null;
+    const fileError = validateNewsAttachment(file);
+    if (fileError) {
+      setError(fileError);
+      e.target.value = '';
+      return;
+    }
+    setAttachmentFile(file);
+  };
+
+  const handleRemoveAttachment = () => {
+    setAttachmentFile(null);
+    set('attachmentUrl', '');
+    set('attachmentName', '');
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -54,8 +75,23 @@ export default function NewsForm({ news }: { news?: News }) {
 
     setIsLoading(true);
     try {
+      let payload = input;
+      if (attachmentFile) {
+        const uploadForm = new FormData();
+        uploadForm.set('file', attachmentFile);
+        const uploadRes = await fetch('/api/admin/news/upload-file', {
+          method: 'POST',
+          body: uploadForm,
+        });
+        const uploadResult = await uploadRes.json();
+        if (!uploadRes.ok) {
+          throw new Error(uploadResult.error || 'ファイルのアップロードに失敗しました。');
+        }
+        payload = { ...input, attachmentUrl: uploadResult.url, attachmentName: uploadResult.name };
+      }
+
       const form = new FormData();
-      Object.entries(input).forEach(([key, value]) => {
+      Object.entries(payload).forEach(([key, value]) => {
         if (typeof value === 'boolean') {
           if (value) form.set(key, 'on');
         } else {
@@ -113,6 +149,33 @@ export default function NewsForm({ news }: { news?: News }) {
 
       <Field label="本文">
         <TextArea rows={6} value={input.content} onChange={(e) => set('content', e.target.value)} />
+      </Field>
+
+      <Field label="添付ファイル" hint="任意。PDF・画像・Word・Excel・PowerPoint（20MBまで）。お知らせページに表示されます。">
+        <div className="border border-accent/20 bg-wakaba/5 max-w-md flex items-center gap-3 px-4 py-4">
+          <FileText className="text-accent/30 shrink-0" size={24} />
+          <span className="text-xs text-accent/60 font-serif break-all flex-1">
+            {attachmentFile ? attachmentFile.name : input.attachmentUrl ? input.attachmentName || '設定済み' : '未設定'}
+          </span>
+          {(attachmentFile || input.attachmentUrl) && (
+            <button
+              type="button"
+              onClick={handleRemoveAttachment}
+              className="text-[11px] font-bold text-accent/50 hover:text-accent font-serif shrink-0"
+            >
+              削除
+            </button>
+          )}
+        </div>
+        <label className="mt-3 block max-w-md text-center text-[11px] font-bold tracking-[0.15em] uppercase text-accent border border-accent/20 py-2.5 cursor-pointer hover:bg-wakaba/20 transition-colors font-serif">
+          ファイルを選択
+          <input
+            type="file"
+            accept="application/pdf,image/*,.doc,.docx,.xls,.xlsx,.ppt,.pptx"
+            onChange={handleFileChange}
+            className="hidden"
+          />
+        </label>
       </Field>
 
       <Field label="slug" hint="お知らせページのURL識別子（例: 2025-11-18-new-release）">

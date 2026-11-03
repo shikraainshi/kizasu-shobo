@@ -93,6 +93,27 @@ export function validateImageFile(image: File | null | undefined): string | null
   return null;
 }
 
+const NEWS_ATTACHMENT_TYPES = [
+  "application/pdf",
+  "application/msword",
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+  "application/vnd.ms-excel",
+  "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+  "application/vnd.ms-powerpoint",
+  "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+];
+
+export function validateNewsAttachment(file: File | null | undefined): string | null {
+  if (!file || file.size === 0) return null;
+  if (!file.type.startsWith("image/") && !NEWS_ATTACHMENT_TYPES.includes(file.type)) {
+    return "PDF・画像・Word・Excel・PowerPointのファイルを選択してください。";
+  }
+  if (file.size > MAX_IMAGE_BYTES) {
+    return "ファイルサイズは20MB以下にしてください。";
+  }
+  return null;
+}
+
 export function validateFlyerFile(file: File | null | undefined, mediaType: "image" | "pdf"): string | null {
   if (!file || file.size === 0) return null;
   if (mediaType === "pdf") {
