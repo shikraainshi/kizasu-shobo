@@ -73,7 +73,7 @@ export default async function AdminDashboardPage() {
     <div className="space-y-10">
       <div>
         <h1 className="text-2xl font-serif font-bold text-foreground tracking-[0.1em]">ダッシュボード</h1>
-        <p className="text-sm text-foreground/50 font-serif mt-1">
+        <p className="text-sm text-foreground/70 font-serif mt-1">
           書籍・お知らせ・イベントをここから管理できます。カードをクリックすると一覧に移動します。
         </p>
       </div>
@@ -89,7 +89,7 @@ export default async function AdminDashboardPage() {
           <Link
             key={href}
             href={href}
-            className="flex items-center gap-2 text-xs font-bold tracking-[0.15em] uppercase text-foreground/60 hover:text-accent border border-border px-5 py-3 hover:border-accent/40 hover:bg-wakaba/20 transition-all font-serif"
+            className="flex items-center gap-2 text-xs font-bold tracking-[0.08em] uppercase text-foreground/75 hover:text-accent border border-border px-5 py-3 hover:border-accent/40 hover:bg-wakaba/20 transition-all font-serif"
           >
             <Icon size={14} />
             {label}

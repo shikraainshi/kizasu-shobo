@@ -152,22 +152,22 @@ export default function NewsForm({ news }: { news?: News }) {
       </Field>
 
       <Field label="添付ファイル" hint="任意。PDF・画像・Word・Excel・PowerPoint（20MBまで）。お知らせページに表示されます。">
-        <div className="border border-accent/20 bg-wakaba/5 max-w-md flex items-center gap-3 px-4 py-4">
-          <FileText className="text-accent/30 shrink-0" size={24} />
-          <span className="text-xs text-accent/60 font-serif break-all flex-1">
+        <div className="border border-accent/35 bg-wakaba/5 max-w-md flex items-center gap-3 px-4 py-4">
+          <FileText className="text-accent/50 shrink-0" size={24} />
+          <span className="text-xs text-accent/80 font-serif break-all flex-1">
             {attachmentFile ? attachmentFile.name : input.attachmentUrl ? input.attachmentName || '設定済み' : '未設定'}
           </span>
           {(attachmentFile || input.attachmentUrl) && (
             <button
               type="button"
               onClick={handleRemoveAttachment}
-              className="text-[11px] font-bold text-accent/50 hover:text-accent font-serif shrink-0"
+              className="text-xs font-bold text-accent/80 hover:text-accent font-serif shrink-0"
             >
               削除
             </button>
           )}
         </div>
-        <label className="mt-3 block max-w-md text-center text-[11px] font-bold tracking-[0.15em] uppercase text-accent border border-accent/20 py-2.5 cursor-pointer hover:bg-wakaba/20 transition-colors font-serif">
+        <label className="mt-3 block max-w-md text-center text-xs font-bold tracking-[0.08em] uppercase text-accent border border-accent/35 py-2.5 cursor-pointer hover:bg-wakaba/20 transition-colors font-serif">
           ファイルを選択
           <input
             type="file"

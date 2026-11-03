@@ -24,7 +24,7 @@ export default function EventsSubNav() {
             className={`flex items-center gap-2 px-4 py-3 text-xs font-bold tracking-[0.1em] font-serif border-b-2 -mb-px transition-colors ${
               active
                 ? 'text-accent border-accent'
-                : 'text-foreground/50 border-transparent hover:text-accent hover:border-accent/30'
+                : 'text-foreground/70 border-transparent hover:text-accent hover:border-accent/30'
             }`}
           >
             <Icon size={14} />

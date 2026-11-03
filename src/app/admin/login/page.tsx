@@ -45,8 +45,8 @@ function LoginForm() {
           <div className="w-14 h-14 bg-wakaba-base/30 rounded-full flex items-center justify-center mx-auto">
             <Lock className="text-accent" size={22} />
           </div>
-          <h1 className="text-xl font-serif font-bold text-foreground tracking-[0.15em]">管理画面ログイン</h1>
-          <p className="text-xs text-foreground/50 font-serif">萌書房 コンテンツ管理</p>
+          <h1 className="text-xl font-serif font-bold text-foreground tracking-[0.08em]">管理画面ログイン</h1>
+          <p className="text-xs text-foreground/70 font-serif">萌書房 コンテンツ管理</p>
         </div>
 
         {error && (
@@ -57,7 +57,7 @@ function LoginForm() {
 
         <form onSubmit={handleSubmit} className="space-y-6 bg-wakaba/5 p-8 border border-border/40">
           <div className="space-y-3">
-            <label className="text-[10px] font-bold tracking-[0.3em] uppercase text-accent/80 font-serif block">
+            <label className="text-xs font-bold tracking-[0.1em] uppercase text-accent font-serif block">
               パスワード
             </label>
             <input
@@ -66,13 +66,13 @@ function LoginForm() {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full bg-background border border-accent/20 px-5 py-4 text-sm font-serif focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/10 transition-all shadow-sm"
+              className="w-full bg-background border border-accent/35 px-5 py-4 text-sm font-serif focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/10 transition-all shadow-sm"
             />
           </div>
           <button
             type="submit"
             disabled={isLoading}
-            className={`w-full bg-accent text-white py-4 font-bold tracking-[0.4em] text-[11px] uppercase transition-all font-serif shadow-lg ${
+            className={`w-full bg-accent text-white py-4 font-bold tracking-[0.1em] text-xs uppercase transition-all font-serif shadow-lg ${
               isLoading ? 'opacity-70 cursor-not-allowed' : 'hover:bg-accent/90'
             }`}
           >

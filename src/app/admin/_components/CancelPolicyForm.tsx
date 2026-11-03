@@ -50,7 +50,7 @@ export default function CancelPolicyForm({ cancelPolicy }: { cancelPolicy: strin
     <form onSubmit={handleSubmit} className="space-y-6 max-w-2xl">
       <ErrorBanner message={error} />
       {saved && (
-        <div className="p-4 bg-wakaba/20 border border-accent/20 text-accent text-sm font-serif">
+        <div className="p-4 bg-wakaba/20 border border-accent/35 text-accent text-sm font-serif">
           保存しました。
         </div>
       )}

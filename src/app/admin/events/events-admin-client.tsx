@@ -37,7 +37,7 @@ export default function EventsAdminClient({ events }: { events: EventDoc[] }) {
         <h1 className="text-2xl font-serif font-bold text-foreground tracking-[0.1em]">イベント一覧</h1>
         <Link
           href="/admin/events/new"
-          className="inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.2em] uppercase bg-accent text-white px-5 py-3 hover:bg-accent/90 transition-all font-serif"
+          className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.08em] uppercase bg-accent text-white px-5 py-3 hover:bg-accent/90 transition-all font-serif"
         >
           <Plus size={14} />
           新規イベントを追加
@@ -46,34 +46,34 @@ export default function EventsAdminClient({ events }: { events: EventDoc[] }) {
 
       <div className="flex flex-wrap gap-3">
         <div className="relative flex-1 min-w-[220px]">
-          <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-accent/60" />
+          <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-accent/80" />
           <input
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="イベント名で検索"
-            className="w-full bg-background border border-accent/30 pl-9 pr-4 py-2.5 text-sm font-serif text-foreground focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/10 transition-all"
+            className="w-full bg-background border border-accent/40 pl-9 pr-4 py-2.5 text-sm font-serif text-foreground focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/10 transition-all"
           />
         </div>
         <select
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value as '' | EventStatus)}
-          className="bg-background border border-accent/30 px-4 py-2.5 text-sm font-serif text-foreground focus:outline-none focus:border-accent"
+          className="bg-background border border-accent/40 px-4 py-2.5 text-sm font-serif text-foreground focus:outline-none focus:border-accent"
         >
           <option value="">公開状態すべて</option>
           <option value="draft">下書き</option>
           <option value="published">公開</option>
           <option value="closed">受付終了</option>
         </select>
-        <div className="flex items-center text-xs text-foreground/70 font-serif font-medium px-2">
+        <div className="flex items-center text-xs text-foreground/80 font-serif font-medium px-2">
           {filtered.length} / {events.length} 件
         </div>
       </div>
 
-      <div className="border-2 border-foreground/15 overflow-x-auto bg-background">
+      <div className="border-2 border-foreground/25 overflow-x-auto bg-background">
         <table className="w-full min-w-[600px] border-collapse">
           <thead>
-            <tr className="bg-wakaba-base/40 text-left text-[11px] font-bold tracking-[0.1em] uppercase text-foreground/80 font-serif border-b-2 border-foreground/15">
+            <tr className="bg-wakaba-base/40 text-left text-xs font-bold tracking-[0.1em] uppercase text-foreground/90 font-serif border-b-2 border-foreground/25">
               <th className="p-3">イベント名</th>
               <th className="p-3 text-right">参加費</th>
               <th className="p-3">定員</th>
@@ -90,23 +90,23 @@ export default function EventsAdminClient({ events }: { events: EventDoc[] }) {
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') goToEdit(event.id);
                 }}
-                className="border-t border-foreground/10 hover:bg-wakaba/40 focus:bg-wakaba/40 focus:outline-none cursor-pointer transition-colors"
+                className="border-t border-foreground/20 hover:bg-wakaba/40 focus:bg-wakaba/40 focus:outline-none cursor-pointer transition-colors"
               >
                 <td className="p-3 text-sm font-serif text-foreground font-bold max-w-[280px]">{event.title}</td>
-                <td className="p-3 text-sm font-serif text-foreground/90 text-right whitespace-nowrap tabular-nums">
+                <td className="p-3 text-sm font-serif text-foreground text-right whitespace-nowrap tabular-nums">
                   {event.price > 0 ? `${event.price.toLocaleString()}円` : '無料'}
                 </td>
-                <td className="p-3 text-sm font-serif text-foreground/90 whitespace-nowrap tabular-nums">
+                <td className="p-3 text-sm font-serif text-foreground whitespace-nowrap tabular-nums">
                   {event.capacity ?? '無制限'}
                 </td>
                 <td className="p-3">
                   <span
-                    className={`text-[10px] font-bold px-2 py-0.5 tracking-wider ${
+                    className={`text-xs font-bold px-2 py-0.5 tracking-wider ${
                       event.status === 'published'
                         ? 'bg-accent text-white'
                         : event.status === 'closed'
                           ? 'bg-foreground/40 text-white'
-                          : 'bg-foreground/15 text-foreground/70'
+                          : 'bg-foreground/15 text-foreground/80'
                     }`}
                   >
                     {STATUS_LABEL[event.status]}
@@ -116,7 +116,7 @@ export default function EventsAdminClient({ events }: { events: EventDoc[] }) {
             ))}
             {filtered.length === 0 && (
               <tr>
-                <td colSpan={4} className="p-10 text-center text-sm text-foreground/60 font-serif">
+                <td colSpan={4} className="p-10 text-center text-sm text-foreground/75 font-serif">
                   該当するイベントがありません
                 </td>
               </tr>

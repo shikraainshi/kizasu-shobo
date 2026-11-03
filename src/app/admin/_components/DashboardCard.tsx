@@ -41,18 +41,18 @@ export default function DashboardCard({
         </div>
         <ArrowRight
           size={18}
-          className="text-accent/30 group-hover:text-accent group-hover:translate-x-1 transition-all"
+          className="text-accent/50 group-hover:text-accent group-hover:translate-x-1 transition-all"
         />
       </div>
 
       {note ? (
-        <p className="text-xs text-foreground/50 font-serif">{note}</p>
+        <p className="text-xs text-foreground/70 font-serif">{note}</p>
       ) : (
         <div className="flex flex-wrap gap-x-8 gap-y-4">
           {stats.map((s) => (
             <div key={s.label}>
               <div className="text-3xl font-serif font-bold text-foreground tabular-nums">{s.value}</div>
-              <div className="text-[11px] text-foreground/50 font-serif tracking-wider">{s.label}</div>
+              <div className="text-xs text-foreground/70 font-serif tracking-wider">{s.label}</div>
             </div>
           ))}
         </div>
@@ -64,7 +64,7 @@ export default function DashboardCard({
           e.stopPropagation();
           router.push(newHref);
         }}
-        className="inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.2em] uppercase bg-accent text-white px-5 py-3 hover:bg-accent/90 transition-all font-serif"
+        className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.08em] uppercase bg-accent text-white px-5 py-3 hover:bg-accent/90 transition-all font-serif"
       >
         <Plus size={14} />
         {newLabel}

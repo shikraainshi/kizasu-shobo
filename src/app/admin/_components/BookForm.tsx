@@ -119,14 +119,14 @@ export default function BookForm({ book }: { book?: Book }) {
         {/* Cover image */}
         <div className="space-y-3">
           <Field label="書影">
-            <div className="border border-accent/20 bg-wakaba/5 aspect-[3/4] flex items-center justify-center overflow-hidden">
+            <div className="border border-accent/35 bg-wakaba/5 aspect-[3/4] flex items-center justify-center overflow-hidden">
               {imagePreview ? (
                 <img src={imagePreview} alt="" className="w-full h-full object-cover" />
               ) : (
-                <ImagePlus className="text-accent/20" size={32} />
+                <ImagePlus className="text-accent/40" size={32} />
               )}
             </div>
-            <label className="block text-center text-[11px] font-bold tracking-[0.15em] uppercase text-accent border border-accent/20 py-2.5 cursor-pointer hover:bg-wakaba/20 transition-colors font-serif">
+            <label className="block text-center text-xs font-bold tracking-[0.08em] uppercase text-accent border border-accent/35 py-2.5 cursor-pointer hover:bg-wakaba/20 transition-colors font-serif">
               画像を選択
               <input type="file" accept="image/*" onChange={handleImageChange} className="hidden" />
             </label>
@@ -197,7 +197,7 @@ export default function BookForm({ book }: { book?: Book }) {
         <button
           type="button"
           onClick={() => setShowDetails((v) => !v)}
-          className="flex items-center gap-2 text-[11px] font-bold tracking-[0.2em] uppercase text-accent/60 hover:text-accent transition-colors font-serif"
+          className="flex items-center gap-2 text-xs font-bold tracking-[0.08em] uppercase text-accent/80 hover:text-accent transition-colors font-serif"
         >
           <ChevronDown size={14} className={`transition-transform ${showDetails ? 'rotate-180' : ''}`} />
           詳細設定
@@ -230,7 +230,7 @@ export default function BookForm({ book }: { book?: Book }) {
                     type="color"
                     value={/^#[0-9a-fA-F]{6}$/.test(input.color || '') ? input.color : '#cccccc'}
                     onChange={(e) => set('color', e.target.value)}
-                    className="w-10 h-10 border border-accent/20 cursor-pointer"
+                    className="w-10 h-10 border border-accent/35 cursor-pointer"
                   />
                   <TextInput value={input.color} onChange={(e) => set('color', e.target.value)} placeholder="#cc9f93" />
                 </div>

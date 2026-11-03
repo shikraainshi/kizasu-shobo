@@ -157,10 +157,10 @@ export default function EventForm({ event }: { event?: EventDoc }) {
                 setFlyerFile(null);
                 if (type === 'pdf') setImagePreview(null);
               }}
-              className={`px-5 py-2.5 text-xs font-bold tracking-[0.15em] uppercase font-serif border transition-all ${
+              className={`px-5 py-2.5 text-xs font-bold tracking-[0.08em] uppercase font-serif border transition-all ${
                 form.mediaType === type
                   ? 'bg-accent text-white border-accent'
-                  : 'bg-background border-accent/20 text-foreground/70 hover:border-accent/40'
+                  : 'bg-background border-accent/35 text-foreground/80 hover:border-accent/40'
               }`}
             >
               {type === 'image' ? '画像' : 'PDF'}
@@ -171,22 +171,22 @@ export default function EventForm({ event }: { event?: EventDoc }) {
 
       <Field label="チラシ" hint="任意">
         {form.mediaType === 'image' ? (
-          <div className="border border-accent/20 bg-wakaba/5 aspect-video max-w-md flex items-center justify-center overflow-hidden">
+          <div className="border border-accent/35 bg-wakaba/5 aspect-video max-w-md flex items-center justify-center overflow-hidden">
             {imagePreview ? (
               <img src={imagePreview} alt="" className="w-full h-full object-cover" />
             ) : (
-              <ImagePlus className="text-accent/20" size={32} />
+              <ImagePlus className="text-accent/40" size={32} />
             )}
           </div>
         ) : (
-          <div className="border border-accent/20 bg-wakaba/5 aspect-video max-w-md flex flex-col items-center justify-center gap-2 overflow-hidden">
-            <FileText className="text-accent/20" size={32} />
-            <span className="text-xs text-accent/40 font-serif">
+          <div className="border border-accent/35 bg-wakaba/5 aspect-video max-w-md flex flex-col items-center justify-center gap-2 overflow-hidden">
+            <FileText className="text-accent/40" size={32} />
+            <span className="text-xs text-accent/70 font-serif">
               {flyerFile ? flyerFile.name : form.coverImageUrl ? 'PDF設定済み' : '未設定'}
             </span>
           </div>
         )}
-        <label className="mt-3 block max-w-md text-center text-[11px] font-bold tracking-[0.15em] uppercase text-accent border border-accent/20 py-2.5 cursor-pointer hover:bg-wakaba/20 transition-colors font-serif">
+        <label className="mt-3 block max-w-md text-center text-xs font-bold tracking-[0.08em] uppercase text-accent border border-accent/35 py-2.5 cursor-pointer hover:bg-wakaba/20 transition-colors font-serif">
           {form.mediaType === 'image' ? '画像を選択' : 'PDFを選択'}
           <input
             type="file"
@@ -201,7 +201,7 @@ export default function EventForm({ event }: { event?: EventDoc }) {
         <select
           value={form.status}
           onChange={(e) => set('status', e.target.value as FormState['status'])}
-          className="w-full bg-background border border-accent/20 px-4 py-3 text-sm font-serif focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/10 transition-all appearance-none cursor-pointer shadow-sm"
+          className="w-full bg-background border border-accent/35 px-4 py-3 text-sm font-serif focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/10 transition-all appearance-none cursor-pointer shadow-sm"
         >
           <option value="draft">下書き（非公開）</option>
           <option value="published">公開</option>
