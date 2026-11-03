@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import type { EventDoc } from '@/lib/events';
 import { AREA_OPTIONS, SOURCE_OPTIONS } from '@/lib/applications-constants';
 import { getLiffUserId } from '@/lib/line/liff-client';
+import CancelPolicyList from './CancelPolicyList';
 
 const optionButtonClass = (selected: boolean) =>
   `px-4 py-2.5 text-xs font-serif border transition-all ${
@@ -185,9 +186,7 @@ export default function EventApplyForm({ event, cancelPolicy }: { event: EventDo
             キャンセルポリシー
           </label>
           <div className="border border-border/40 p-5 max-h-40 overflow-y-auto">
-            <p className="text-xs text-foreground/70 font-serif leading-relaxed whitespace-pre-wrap">
-              {cancelPolicy}
-            </p>
+            <CancelPolicyList text={cancelPolicy} className="text-xs" />
           </div>
         </div>
       )}

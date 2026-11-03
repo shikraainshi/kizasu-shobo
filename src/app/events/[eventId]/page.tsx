@@ -5,6 +5,7 @@ import { getEventById } from "@/lib/events";
 import { getPaidParticipantCount } from "@/lib/applications";
 import { getCancelPolicy } from "@/lib/settings";
 import EventFlyer from "@/app/events/_components/EventFlyer";
+import CancelPolicyList from "@/app/events/_components/CancelPolicyList";
 
 export const dynamic = "force-dynamic";
 
@@ -58,9 +59,7 @@ export default async function EventDetailPage({
             <h2 className="text-xs font-bold tracking-[0.2em] uppercase text-accent/60 font-serif">
               キャンセルポリシー
             </h2>
-            <p className="text-sm text-foreground/70 font-serif leading-relaxed whitespace-pre-wrap">
-              {cancelPolicy}
-            </p>
+            <CancelPolicyList text={cancelPolicy} className="text-sm" />
           </div>
         )}
 
