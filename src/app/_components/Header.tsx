@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
-import { Search, Instagram, Menu, X } from 'lucide-react';
+import { Search, Instagram, Menu, X, FileText } from 'lucide-react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -94,7 +94,15 @@ export default function Header() {
           <div className="flex items-center justify-end gap-3 md:gap-6">
             {/* Social & Search Unit (Desktop) */}
             <div className="hidden xl:flex items-center gap-6">
-              <a 
+              <Link
+                href="/errata"
+                className="flex items-center gap-1.5 text-[12px] font-serif tracking-[0.1em] text-accent/60 hover:text-accent underline-offset-4 hover:underline transition-colors whitespace-nowrap"
+              >
+                <FileText size={14} />
+                正誤表
+              </Link>
+
+              <a
                 href="https://www.instagram.com/kawaberi_bookandcafe/" 
                 target="_blank" 
                 rel="noopener noreferrer"
@@ -201,6 +209,15 @@ export default function Header() {
                     </Link>
                   ))}
                 </nav>
+
+                {/* Mobile Sub Link */}
+                <Link
+                  href="/errata"
+                  className="-mt-4 flex items-center gap-2 text-sm font-serif tracking-[0.1em] text-accent/70 hover:text-accent transition-colors"
+                >
+                  <FileText size={16} />
+                  正誤表
+                </Link>
 
                 {/* Mobile Social & Info */}
                 <div className="mt-auto pt-10 border-t border-border/50 flex flex-col gap-6">
