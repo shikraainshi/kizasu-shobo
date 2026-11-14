@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ChevronRight, FileText } from "lucide-react";
-import { ERRATA } from "@/data/errata";
+import { getAllErrata, type ErrataDoc } from "@/lib/errata";
+
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "正誤表",
@@ -12,8 +14,13 @@ function formatDate(date: string): string {
   return date.replace(/-/g, ".");
 }
 
-export default function ErrataPage() {
-  const errata = [...ERRATA].sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
+export default async function ErrataPage() {
+  let errata: ErrataDoc[] = [];
+  try {
+    errata = (await getAllErrata()).filter((e) => e.pdfUrl);
+  } catch (error) {
+    console.error("Failed to load errata:", error);
+  }
 
   return (
     <main className="min-h-screen bg-background">
@@ -52,7 +59,7 @@ export default function ErrataPage() {
             ) : (
               <ul className="divide-y divide-accent/10 border-y border-accent/10">
                 {errata.map((item) => (
-                  <li key={`${item.bookTitle}-${item.pdfUrl}`}>
+                  <li key={item.id}>
                     <a
                       href={item.pdfUrl}
                       target="_blank"

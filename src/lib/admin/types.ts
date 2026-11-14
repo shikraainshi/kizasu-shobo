@@ -37,6 +37,13 @@ export interface NewsInput {
   attachmentName?: string;
 }
 
+export interface ErrataInput {
+  bookTitle: string;
+  updatedAt: string;
+  pdfUrl: string;
+  pdfName: string;
+}
+
 export interface EventInput {
   title: string;
   coverImageUrl?: string;

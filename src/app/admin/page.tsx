@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { BookOpen, Newspaper, CalendarDays, ClipboardList, Settings } from "lucide-react";
+import { BookOpen, Newspaper, FileText, CalendarDays, ClipboardList, Settings } from "lucide-react";
+import { getAllErrata } from "@/lib/errata";
 import { getAllBooksForAdmin, getAllNewsForAdmin } from "@/lib/admin/notion-admin";
 import { getAllEventsForAdmin } from "@/lib/admin/events-admin";
 import { getAllApplicationsForAdmin } from "@/lib/admin/applications-admin";
@@ -16,8 +17,13 @@ export default async function AdminDashboardPage() {
   let firestoreError = false;
   let events: Awaited<ReturnType<typeof getAllEventsForAdmin>> = [];
   let applications: Awaited<ReturnType<typeof getAllApplicationsForAdmin>> = [];
+  let errata: Awaited<ReturnType<typeof getAllErrata>> = [];
   try {
-    [events, applications] = await Promise.all([getAllEventsForAdmin(), getAllApplicationsForAdmin()]);
+    [events, applications, errata] = await Promise.all([
+      getAllEventsForAdmin(),
+      getAllApplicationsForAdmin(),
+      getAllErrata(),
+    ]);
   } catch (error) {
     console.warn("Failed to load events/applications for dashboard:", error);
     firestoreError = true;
@@ -47,6 +53,15 @@ export default async function AdminDashboardPage() {
       newLabel: "新規お知らせを追加",
     },
     {
+      href: "/admin/errata",
+      icon: <FileText size={20} />,
+      label: "正誤表",
+      stats: firestoreError ? [] : [{ value: errata.length, label: "総数" }],
+      newHref: "/admin/errata/new",
+      newLabel: "新規正誤表を追加",
+      note: firestoreError ? "Firestoreが未設定のため、統計を表示できません。" : undefined,
+    },
+    {
       href: "/admin/events",
       icon: <CalendarDays size={20} />,
       label: "イベント",
@@ -74,7 +89,7 @@ export default async function AdminDashboardPage() {
       <div>
         <h1 className="text-2xl font-serif font-bold text-foreground tracking-[0.1em]">ダッシュボード</h1>
         <p className="text-sm text-foreground/70 font-serif mt-1">
-          書籍・お知らせ・イベントをここから管理できます。カードをクリックすると一覧に移動します。
+          書籍・お知らせ・正誤表・イベントをここから管理できます。カードをクリックすると一覧に移動します。
         </p>
       </div>
 

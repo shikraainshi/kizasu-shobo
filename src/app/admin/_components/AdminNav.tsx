@@ -3,12 +3,13 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { LayoutDashboard, BookOpen, Newspaper, CalendarDays, LogOut } from 'lucide-react';
+import { LayoutDashboard, BookOpen, Newspaper, FileText, CalendarDays, LogOut } from 'lucide-react';
 
 const links = [
   { href: '/admin', label: 'ダッシュボード', icon: LayoutDashboard, exact: true, extraPrefixes: [] as string[] },
   { href: '/admin/books', label: '書籍', icon: BookOpen, exact: false, extraPrefixes: [] as string[] },
   { href: '/admin/news', label: 'お知らせ', icon: Newspaper, exact: false, extraPrefixes: [] as string[] },
+  { href: '/admin/errata', label: '正誤表', icon: FileText, exact: false, extraPrefixes: [] as string[] },
   {
     href: '/admin/events',
     label: 'イベント',

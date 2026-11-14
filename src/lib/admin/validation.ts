@@ -1,4 +1,4 @@
-import type { BookInput, EventInput, NewsInput } from "@/lib/admin/types";
+import type { BookInput, ErrataInput, EventInput, NewsInput } from "@/lib/admin/types";
 import { BOOK_CATEGORIES, NEWS_CATEGORIES } from "@/lib/admin/constants";
 
 const MAX_IMAGE_BYTES = 20 * 1024 * 1024; // 20MB (Notion単一パートアップロードの目安上限)
@@ -107,6 +107,35 @@ export function validateNewsAttachment(file: File | null | undefined): string | 
   if (!file || file.size === 0) return null;
   if (!file.type.startsWith("image/") && !NEWS_ATTACHMENT_TYPES.includes(file.type)) {
     return "PDF・画像・Word・Excel・PowerPointのファイルを選択してください。";
+  }
+  if (file.size > MAX_IMAGE_BYTES) {
+    return "ファイルサイズは20MB以下にしてください。";
+  }
+  return null;
+}
+
+export function parseErrataInput(body: any): ErrataInput {
+  const s = (v: unknown) => (typeof v === "string" ? v.trim() : "");
+  return {
+    bookTitle: s(body?.bookTitle),
+    updatedAt: s(body?.updatedAt),
+    pdfUrl: s(body?.pdfUrl),
+    pdfName: s(body?.pdfName),
+  };
+}
+
+export function validateErrataInput(input: ErrataInput): string[] {
+  const errors: string[] = [];
+  if (!input.bookTitle?.trim()) errors.push("書籍名を入力してください。");
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(input.updatedAt || "")) errors.push("更新日を入力してください。");
+  if (!input.pdfUrl?.trim()) errors.push("正誤表のPDFを選択してください。");
+  return errors;
+}
+
+export function validateErrataPdf(file: File | null | undefined): string | null {
+  if (!file || file.size === 0) return null;
+  if (file.type !== "application/pdf") {
+    return "PDFファイルを選択してください。";
   }
   if (file.size > MAX_IMAGE_BYTES) {
     return "ファイルサイズは20MB以下にしてください。";
