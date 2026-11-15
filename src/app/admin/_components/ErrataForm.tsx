@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { FileText, Info } from 'lucide-react';
+import { FileText } from 'lucide-react';
 import type { ErrataDoc } from '@/lib/errata';
 import type { ErrataInput } from '@/lib/admin/types';
 import { todayInJapan } from '@/lib/errata-format';
@@ -146,17 +146,6 @@ export default function ErrataForm({ errata, bookTitles }: { errata?: ErrataDoc;
           <input type="file" accept="application/pdf" onChange={handleFileChange} className="hidden" />
         </label>
       </Field>
-
-      <div className="flex items-start gap-3 border border-accent/30 bg-wakaba/20 p-4 text-sm font-serif text-foreground/85 leading-relaxed">
-        <Info size={16} className="mt-1 shrink-0 text-accent" />
-        {isCreate ? (
-          <p>登録すると、お知らせ（カテゴリ「お知らせ」）が自動で作成され、正誤表PDFが添付されます。</p>
-        ) : (
-          <p>
-            編集してもお知らせは追加されません。PDFを差し替えた場合は、新規追加時のお知らせに添付されているPDFも新しいものに入れ替わります。
-          </p>
-        )}
-      </div>
 
       <div className="pt-4">
         <SubmitButton isLoading={isLoading}>{isCreate ? '正誤表を登録する' : '変更を保存する'}</SubmitButton>
