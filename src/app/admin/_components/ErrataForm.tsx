@@ -5,7 +5,8 @@ import { useRouter } from 'next/navigation';
 import { FileText, Info } from 'lucide-react';
 import type { ErrataDoc } from '@/lib/errata';
 import type { ErrataInput } from '@/lib/admin/types';
-import { errataNewsTitle, todayInJapan } from '@/lib/errata-format';
+import { todayInJapan } from '@/lib/errata-format';
+import BookTitleCombobox from './BookTitleCombobox';
 import { validateErrataInput, validateErrataPdf } from '@/lib/admin/validation';
 import Field from './ui/Field';
 import TextInput from './ui/TextInput';
@@ -21,7 +22,7 @@ function errataToInput(errata?: ErrataDoc): ErrataInput {
   };
 }
 
-export default function ErrataForm({ errata }: { errata?: ErrataDoc }) {
+export default function ErrataForm({ errata, bookTitles }: { errata?: ErrataDoc; bookTitles: string[] }) {
   const router = useRouter();
   const isCreate = !errata;
   const [input, setInput] = useState<ErrataInput>(() => errataToInput(errata));
@@ -52,6 +53,10 @@ export default function ErrataForm({ errata }: { errata?: ErrataDoc }) {
 
     // PDFはまだアップロード前なので、選択済みならURLがある扱いで検証する
     const errors = validateErrataInput({ ...input, pdfUrl: pdfFile ? 'pending' : input.pdfUrl });
+    // 書籍名は一覧から選んだものに限る（既存の正誤表で書籍名を変えていない場合は除く）
+    if (input.bookTitle.trim() && input.bookTitle !== errata?.bookTitle && !bookTitles.includes(input.bookTitle)) {
+      errors.push('書籍名は候補の一覧から選択してください。');
+    }
     if (errors.length > 0) {
       setError(errors.join('\n'));
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -99,16 +104,15 @@ export default function ErrataForm({ errata }: { errata?: ErrataDoc }) {
     <form onSubmit={handleSubmit} className="space-y-6">
       <ErrorBanner message={error} />
 
-      <Field label="書籍名" required hint="『』は自動で付くので不要です。">
-        <TextInput
-          required
+      <Field label="書籍名" required>
+        <BookTitleCombobox
           value={input.bookTitle}
-          onChange={(e) => set('bookTitle', e.target.value)}
-          placeholder="例: ディケンズ全集　書簡集　Ⅰ"
+          onChange={(v) => set('bookTitle', v)}
+          options={bookTitles}
         />
       </Field>
 
-      <Field label="更新日" required hint="正誤表ページに「（YYYY.MM.DD更新）」と表示されます。">
+      <Field label="更新日" required>
         <TextInput
           type="date"
           required
@@ -146,12 +150,7 @@ export default function ErrataForm({ errata }: { errata?: ErrataDoc }) {
       <div className="flex items-start gap-3 border border-accent/30 bg-wakaba/20 p-4 text-sm font-serif text-foreground/85 leading-relaxed">
         <Info size={16} className="mt-1 shrink-0 text-accent" />
         {isCreate ? (
-          <p>
-            登録すると、お知らせ（カテゴリ「お知らせ」）が自動で作成され、正誤表PDFが添付されます。
-            <br />
-            タイトル・本文：
-            <span className="font-bold">{errataNewsTitle(input.bookTitle || '書籍名')}</span>
-          </p>
+          <p>登録すると、お知らせ（カテゴリ「お知らせ」）が自動で作成され、正誤表PDFが添付されます。</p>
         ) : (
           <p>
             編集してもお知らせは追加されません。PDFを差し替えた場合は、新規追加時のお知らせに添付されているPDFも新しいものに入れ替わります。

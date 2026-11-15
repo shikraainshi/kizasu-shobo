@@ -1,8 +1,14 @@
 import { getDb } from "@/lib/firebase/admin";
 import { ERRATA_COLLECTION } from "@/lib/errata";
 import { errataNewsTitle } from "@/lib/errata-format";
-import { createNews, updateNews } from "@/lib/admin/notion-admin";
+import { createNews, getAllBooksForAdmin, updateNews } from "@/lib/admin/notion-admin";
 import type { ErrataInput } from "@/lib/admin/types";
+
+/** 書籍名の候補（Notionの書籍DBから、新しい順・重複なし） */
+export async function getErrataBookTitles(): Promise<string[]> {
+  const books = await getAllBooksForAdmin();
+  return [...new Set(books.map((b) => b.title.trim()).filter(Boolean))];
+}
 
 /**
  * 正誤表を新規追加し、同時にお知らせ（カテゴリ「お知らせ」、PDF添付）を作成する。
