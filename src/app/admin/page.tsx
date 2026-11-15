@@ -42,7 +42,7 @@ export default async function AdminDashboardPage() {
         { value: draftCount, label: "非公開" },
       ],
       newHref: "/admin/books/new",
-      newLabel: "新規書籍を追加",
+      newLabel: "新規追加",
     },
     {
       href: "/admin/news",
@@ -50,7 +50,7 @@ export default async function AdminDashboardPage() {
       label: "お知らせ",
       stats: [{ value: news.length, label: "総数" }],
       newHref: "/admin/news/new",
-      newLabel: "新規お知らせを追加",
+      newLabel: "新規追加",
     },
     {
       href: "/admin/errata",
@@ -74,7 +74,7 @@ export default async function AdminDashboardPage() {
             { value: paidApplicationCount, label: "決済済み" },
           ],
       newHref: "/admin/events/new",
-      newLabel: "新規イベントを追加",
+      newLabel: "新規追加",
       note: firestoreError ? "Firestoreが未設定のため、統計を表示できません。" : undefined,
     },
   ];
