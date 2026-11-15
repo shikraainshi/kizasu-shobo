@@ -1,7 +1,7 @@
 import { getDb } from "@/lib/firebase/admin";
 import { ERRATA_COLLECTION } from "@/lib/errata";
 import { errataNewsTitle } from "@/lib/errata-format";
-import { createNews, getAllBooksForAdmin, updateNews } from "@/lib/admin/notion-admin";
+import { createNews, getAllBooksForAdmin } from "@/lib/admin/notion-admin";
 import type { ErrataInput } from "@/lib/admin/types";
 
 /** 書籍名の候補（Notionの書籍DBから、新しい順・重複なし） */
@@ -10,12 +10,10 @@ export async function getErrataBookTitles(): Promise<string[]> {
   return [...new Set(books.map((b) => b.title.trim()).filter(Boolean))];
 }
 
-/**
- * 正誤表を新規追加し、同時にお知らせ（カテゴリ「お知らせ」、PDF添付）を作成する。
- */
-export async function createErrata(input: ErrataInput): Promise<{ id: string; newsPageId: string }> {
-  const title = errataNewsTitle(input.bookTitle);
-  const { pageId: newsPageId } = await createNews({
+/** 正誤表PDFを添付したお知らせ（カテゴリ「お知らせ」）を作成する */
+async function createErrataNews(input: ErrataInput, kind: "published" | "updated"): Promise<string> {
+  const title = errataNewsTitle(input.bookTitle, kind);
+  const { pageId } = await createNews({
     title,
     date: input.updatedAt,
     category: "お知らせ",
@@ -24,6 +22,14 @@ export async function createErrata(input: ErrataInput): Promise<{ id: string; ne
     attachmentUrl: input.pdfUrl,
     attachmentName: input.pdfName,
   });
+  return pageId;
+}
+
+/**
+ * 正誤表を新規登録し、「正誤表を掲載いたしました。」のお知らせを作成する。
+ */
+export async function createErrata(input: ErrataInput): Promise<{ id: string; newsPageId: string }> {
+  const newsPageId = await createErrataNews(input, "published");
 
   const now = new Date().toISOString();
   const ref = getDb().collection(ERRATA_COLLECTION).doc();
@@ -40,25 +46,29 @@ export async function createErrata(input: ErrataInput): Promise<{ id: string; ne
 }
 
 /**
- * 正誤表を更新する。お知らせは新たに作らない。
- * PDFを差し替えた場合は、新規追加時に作ったお知らせの添付PDFも新しいものに差し替える。
+ * 正誤表を更新する。
+ * PDFを差し替えた場合は「正誤表を更新いたしました。」のお知らせを新しく作成する
+ * （それまでのお知らせはそのまま残す）。書籍名・更新日だけの変更ではお知らせは作らない。
  */
 export async function updateErrata(
   errataId: string,
   input: ErrataInput,
-  previous: { pdfUrl: string; newsPageId: string }
-): Promise<void> {
-  await getDb().collection(ERRATA_COLLECTION).doc(errataId).update({
-    bookTitle: input.bookTitle,
-    updatedAt: input.updatedAt,
-    pdfUrl: input.pdfUrl,
-    pdfName: input.pdfName,
-  });
+  previous: { pdfUrl: string }
+): Promise<{ newsPageId: string | null }> {
+  const pdfChanged = previous.pdfUrl !== input.pdfUrl;
+  const newsPageId = pdfChanged ? await createErrataNews(input, "updated") : null;
 
-  if (previous.newsPageId && previous.pdfUrl !== input.pdfUrl) {
-    await updateNews(previous.newsPageId, {
-      attachmentUrl: input.pdfUrl,
-      attachmentName: input.pdfName,
+  await getDb()
+    .collection(ERRATA_COLLECTION)
+    .doc(errataId)
+    .update({
+      bookTitle: input.bookTitle,
+      updatedAt: input.updatedAt,
+      pdfUrl: input.pdfUrl,
+      pdfName: input.pdfName,
+      // 最新のお知らせを指すようにする
+      ...(newsPageId ? { newsPageId } : {}),
     });
-  }
+
+  return { newsPageId };
 }

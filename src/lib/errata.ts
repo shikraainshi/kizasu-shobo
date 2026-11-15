@@ -10,7 +10,7 @@ export interface ErrataDoc {
   pdfUrl: string;
   /** アップロード時の元ファイル名 */
   pdfName: string;
-  /** 新規追加時に自動作成したお知らせのNotionページID */
+  /** 最後に自動作成したお知らせ（掲載／更新）のNotionページID */
   newsPageId: string;
   createdAt: string;
 }

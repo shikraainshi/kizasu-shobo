@@ -22,12 +22,13 @@ export async function PATCH(
       return NextResponse.json({ error: "正誤表が見つかりません。" }, { status: 404 });
     }
 
-    await updateErrata(errataId, input, current);
+    const { newsPageId } = await updateErrata(errataId, input, current);
 
     revalidatePath("/errata");
-    if (current.newsPageId && current.pdfUrl !== input.pdfUrl) {
+    if (newsPageId) {
       revalidatePath("/news");
-      revalidatePath(`/news/${current.newsPageId}`);
+      revalidatePath(`/news/${newsPageId}`);
+      revalidatePath("/");
     }
 
     return NextResponse.json({ success: true, id: errataId });
