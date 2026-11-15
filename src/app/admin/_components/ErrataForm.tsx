@@ -148,7 +148,7 @@ export default function ErrataForm({ errata, bookTitles }: { errata?: ErrataDoc;
       </Field>
 
       <div className="pt-4">
-        <SubmitButton isLoading={isLoading}>{isCreate ? '正誤表を登録する' : '変更を保存する'}</SubmitButton>
+        <SubmitButton isLoading={isLoading}>{isCreate ? '登録' : '変更を保存する'}</SubmitButton>
       </div>
     </form>
   );
