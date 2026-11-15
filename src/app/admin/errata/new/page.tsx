@@ -8,7 +8,7 @@ export default async function NewErrataPage() {
 
   return (
     <div className="space-y-8 max-w-2xl mx-auto">
-      <h1 className="text-2xl font-serif font-bold text-foreground tracking-[0.1em]">新規追加</h1>
+      <h1 className="text-2xl font-serif font-bold text-foreground tracking-[0.1em]">正誤表の新規追加</h1>
       <ErrataForm bookTitles={bookTitles} />
     </div>
   );
