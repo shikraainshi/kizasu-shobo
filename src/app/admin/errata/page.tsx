@@ -25,7 +25,7 @@ export default async function AdminErrataPage() {
           className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.08em] uppercase bg-accent text-white px-5 py-3 hover:bg-accent/90 transition-all font-serif"
         >
           <Plus size={14} />
-          新規正誤表を追加
+          新規追加
         </Link>
       </div>
       {firestoreError ? <FirestoreNotice /> : <ErrataAdminClient errata={errata} />}

@@ -58,7 +58,7 @@ export default async function AdminDashboardPage() {
       label: "正誤表",
       stats: firestoreError ? [] : [{ value: errata.length, label: "総数" }],
       newHref: "/admin/errata/new",
-      newLabel: "新規正誤表を追加",
+      newLabel: "新規追加",
       note: firestoreError ? "Firestoreが未設定のため、統計を表示できません。" : undefined,
     },
     {
