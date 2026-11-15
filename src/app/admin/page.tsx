@@ -86,12 +86,7 @@ export default async function AdminDashboardPage() {
 
   return (
     <div className="space-y-10">
-      <div>
-        <h1 className="text-2xl font-serif font-bold text-foreground tracking-[0.1em]">ダッシュボード</h1>
-        <p className="text-sm text-foreground/70 font-serif mt-1">
-          書籍・お知らせ・正誤表・イベントをここから管理できます。カードをクリックすると一覧に移動します。
-        </p>
-      </div>
+      <h1 className="text-2xl font-serif font-bold text-foreground tracking-[0.1em]">ダッシュボード</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {cards.map((card) => (
