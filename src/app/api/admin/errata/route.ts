@@ -2,10 +2,12 @@ import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
 import { createErrata } from "@/lib/admin/errata-admin";
 import { parseErrataInput, validateErrataInput } from "@/lib/admin/validation";
+import { todayInJapan } from "@/lib/errata-format";
 
 export async function POST(request: Request) {
   try {
-    const input = parseErrataInput(await request.json());
+    // 更新日（＝お知らせの日付）は登録した日にする
+    const input = { ...parseErrataInput(await request.json()), updatedAt: todayInJapan() };
 
     const errors = validateErrataInput(input);
     if (errors.length > 0) {

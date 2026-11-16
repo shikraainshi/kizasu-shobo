@@ -3,6 +3,7 @@ import { revalidatePath } from "next/cache";
 import { getErrataById } from "@/lib/errata";
 import { updateErrata } from "@/lib/admin/errata-admin";
 import { parseErrataInput, validateErrataInput } from "@/lib/admin/validation";
+import { todayInJapan } from "@/lib/errata-format";
 
 export async function PATCH(
   request: Request,
@@ -10,16 +11,21 @@ export async function PATCH(
 ) {
   try {
     const { errataId } = await params;
-    const input = parseErrataInput(await request.json());
+    const current = await getErrataById(errataId);
+    if (!current) {
+      return NextResponse.json({ error: "正誤表が見つかりません。" }, { status: 404 });
+    }
+
+    const parsed = parseErrataInput(await request.json());
+    // 更新日はPDFを差し替えたときだけ今日にし、それ以外は元の日付のままにする
+    const input = {
+      ...parsed,
+      updatedAt: parsed.pdfUrl !== current.pdfUrl ? todayInJapan() : current.updatedAt,
+    };
 
     const errors = validateErrataInput(input);
     if (errors.length > 0) {
       return NextResponse.json({ error: errors.join("\n") }, { status: 400 });
-    }
-
-    const current = await getErrataById(errataId);
-    if (!current) {
-      return NextResponse.json({ error: "正誤表が見つかりません。" }, { status: 404 });
     }
 
     const { newsPageId } = await updateErrata(errataId, input, current);

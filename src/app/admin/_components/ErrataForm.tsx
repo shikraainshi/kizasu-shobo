@@ -9,7 +9,6 @@ import { todayInJapan } from '@/lib/errata-format';
 import BookTitleCombobox from './BookTitleCombobox';
 import { validateErrataInput, validateErrataPdf } from '@/lib/admin/validation';
 import Field from './ui/Field';
-import TextInput from './ui/TextInput';
 import ErrorBanner from './ui/ErrorBanner';
 import SubmitButton from './ui/SubmitButton';
 
@@ -43,8 +42,6 @@ export default function ErrataForm({ errata, bookTitles }: { errata?: ErrataDoc;
     }
     setError(null);
     setPdfFile(file);
-    // PDFを差し替えたら更新日を今日にする（必要なら手で変更できる）
-    if (file && !isCreate) set('updatedAt', todayInJapan());
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -109,16 +106,6 @@ export default function ErrataForm({ errata, bookTitles }: { errata?: ErrataDoc;
           value={input.bookTitle}
           onChange={(v) => set('bookTitle', v)}
           options={bookTitles}
-        />
-      </Field>
-
-      <Field label="更新日" required>
-        <TextInput
-          type="date"
-          required
-          value={input.updatedAt}
-          onChange={(e) => set('updatedAt', e.target.value)}
-          className="max-w-xs"
         />
       </Field>
 
