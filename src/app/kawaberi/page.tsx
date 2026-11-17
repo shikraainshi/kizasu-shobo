@@ -232,7 +232,7 @@ export default function KawaberiPage() {
               },
             ].map((item) => (
               <motion.div key={item.num} {...fadeUp} className="flex flex-col items-center text-center gap-5">
-                <span className="font-serif text-xs text-[#8a7d63] tracking-[0.3em]">{item.num}</span>
+                <span className="font-serif text-xs text-[#8a7d63] tracking-[0.15em]">{item.num}</span>
                 <h3 className="font-serif text-3xl md:text-4xl font-bold text-[#2a2622]/75">{item.title}</h3>
                 <OpenBookFrame>
                   <p className="text-center text-white/95 leading-[1.65] text-[clamp(12px,1.25vw,14.5px)] font-medium font-serif">
@@ -314,7 +314,7 @@ export default function KawaberiPage() {
                 href="https://maps.google.com/?q=奈良県奈良市法蓮町1050-1"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.3em] uppercase border border-[#2a2622]/30 rounded-full px-5 py-2.5 hover:border-[#2a2622] hover:bg-[#2a2622]/5 transition-colors"
+                className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.15em] uppercase border border-[#2a2622]/30 rounded-full px-5 py-2.5 hover:border-[#2a2622] hover:bg-[#2a2622]/5 transition-colors"
               >
                 <MapPin size={15} />
                 Googleマップで見る

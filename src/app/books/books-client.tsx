@@ -105,7 +105,7 @@ function BooksContent({ initialBooks }: BooksClientProps) {
                   <Search size={16} />
                   <span>検索条件: <span className="text-accent font-bold">「{searchQuery}」</span></span>
                 </div>
-                <p className="text-sm text-accent/40">
+                <p className="text-sm text-accent/80">
                   {filteredAndSortedBooks.length}件見つかりました
                 </p>
               </div>
@@ -113,7 +113,7 @@ function BooksContent({ initialBooks }: BooksClientProps) {
               <>
                 {/* Mobile: Category Dropdown */}
                 <div className="lg:hidden flex items-center gap-3 w-full border border-accent/20 bg-wakaba/10 px-4 py-2.5">
-                  <span className="text-[11px] font-serif font-bold text-accent/60 shrink-0 tracking-widest border-r border-accent/10 pr-3">カテゴリ</span>
+                  <span className="text-[13px] font-serif font-bold text-accent/60 shrink-0 tracking-widest border-r border-accent/10 pr-3">カテゴリ</span>
                   <div className="relative flex-1 group">
                     <select 
                       value={selectedCategory}
@@ -124,7 +124,7 @@ function BooksContent({ initialBooks }: BooksClientProps) {
                         <option key={cat} value={cat}>{cat}</option>
                       ))}
                     </select>
-                    <div className="absolute inset-y-0 right-0 flex items-center pointer-events-none text-accent/40">
+                    <div className="absolute inset-y-0 right-0 flex items-center pointer-events-none text-accent/80">
                       <ChevronDown size={14} />
                     </div>
                   </div>
@@ -136,7 +136,7 @@ function BooksContent({ initialBooks }: BooksClientProps) {
                     <button 
                       key={cat}
                       onClick={() => setSelectedCategory(cat)}
-                      className={`whitespace-nowrap px-5 py-2 text-[11px] font-serif transition-all border ${
+                      className={`whitespace-nowrap px-5 py-2 text-[13px] font-serif transition-all border ${
                         selectedCategory === cat 
                         ? "bg-accent text-white border-accent font-bold" 
                         : "bg-wakaba/10 text-accent/60 border-transparent hover:border-accent/20 hover:text-accent"
@@ -154,13 +154,13 @@ function BooksContent({ initialBooks }: BooksClientProps) {
             <select 
               value={sortOption}
               onChange={(e) => setSortOption(e.target.value as SortOption)}
-              className="appearance-none bg-background border border-accent/20 px-4 py-2 pr-10 text-[10px] font-serif font-bold uppercase tracking-widest text-accent focus:outline-none focus:border-accent transition-all cursor-pointer rounded-none min-w-[200px]"
+              className="appearance-none bg-background border border-accent/20 px-4 py-2 pr-10 text-xs font-serif font-bold uppercase tracking-widest text-accent focus:outline-none focus:border-accent transition-all cursor-pointer rounded-none min-w-[200px]"
             >
               <option value="date-desc">出版年月日の新しい順</option>
               <option value="date-asc">出版年月日の古い順</option>
               <option value="title">タイトル</option>
             </select>
-            <div className="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none text-accent/40 group-hover:text-accent">
+            <div className="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none text-accent/80 group-hover:text-accent">
               <ChevronDown size={14} />
             </div>
           </div>
@@ -185,9 +185,9 @@ function BooksContent({ initialBooks }: BooksClientProps) {
                       />
                     ) : (
                       <div className="w-full max-w-[220px] h-full bg-wakaba/5 border border-border/40 flex items-center justify-center p-6 text-center shadow-md">
-                        <span className="text-[9px] uppercase tracking-[0.2em] text-accent/50 mb-2 block font-serif font-bold">{book.category}</span>
+                        <span className="text-xs uppercase tracking-[0.1em] text-accent/80 mb-2 block font-serif font-bold">{book.category}</span>
                         <h3 className="text-base font-serif font-bold mb-1 leading-tight text-foreground">{book.title}</h3>
-                        <p className="text-[10px] text-accent/50 font-serif">{book.author}</p>
+                        <p className="text-xs text-accent/80 font-serif">{book.author}</p>
                       </div>
                     )}
                   </div>
@@ -195,7 +195,7 @@ function BooksContent({ initialBooks }: BooksClientProps) {
                   <div className="flex-1 flex flex-col space-y-4">
                     {/* カテゴリ */}
                     <div>
-                      <div className="inline-block px-2.5 py-1 bg-accent text-white text-[9px] font-bold tracking-[0.2em] leading-none uppercase">
+                      <div className="inline-block px-2.5 py-1 bg-accent text-white text-xs font-bold tracking-[0.1em] leading-none uppercase">
                         {book.category}
                       </div>
                     </div>
@@ -211,7 +211,7 @@ function BooksContent({ initialBooks }: BooksClientProps) {
                         <p className="text-[13px] text-accent/70 font-serif flex-1 line-clamp-2">
                           {book.author}
                         </p>
-                        <span className="text-[11px] text-muted-foreground shrink-0 mt-0.5 italic">著者</span>
+                        <span className="text-[13px] text-muted-foreground shrink-0 mt-0.5">著者</span>
                       </div>
                     </div>
 
@@ -228,7 +228,7 @@ function BooksContent({ initialBooks }: BooksClientProps) {
             </div>
           ) : (
             <div className="bg-background w-full py-40 flex flex-col items-center justify-center border-b border-r border-border">
-              <p className="text-accent/40 font-serif italic text-lg tracking-wider">該当する書籍がありません。</p>
+              <p className="text-accent/80 font-serif text-lg tracking-wider">該当する書籍がありません。</p>
               <button 
                 onClick={() => {
                   setSelectedCategory("すべて");
@@ -236,7 +236,7 @@ function BooksContent({ initialBooks }: BooksClientProps) {
                     window.location.href = "/books";
                   }
                 }}
-                className="mt-6 text-[10px] font-serif font-bold uppercase tracking-[0.2em] text-accent border-b border-accent/30 pb-1 hover:text-accent/60 hover:border-accent/10 transition-all"
+                className="mt-6 text-xs font-serif font-bold uppercase tracking-[0.1em] text-accent border-b border-accent/30 pb-1 hover:text-accent/60 hover:border-accent/10 transition-all"
               >
                 {searchQuery ? "すべての書籍を表示" : "すべての書籍を表示"}
               </button>
@@ -304,13 +304,13 @@ function BooksContent({ initialBooks }: BooksClientProps) {
                     className={`w-10 h-10 flex items-center justify-center border font-bold font-serif transition-all text-xs ${
                       currentPage === page
                       ? "border-accent bg-accent text-white"
-                      : "border-accent/10 text-accent/40 hover:border-accent/40 hover:text-accent hover:bg-wakaba/20"
+                      : "border-accent/10 text-accent/80 hover:border-accent/40 hover:text-accent hover:bg-wakaba/20"
                     }`}
                   >
                     {page}
                   </button>
                 ) : (
-                  <span key={index} className="w-8 text-center text-accent/20 font-serif">
+                  <span key={index} className="w-8 text-center text-accent/50 font-serif">
                     {page}
                   </span>
                 )

@@ -19,7 +19,7 @@ export default function EventFlyer({
           href={url}
           target="_blank"
           rel="noopener noreferrer"
-          className="block text-center py-3 text-[11px] font-bold tracking-[0.3em] uppercase text-accent/60 hover:text-accent border-t border-border/40 font-serif"
+          className="block text-center py-3 text-[13px] font-bold tracking-[0.15em] uppercase text-accent/60 hover:text-accent border-t border-border/40 font-serif"
         >
           PDFを開く
         </a>

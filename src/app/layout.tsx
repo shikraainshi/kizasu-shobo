@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 
 const notoSerif = Noto_Serif_JP({
   variable: "--font-noto-serif",
-  weight: ["400", "700"],
+  weight: ["400", "500", "700"],
   display: "swap",
 });
 

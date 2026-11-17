@@ -87,7 +87,7 @@ export default function HomeClient({ latestBooks, featuredBooks, newArrivals, in
             {newArrivals.map((book, i) => {
               return (
                 <div key={i} className={`group relative px-8 lg:px-12 py-4 lg:py-8 transition-all duration-500 ease-out hover:-translate-y-2 border border-border/40 shadow-[0_2px_10px_-3px_rgba(0,0,0,0.02),0_10px_30px_-15px_rgba(0,0,0,0.05)] hover:shadow-[0_30px_60px_-12px_rgba(0,0,0,0.12),0_18px_36px_-18px_rgba(0,0,0,0.08)] ${book.color && !book.color.startsWith('#') ? book.color : 'bg-stone-800'}`} style={book.color && book.color.startsWith('#') ? { backgroundColor: book.color } : {}}>
-                  <div className="absolute top-4 right-4 text-[8px] font-serif font-bold tracking-[0.2em] text-white/40 uppercase">New</div>
+                  <div className="absolute top-4 right-4 text-xs font-serif font-bold tracking-[0.1em] text-white/40 uppercase">New</div>
                   <div className="flex flex-row gap-6 lg:gap-12 items-start relative">
                     <div className="relative w-32 sm:w-40 lg:w-48 shrink-0 -mt-12 lg:-mt-20 -ml-4 lg:-ml-8 drop-shadow-[0_20px_40px_rgba(0,0,0,0.3)] group-hover:drop-shadow-[0_35px_60px_rgba(0,0,0,0.4)] transition-all duration-700">
                       <Link href={`/books/${book.id}`} className="block relative aspect-[2/3] transition-all duration-700">
@@ -101,23 +101,23 @@ export default function HomeClient({ latestBooks, featuredBooks, newArrivals, in
                     <div className="flex-1 space-y-3 pl-4 lg:pl-6 relative">
                       <div className="absolute left-0 top-1 w-[2px] h-10 bg-white/30 group-hover:h-14 group-hover:bg-white/60 transition-all duration-500"></div>
                       <div className="space-y-2 text-left">
-                        <div className="inline-block text-[10px] font-bold tracking-[0.4em] text-white/60 uppercase font-serif mb-1">
+                        <div className="inline-block text-xs font-bold tracking-[0.15em] text-white/60 uppercase font-serif mb-1">
                           {book.category}
                         </div>
                         <h3 className="text-lg lg:text-2xl font-serif font-bold text-white group-hover:text-white/80 transition-colors duration-500 line-clamp-2 leading-snug">
                           <Link href={`/books/${book.id}`}>{book.title}</Link>
                         </h3>
                         <div className="flex items-center justify-start gap-3 py-1">
-                          <p className="text-xs text-white/80 font-serif italic">
-                            {book.author} <span className="text-[9px] text-white/50 not-italic ml-0.5">著</span>
+                          <p className="text-xs text-white/80 font-serif">
+                            {book.author} <span className="text-xs text-white/50 ml-0.5">著</span>
                           </p>
                         </div>
                       </div>
-                      <p className="text-[11px] text-white/90 leading-relaxed font-serif line-clamp-3 lg:line-clamp-4 text-left">
+                      <p className="text-[13px] text-white/90 leading-relaxed font-serif line-clamp-3 lg:line-clamp-4 text-left">
                         {book.description}
                       </p>
                       <div className="pt-2 flex justify-start">
-                        <Link href={`/books/${book.id}`} className="text-[9px] font-bold text-white/70 uppercase tracking-[0.3em] font-serif border-b border-white/20 hover:border-white hover:text-white transition-all">詳細を見る</Link>
+                        <Link href={`/books/${book.id}`} className="text-xs font-bold text-white/70 uppercase tracking-[0.15em] font-serif border-b border-white/20 hover:border-white hover:text-white transition-all">詳細を見る</Link>
                       </div>
                     </div>
                   </div>
@@ -126,7 +126,7 @@ export default function HomeClient({ latestBooks, featuredBooks, newArrivals, in
             })}
           </div>
           <div className="mt-20 flex justify-end">
-            <Link href="/books" className="inline-flex items-center gap-4 border-b border-accent/30 pb-3 text-sm tracking-[0.2em] text-accent/60 font-serif transition hover:gap-6 hover:text-accent hover:border-accent">
+            <Link href="/books" className="inline-flex items-center gap-4 border-b border-accent/30 pb-3 text-sm tracking-[0.1em] text-accent/60 font-serif transition hover:gap-6 hover:text-accent hover:border-accent">
               刊行書籍一覧へ
               <span>›</span>
             </Link>
@@ -160,11 +160,11 @@ export default function HomeClient({ latestBooks, featuredBooks, newArrivals, in
               const inner = (
                 <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-10">
                   <div className="flex items-center md:w-56 shrink-0 gap-8">
-                    <span className="text-sm text-accent/40 font-serif leading-none tracking-wider font-bold w-20">
+                    <span className="text-sm text-accent/80 font-serif leading-none tracking-wider font-bold w-20">
                       {item.date.replace(/-/g, '.')}
                     </span>
                     <div className="w-24 flex justify-start">
-                      <span className={`text-[9px] tracking-[0.1em] border px-2 py-0.5 font-bold font-serif w-full text-center truncate ${getCategoryColor(item.category)}`}>
+                      <span className={`text-xs tracking-[0.1em] border px-2 py-0.5 font-bold font-serif w-full text-center truncate ${getCategoryColor(item.category)}`}>
                         {item.category}
                       </span>
                     </div>
@@ -187,7 +187,7 @@ export default function HomeClient({ latestBooks, featuredBooks, newArrivals, in
             })}
           </div>
           <div className="mt-12 flex justify-end">
-            <Link href="/news" className="inline-flex items-center gap-4 border-b border-accent/30 pb-3 text-sm tracking-[0.2em] text-accent/60 font-serif transition hover:gap-6 hover:text-accent hover:border-accent">
+            <Link href="/news" className="inline-flex items-center gap-4 border-b border-accent/30 pb-3 text-sm tracking-[0.1em] text-accent/60 font-serif transition hover:gap-6 hover:text-accent hover:border-accent">
               お知らせ一覧を見る
               <span>›</span>
             </Link>
@@ -295,7 +295,7 @@ export default function HomeClient({ latestBooks, featuredBooks, newArrivals, in
 
             <Link
               href="/about"
-              className="mt-12 inline-flex items-center gap-4 border-b border-[#9ab673] pb-3 text-sm tracking-[0.2em] text-[#5f7f4f] transition hover:gap-6"
+              className="mt-12 inline-flex items-center gap-4 border-b border-[#9ab673] pb-3 text-sm tracking-[0.1em] text-[#5f7f4f] transition hover:gap-6"
             >
               萌書房について詳しく見る
               <span>›</span>

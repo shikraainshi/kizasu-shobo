@@ -67,7 +67,7 @@ export default function ContactPage() {
           </div>
           <button 
             onClick={() => setIsSubmitted(false)}
-            className="text-[11px] font-bold tracking-[0.4em] uppercase border-b border-accent/20 pb-2 text-accent/60 hover:text-accent hover:border-accent/40 transition-all font-serif"
+            className="text-[13px] font-bold tracking-[0.15em] uppercase border-b border-accent/20 pb-2 text-accent/60 hover:text-accent hover:border-accent/40 transition-all font-serif"
           >
             トップページに戻る
           </button>
@@ -91,7 +91,7 @@ export default function ContactPage() {
           {/* Left: Contact Info (2/5) */}
           <div className="lg:col-span-2 space-y-16">
             <div className="space-y-6">
-              <h2 className="text-[10px] font-bold tracking-[0.4em] uppercase text-accent/40 font-serif border-l-2 border-accent/20 pl-4">Information</h2>
+              <h2 className="text-xs font-bold tracking-[0.15em] uppercase text-accent/80 font-serif border-l-2 border-accent/20 pl-4">Information</h2>
               <p className="text-foreground/70 font-serif leading-loose">
                 書籍のご注文、公費でのご購入、企画の持ち込み、または弊社の活動に関するご質問など、お気軽にお問い合わせください。
               </p>
@@ -100,17 +100,17 @@ export default function ContactPage() {
             <div className="space-y-12">
               <div className="space-y-6">
                 <div className="flex items-center gap-3 border-b border-accent/10 pb-2">
-                  <h3 className="text-xs font-bold tracking-[0.2em] text-accent font-serif uppercase">Kitamachi Office / きたまちオフィス</h3>
-                  <span className="text-[9px] px-2 py-0.5 bg-accent/10 text-accent font-bold rounded-full">主連絡先</span>
+                  <h3 className="text-xs font-bold tracking-[0.1em] text-accent font-serif uppercase">Kitamachi Office / きたまちオフィス</h3>
+                  <span className="text-xs px-2 py-0.5 bg-accent/10 text-accent font-bold rounded-full">主連絡先</span>
                 </div>
                 <div className="flex items-start gap-6">
-                  <MapPin size={18} className="text-accent/40 mt-1" />
+                  <MapPin size={18} className="text-accent/80 mt-1" />
                   <p className="text-sm font-serif text-foreground/80 leading-relaxed">
                     〒630-8113 奈良市法蓮町1050-1
                   </p>
                 </div>
                 <div className="flex items-start gap-6">
-                  <Phone size={18} className="text-accent/40 mt-1" />
+                  <Phone size={18} className="text-accent/80 mt-1" />
                   <div className="text-sm font-serif text-foreground/80 space-y-1">
                     <p>TEL：0742-42-6986</p>
                     <p>FAX：0742-90-0044</p>
@@ -119,15 +119,15 @@ export default function ContactPage() {
               </div>
 
               <div className="space-y-6 pt-4 opacity-80">
-                <h3 className="text-xs font-bold tracking-[0.2em] text-accent/60 font-serif border-b border-accent/10 pb-2 uppercase">Headquarters / 本社</h3>
+                <h3 className="text-xs font-bold tracking-[0.1em] text-accent/60 font-serif border-b border-accent/10 pb-2 uppercase">Headquarters / 本社</h3>
                 <div className="flex items-start gap-6">
-                  <MapPin size={18} className="text-accent/40 mt-1" />
+                  <MapPin size={18} className="text-accent/80 mt-1" />
                   <p className="text-sm font-serif text-foreground/80 leading-relaxed">
                     〒630-1242 奈良市大柳生町3619-1
                   </p>
                 </div>
                 <div className="flex items-start gap-6">
-                  <Phone size={18} className="text-accent/40 mt-1" />
+                  <Phone size={18} className="text-accent/80 mt-1" />
                   <div className="text-sm font-serif text-foreground/80 space-y-1">
                     <p>TEL：0742-93-2234</p>
                     <p>FAX：0742-93-2235</p>
@@ -136,7 +136,7 @@ export default function ContactPage() {
               </div>
 
               <div className="flex items-start gap-6 pt-6 border-t border-accent/5">
-                <Mail size={18} className="text-accent/40 mt-1" />
+                <Mail size={18} className="text-accent/80 mt-1" />
                 <div className="text-sm font-serif text-foreground/80">
                   <p>Email：kizasu-s@m3.kcn.ne.jp</p>
                 </div>
@@ -154,7 +154,7 @@ export default function ContactPage() {
             <form onSubmit={handleSubmit} className="space-y-10 bg-wakaba/5 p-8 md:p-12 border border-border/40">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                 <div className="space-y-3">
-                  <label className="text-[10px] font-bold tracking-[0.3em] uppercase text-accent/80 font-serif block">お名前 <span className="text-accent/40 ml-2">Required</span></label>
+                  <label className="text-xs font-bold tracking-[0.15em] uppercase text-accent/80 font-serif block">お名前 <span className="text-accent/80 ml-2">Required</span></label>
                   <input 
                     required
                     name="name"
@@ -164,7 +164,7 @@ export default function ContactPage() {
                   />
                 </div>
                 <div className="space-y-3">
-                  <label className="text-[10px] font-bold tracking-[0.3em] uppercase text-accent/80 font-serif block">メールアドレス <span className="text-accent/40 ml-2">Required</span></label>
+                  <label className="text-xs font-bold tracking-[0.15em] uppercase text-accent/80 font-serif block">メールアドレス <span className="text-accent/80 ml-2">Required</span></label>
                   <input 
                     required
                     name="email"
@@ -176,7 +176,7 @@ export default function ContactPage() {
               </div>
 
               <div className="space-y-3">
-                <label className="text-[10px] font-bold tracking-[0.3em] uppercase text-accent/80 font-serif block">お問い合わせ種別</label>
+                <label className="text-xs font-bold tracking-[0.15em] uppercase text-accent/80 font-serif block">お問い合わせ種別</label>
                 <div className="relative">
                   <select 
                     name="type"
@@ -187,14 +187,14 @@ export default function ContactPage() {
                     <option>企画・執筆の持ち込み</option>
                     <option>その他のお問い合わせ</option>
                   </select>
-                  <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-accent/40">
+                  <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-accent/80">
                     <ChevronDown size={14} />
                   </div>
                 </div>
               </div>
 
               <div className="space-y-3">
-                <label className="text-[10px] font-bold tracking-[0.3em] uppercase text-accent/80 font-serif block">メッセージ内容 <span className="text-accent/40 ml-2">Required</span></label>
+                <label className="text-xs font-bold tracking-[0.15em] uppercase text-accent/80 font-serif block">メッセージ内容 <span className="text-accent/80 ml-2">Required</span></label>
                 <textarea 
                   required
                   name="message"
@@ -208,11 +208,11 @@ export default function ContactPage() {
                 <button 
                   type="submit"
                   disabled={isLoading}
-                  className={`w-full bg-accent text-white py-6 font-bold tracking-[0.5em] text-[11px] uppercase transition-all font-serif shadow-lg ${isLoading ? 'opacity-70 cursor-not-allowed' : 'hover:bg-accent/90'}`}
+                  className={`w-full bg-accent text-white py-6 font-bold tracking-[0.15em] text-[13px] uppercase transition-all font-serif shadow-lg ${isLoading ? 'opacity-70 cursor-not-allowed' : 'hover:bg-accent/90'}`}
                 >
                   {isLoading ? '送信中...' : 'メッセージを送信する'}
                 </button>
-                <p className="text-[11px] text-foreground/50 text-center mt-6 font-serif tracking-widest">
+                <p className="text-[13px] text-foreground/70 text-center mt-6 font-serif tracking-widest">
                   ※ 通常2〜3営業日以内にご返信いたします。
                 </p>
               </div>

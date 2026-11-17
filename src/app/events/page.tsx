@@ -16,7 +16,7 @@ export default async function EventsPage() {
 
       <section className="max-w-4xl mx-auto px-6 py-14 md:py-24">
         {events.length === 0 ? (
-          <p className="text-center text-foreground/50 font-serif">現在開催予定のイベントはありません。</p>
+          <p className="text-center text-foreground/70 font-serif">現在開催予定のイベントはありません。</p>
         ) : (
           <div className="space-y-6">
             {events.map((event) => (

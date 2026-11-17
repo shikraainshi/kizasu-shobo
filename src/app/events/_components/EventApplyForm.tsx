@@ -82,8 +82,8 @@ export default function EventApplyForm({ event, cancelPolicy }: { event: EventDo
       )}
 
       <div className="space-y-3">
-        <label className="text-[10px] font-bold tracking-[0.3em] uppercase text-accent/80 font-serif block">
-          お名前 <span className="text-accent/40 ml-2">必須</span>
+        <label className="text-xs font-bold tracking-[0.15em] uppercase text-accent/80 font-serif block">
+          お名前 <span className="text-accent/80 ml-2">必須</span>
         </label>
         <input
           required
@@ -94,8 +94,8 @@ export default function EventApplyForm({ event, cancelPolicy }: { event: EventDo
       </div>
 
       <div className="space-y-3">
-        <label className="text-[10px] font-bold tracking-[0.3em] uppercase text-accent/80 font-serif block">
-          電話番号 <span className="text-accent/40 ml-2">必須</span>
+        <label className="text-xs font-bold tracking-[0.15em] uppercase text-accent/80 font-serif block">
+          電話番号 <span className="text-accent/80 ml-2">必須</span>
         </label>
         <input
           required
@@ -108,8 +108,8 @@ export default function EventApplyForm({ event, cancelPolicy }: { event: EventDo
       </div>
 
       <div className="space-y-3">
-        <label className="text-[10px] font-bold tracking-[0.3em] uppercase text-accent/50 font-serif block">
-          メールアドレス <span className="text-accent/30 ml-2">任意</span>
+        <label className="text-xs font-bold tracking-[0.15em] uppercase text-accent/80 font-serif block">
+          メールアドレス <span className="text-accent/50 ml-2">任意</span>
         </label>
         <input
           type="email"
@@ -120,8 +120,8 @@ export default function EventApplyForm({ event, cancelPolicy }: { event: EventDo
       </div>
 
       <div className="space-y-3">
-        <label className="text-[10px] font-bold tracking-[0.3em] uppercase text-accent/80 font-serif block">
-          参加人数 <span className="text-accent/40 ml-2">必須</span>
+        <label className="text-xs font-bold tracking-[0.15em] uppercase text-accent/80 font-serif block">
+          参加人数 <span className="text-accent/80 ml-2">必須</span>
         </label>
         <div className="flex items-center gap-5">
           <button
@@ -145,8 +145,8 @@ export default function EventApplyForm({ event, cancelPolicy }: { event: EventDo
       </div>
 
       <div className="space-y-3">
-        <label className="text-[10px] font-bold tracking-[0.3em] uppercase text-accent/50 font-serif block">
-          居住エリア <span className="text-accent/30 ml-2">任意</span>
+        <label className="text-xs font-bold tracking-[0.15em] uppercase text-accent/80 font-serif block">
+          居住エリア <span className="text-accent/50 ml-2">任意</span>
         </label>
         <div className="flex flex-wrap gap-2">
           {AREA_OPTIONS.map((option) => (
@@ -163,8 +163,8 @@ export default function EventApplyForm({ event, cancelPolicy }: { event: EventDo
       </div>
 
       <div className="space-y-3">
-        <label className="text-[10px] font-bold tracking-[0.3em] uppercase text-accent/50 font-serif block">
-          このイベントを知ったきっかけ <span className="text-accent/30 ml-2">任意</span>
+        <label className="text-xs font-bold tracking-[0.15em] uppercase text-accent/80 font-serif block">
+          このイベントを知ったきっかけ <span className="text-accent/50 ml-2">任意</span>
         </label>
         <div className="flex flex-wrap gap-2">
           {SOURCE_OPTIONS.map((option) => (
@@ -182,7 +182,7 @@ export default function EventApplyForm({ event, cancelPolicy }: { event: EventDo
 
       {cancelPolicy && (
         <div className="space-y-3">
-          <label className="text-[10px] font-bold tracking-[0.3em] uppercase text-accent/80 font-serif block">
+          <label className="text-xs font-bold tracking-[0.15em] uppercase text-accent/80 font-serif block">
             キャンセルポリシー
           </label>
           <div className="border border-border/40 p-5 max-h-40 overflow-y-auto">
@@ -208,7 +208,7 @@ export default function EventApplyForm({ event, cancelPolicy }: { event: EventDo
         <button
           type="submit"
           disabled={isLoading}
-          className={`w-full bg-accent text-white py-5 font-bold tracking-[0.3em] text-[12px] uppercase transition-all font-serif shadow-lg ${
+          className={`w-full bg-accent text-white py-5 font-bold tracking-[0.15em] text-[12px] uppercase transition-all font-serif shadow-lg ${
             isLoading ? 'opacity-70 cursor-not-allowed' : 'hover:bg-accent/90'
           }`}
         >

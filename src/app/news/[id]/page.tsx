@@ -24,15 +24,15 @@ export default async function NewsDetailPage({
       {/* 1. Breadcrumbs */}
       <nav className="bg-wakaba/20 border-b border-border py-4">
         <div className="container mx-auto px-6">
-          <ul className="flex items-center gap-3 text-[10px] font-bold tracking-[0.2em] text-accent/40 uppercase font-serif">
+          <ul className="flex items-center gap-3 text-xs font-bold tracking-[0.1em] text-accent/80 uppercase font-serif">
             <li>
               <Link href="/" className="hover:text-accent transition-colors">トップ</Link>
             </li>
-            <ChevronRight size={10} className="text-accent/20" />
+            <ChevronRight size={10} className="text-accent/50" />
             <li>
               <Link href="/news" className="hover:text-accent transition-colors">お知らせ</Link>
             </li>
-            <ChevronRight size={10} className="text-accent/20" />
+            <ChevronRight size={10} className="text-accent/50" />
             <li className="text-accent/60 truncate max-w-[200px] md:max-w-none">
               {newsItem.title}
             </li>
@@ -46,10 +46,10 @@ export default async function NewsDetailPage({
           {/* 2. News Header */}
           <header className="mb-16 border-b border-accent/10 pb-12">
             <div className="flex items-center gap-6 mb-8">
-              <time className="text-sm font-mono text-accent/40 tracking-wider">
+              <time className="text-sm font-mono text-accent/80 tracking-wider">
                 {newsItem.date.replace(/-/g, '.')}
               </time>
-              <span className={`text-[10px] tracking-[0.2em] border px-4 py-1.5 font-bold font-serif ${getCategoryColor(newsItem.category)}`}>
+              <span className={`text-xs tracking-[0.1em] border px-4 py-1.5 font-bold font-serif ${getCategoryColor(newsItem.category)}`}>
                 {newsItem.category}
               </span>
             </div>
@@ -90,7 +90,7 @@ export default async function NewsDetailPage({
           <div className="flex justify-center mt-16 md:mt-48">
             <Link 
               href="/news" 
-              className="inline-block text-base font-serif font-bold tracking-[0.5em] uppercase border-b-2 border-accent/10 pb-3 text-accent/50 hover:text-accent hover:border-accent/40 transition-all"
+              className="inline-block text-base font-serif font-bold tracking-[0.15em] uppercase border-b-2 border-accent/10 pb-3 text-accent/80 hover:text-accent hover:border-accent/40 transition-all"
             >
               お知らせ一覧に戻る
             </Link>

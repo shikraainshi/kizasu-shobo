@@ -45,11 +45,11 @@ export default async function ErrataPage() {
       {/* Breadcrumbs */}
       <nav className="bg-wakaba/20 border-b border-border py-4">
         <div className="container mx-auto px-6">
-          <ul className="flex items-center gap-3 text-[10px] font-bold tracking-[0.2em] text-accent/40 uppercase font-serif">
+          <ul className="flex items-center gap-3 text-xs font-bold tracking-[0.1em] text-accent/80 uppercase font-serif">
             <li>
               <Link href="/" className="hover:text-accent transition-colors">トップ</Link>
             </li>
-            <ChevronRight size={10} className="text-accent/20" />
+            <ChevronRight size={10} className="text-accent/50" />
             <li className="text-accent/60">正誤表</li>
           </ul>
         </div>
@@ -71,7 +71,7 @@ export default async function ErrataPage() {
             </div>
 
             {items.length === 0 ? (
-              <p className="text-center text-accent/40 font-serif py-20 tracking-widest border-t border-accent/5">
+              <p className="text-center text-accent/80 font-serif py-20 tracking-widest border-t border-accent/5">
                 現在掲載している正誤表はありません
               </p>
             ) : (
@@ -88,7 +88,7 @@ export default async function ErrataPage() {
                         />
                       ) : (
                         <span className="w-full h-full flex items-center justify-center bg-wakaba/10 border border-border/40">
-                          <FileText size={20} className="text-accent/40" />
+                          <FileText size={20} className="text-accent/80" />
                         </span>
                       )}
                     </div>
