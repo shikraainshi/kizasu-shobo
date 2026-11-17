@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ChevronRight, FileText } from "lucide-react";
 import { getAllErrata, type ErrataDoc } from "@/lib/errata";
 import { getBooks, type Book } from "@/lib/books";
+import { titleKey } from "@/lib/errata-format";
 
 export const revalidate = 60;
 
@@ -13,11 +14,6 @@ export const metadata: Metadata = {
 
 function formatDate(date: string): string {
   return date.replace(/-/g, ".");
-}
-
-/** 全角・半角や空白の違いを無視して書名を比べるためのキー */
-function titleKey(title: string): string {
-  return title.normalize("NFKC").replace(/\s+/g, "").replace(/[‐－―−–—]/g, "-");
 }
 
 export default async function ErrataPage() {

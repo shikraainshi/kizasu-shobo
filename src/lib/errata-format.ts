@@ -15,3 +15,8 @@ export function errataNewsTitle(bookTitle: string, kind: "published" | "updated"
 export function todayInJapan(): string {
   return new Intl.DateTimeFormat("sv-SE", { timeZone: "Asia/Tokyo" }).format(new Date());
 }
+
+/** 全角・半角や空白の違いを無視して書名を比べるためのキー（正誤表と書籍の突き合わせに使う） */
+export function titleKey(title: string): string {
+  return title.normalize("NFKC").replace(/\s+/g, "").replace(/[‐－―−–—]/g, "-");
+}

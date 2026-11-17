@@ -1,4 +1,5 @@
 import { getDb } from "@/lib/firebase/admin";
+import { titleKey } from "@/lib/errata-format";
 
 export interface ErrataDoc {
   id: string;
@@ -36,6 +37,13 @@ export async function getAllErrata(): Promise<ErrataDoc[]> {
   return snap.docs
     .map(toErrata)
     .sort((a, b) => b.updatedAt.localeCompare(a.updatedAt) || b.createdAt.localeCompare(a.createdAt));
+}
+
+/** 書名が一致する正誤表（PDFがあるもの）。表記の細かな違い（全角・半角、空白）は無視する */
+export async function getErrataForBook(bookTitle: string): Promise<ErrataDoc[]> {
+  const key = titleKey(bookTitle);
+  if (!key) return [];
+  return (await getAllErrata()).filter((e) => e.pdfUrl && titleKey(e.bookTitle) === key);
 }
 
 export async function getErrataById(errataId: string): Promise<ErrataDoc | undefined> {

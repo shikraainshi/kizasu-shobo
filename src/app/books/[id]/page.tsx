@@ -1,7 +1,8 @@
 import { getBookById, getPurchaseUrl } from "@/lib/books";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, FileText } from "lucide-react";
+import { getErrataForBook, type ErrataDoc } from "@/lib/errata";
 
 export const dynamic = 'force-dynamic';
 
@@ -14,6 +15,13 @@ export default async function BookDetailPage({ params }: { params: Promise<{ id:
   }
 
   const purchaseUrl = getPurchaseUrl(book.isbn);
+
+  let errata: ErrataDoc[] = [];
+  try {
+    errata = await getErrataForBook(book.title);
+  } catch (error) {
+    console.error("Failed to load errata for book:", error);
+  }
 
   return (
     <div className="flex flex-col gap-16 pb-24 bg-background">
@@ -100,6 +108,33 @@ export default async function BookDetailPage({ params }: { params: Promise<{ id:
                   <dd className="text-foreground/70 font-serif tabular-nums">{book.pages} ページ</dd>
                 </dl>
               </div>
+
+              {/* 正誤表 */}
+              {errata.length > 0 && (
+                <div className="pt-12 border-t border-accent/10">
+                  <h2 className="text-sm font-bold tracking-[0.2em] text-accent/70 mb-6 font-serif">正誤表</h2>
+                  <ul className="space-y-3">
+                    {errata.map((item) => (
+                      <li key={item.id}>
+                        <a
+                          href={item.pdfUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="group flex items-center gap-4 border border-accent/20 px-5 py-4 hover:bg-wakaba/10 hover:border-accent/40 transition-colors"
+                        >
+                          <FileText size={20} className="shrink-0 text-accent/50 group-hover:text-accent transition-colors" />
+                          <span className="flex-1 text-sm text-foreground group-hover:text-accent transition-colors">
+                            正誤表を見る（PDF）
+                          </span>
+                          <span className="shrink-0 text-xs text-foreground/50 tabular-nums">
+                            {item.updatedAt.replace(/-/g, ".")} 更新
+                          </span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
 
               {/* Purchase Button */}
               <div className="pt-12 flex flex-col sm:flex-row gap-6">
