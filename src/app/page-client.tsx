@@ -15,6 +15,41 @@ interface HomeClientProps {
   initialNews: News[];
 }
 
+/** 背景色（#rrggbb）が暗いかどうか。暗い背景のときだけ白文字にする */
+function isDarkColor(hex: string): boolean {
+  const m = hex.match(/^#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i);
+  if (!m) return false;
+  const [r, g, b] = m.slice(1).map((v) => {
+    const c = parseInt(v, 16) / 255;
+    return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
+  });
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b < 0.25;
+}
+
+// 新着書籍カードの文字色（明るい背景用／暗い背景用）
+const CARD_TEXT = {
+  light: {
+    badge: 'text-foreground/50',
+    bar: 'bg-accent/30 group-hover:bg-accent/60',
+    category: 'text-accent/80',
+    title: 'text-foreground group-hover:text-accent',
+    author: 'text-foreground/80',
+    authorSuffix: 'text-foreground/60',
+    description: 'text-foreground/85',
+    link: 'text-accent border-accent/30 hover:border-accent hover:text-accent',
+  },
+  dark: {
+    badge: 'text-white/40',
+    bar: 'bg-white/30 group-hover:bg-white/60',
+    category: 'text-white/60',
+    title: 'text-white group-hover:text-white/80',
+    author: 'text-white/80',
+    authorSuffix: 'text-white/50',
+    description: 'text-white/90',
+    link: 'text-white/70 border-white/20 hover:border-white hover:text-white',
+  },
+};
+
 export default function HomeClient({ latestBooks, featuredBooks, newArrivals, initialNews }: HomeClientProps) {
   const [activeTab, setActiveTab] = useState("すべて");
   const [newsTab, setNewsTab] = useState("お知らせ");
@@ -85,9 +120,11 @@ export default function HomeClient({ latestBooks, featuredBooks, newArrivals, in
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 lg:gap-32">
             {newArrivals.map((book, i) => {
+              const isHex = !!book.color && book.color.startsWith('#');
+              const t = CARD_TEXT[isHex && isDarkColor(book.color) ? 'dark' : 'light'];
               return (
-                <div key={i} className={`group relative px-8 lg:px-12 py-4 lg:py-8 transition-all duration-500 ease-out hover:-translate-y-2 border border-border/40 shadow-[0_2px_10px_-3px_rgba(0,0,0,0.02),0_10px_30px_-15px_rgba(0,0,0,0.05)] hover:shadow-[0_30px_60px_-12px_rgba(0,0,0,0.12),0_18px_36px_-18px_rgba(0,0,0,0.08)] ${book.color && !book.color.startsWith('#') ? book.color : 'bg-stone-800'}`} style={book.color && book.color.startsWith('#') ? { backgroundColor: book.color } : {}}>
-                  <div className="absolute top-4 right-4 text-xs font-serif font-bold tracking-[0.1em] text-white/40 uppercase">New</div>
+                <div key={i} className={`group relative px-8 lg:px-12 py-4 lg:py-8 transition-all duration-500 ease-out hover:-translate-y-2 border border-border/40 shadow-[0_2px_10px_-3px_rgba(0,0,0,0.02),0_10px_30px_-15px_rgba(0,0,0,0.05)] hover:shadow-[0_30px_60px_-12px_rgba(0,0,0,0.12),0_18px_36px_-18px_rgba(0,0,0,0.08)] ${book.color && !isHex ? book.color : isHex ? '' : 'bg-wakaba'}`} style={isHex ? { backgroundColor: book.color } : {}}>
+                  <div className={`absolute top-4 right-4 text-xs font-serif font-bold tracking-[0.1em] uppercase ${t.badge}`}>New</div>
                   <div className="flex flex-row gap-6 lg:gap-12 items-start relative">
                     <div className="relative w-32 sm:w-40 lg:w-48 shrink-0 -mt-12 lg:-mt-20 -ml-4 lg:-ml-8 drop-shadow-[0_20px_40px_rgba(0,0,0,0.3)] group-hover:drop-shadow-[0_35px_60px_rgba(0,0,0,0.4)] transition-all duration-700">
                       <Link href={`/books/${book.id}`} className="block relative aspect-[2/3] transition-all duration-700">
@@ -99,25 +136,25 @@ export default function HomeClient({ latestBooks, featuredBooks, newArrivals, in
                       </Link>
                     </div>
                     <div className="flex-1 space-y-3 pl-4 lg:pl-6 relative">
-                      <div className="absolute left-0 top-1 w-[2px] h-10 bg-white/30 group-hover:h-14 group-hover:bg-white/60 transition-all duration-500"></div>
+                      <div className={`absolute left-0 top-1 w-[2px] h-10 group-hover:h-14 transition-all duration-500 ${t.bar}`}></div>
                       <div className="space-y-2 text-left">
-                        <div className="inline-block text-xs font-bold tracking-[0.15em] text-white/60 uppercase font-serif mb-1">
+                        <div className={`inline-block text-xs font-bold tracking-[0.15em] uppercase font-serif mb-1 ${t.category}`}>
                           {book.category}
                         </div>
-                        <h3 className="text-lg lg:text-2xl font-serif font-bold text-white group-hover:text-white/80 transition-colors duration-500 line-clamp-2 leading-snug">
+                        <h3 className={`text-lg lg:text-2xl font-serif font-bold transition-colors duration-500 line-clamp-2 leading-snug ${t.title}`}>
                           <Link href={`/books/${book.id}`}>{book.title}</Link>
                         </h3>
                         <div className="flex items-center justify-start gap-3 py-1">
-                          <p className="text-xs text-white/80 font-serif">
-                            {book.author} <span className="text-xs text-white/50 ml-0.5">著</span>
+                          <p className={`text-xs font-serif ${t.author}`}>
+                            {book.author} <span className={`text-xs ml-0.5 ${t.authorSuffix}`}>著</span>
                           </p>
                         </div>
                       </div>
-                      <p className="text-[13px] text-white/90 leading-relaxed font-serif line-clamp-3 lg:line-clamp-4 text-left">
+                      <p className={`text-[13px] leading-relaxed font-serif line-clamp-3 lg:line-clamp-4 text-left ${t.description}`}>
                         {book.description}
                       </p>
                       <div className="pt-2 flex justify-start">
-                        <Link href={`/books/${book.id}`} className="text-xs font-bold text-white/70 uppercase tracking-[0.15em] font-serif border-b border-white/20 hover:border-white hover:text-white transition-all">詳細を見る</Link>
+                        <Link href={`/books/${book.id}`} className={`text-xs font-bold uppercase tracking-[0.15em] font-serif border-b transition-all ${t.link}`}>詳細を見る</Link>
                       </div>
                     </div>
                   </div>
