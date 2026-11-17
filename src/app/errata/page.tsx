@@ -102,10 +102,10 @@ export default async function ErrataPage() {
                         {book?.author && <span className="text-xs md:text-sm text-foreground/60">{book.author}</span>}
                       </p>
                       {book && (
-                        <div className="mt-3">
+                        <div className="mt-1">
                           <Link
                             href={`/books/${book.id}`}
-                            className="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-bold tracking-[0.1em] text-accent/80 border border-accent/25 hover:bg-wakaba/20 hover:text-accent hover:border-accent/50 transition-colors"
+                            className="inline-flex items-center gap-0.5 py-1.5 text-sm text-accent/80 underline underline-offset-4 hover:text-accent transition-colors"
                           >
                             書籍詳細
                             <ChevronRight size={14} />
