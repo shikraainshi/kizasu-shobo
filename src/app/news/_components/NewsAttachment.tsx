@@ -27,7 +27,7 @@ export default function NewsAttachment({
           href={url}
           target="_blank"
           rel="noopener noreferrer"
-          className="block text-center py-3 text-[11px] font-bold tracking-[0.3em] uppercase text-accent/60 hover:text-accent border-t border-border/40 font-serif"
+          className="block text-center py-3 text-[13px] font-bold tracking-[0.15em] uppercase text-accent/60 hover:text-accent border-t border-border/40"
         >
           PDFを開く
         </a>
@@ -47,7 +47,7 @@ export default function NewsAttachment({
       href={url}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex items-center gap-3 border border-border/40 bg-wakaba/5 px-5 py-4 text-accent/70 hover:text-accent hover:border-accent/40 transition-colors font-serif"
+      className="flex items-center gap-3 border border-border/40 bg-wakaba/5 px-5 py-4 text-accent/70 hover:text-accent hover:border-accent/40 transition-colors"
     >
       <FileText size={20} className="shrink-0" />
       <span className="text-sm break-all">{label}</span>

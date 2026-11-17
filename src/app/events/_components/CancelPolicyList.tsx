@@ -10,7 +10,7 @@ function toItems(text: string): string[] {
 
 export default function CancelPolicyList({ text, className = '' }: { text: string; className?: string }) {
   return (
-    <ul className={`list-disc pl-5 space-y-1.5 text-foreground/70 font-serif leading-relaxed ${className}`}>
+    <ul className={`list-disc pl-5 space-y-1.5 text-foreground/70  leading-relaxed ${className}`}>
       {toItems(text).map((item, i) => (
         <li key={i}>{item}</li>
       ))}

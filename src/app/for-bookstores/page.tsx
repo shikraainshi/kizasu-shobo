@@ -6,8 +6,8 @@ export default function ForBookstoresPage() {
       {/* Page Header */}
       <section className="bg-wakaba/30 py-24 border-b border-border text-center">
         <div className="container mx-auto px-6">
-          <span className="text-[10px] font-bold tracking-[0.4em] uppercase text-accent/50 mb-4 block font-serif">For Bookstores</span>
-          <h1 className="text-4xl font-serif font-bold text-foreground tracking-tight">書店様へ</h1>
+          <span className="text-xs font-bold tracking-[0.15em] uppercase text-accent/80 mb-4 block">For Bookstores</span>
+          <h1 className="text-4xl font-bold text-foreground tracking-tight">書店様へ</h1>
         </div>
       </section>
 
@@ -15,8 +15,8 @@ export default function ForBookstoresPage() {
         <div className="max-w-4xl mx-auto space-y-20">
           
           {/* Main Message */}
-          <section className="space-y-12 font-serif">
-            <h2 className="text-2xl font-serif font-bold border-b border-accent/10 pb-6 text-foreground tracking-tight">萌書房書籍のご注文について</h2>
+          <section className="space-y-12">
+            <h2 className="text-2xl font-bold border-b border-accent/10 pb-6 text-foreground tracking-tight">萌書房書籍のご注文について</h2>
             <div className="space-y-8 text-foreground/70 leading-relaxed text-lg">
               <p>
                 日頃、皆さまには萌書房の書籍をご販売いただき、深く御礼を申し上げます。
@@ -41,19 +41,19 @@ export default function ForBookstoresPage() {
               {/* きたまちオフィス */}
               <div className="flex flex-col md:flex-row md:items-baseline gap-4 md:gap-12 border-b border-accent/5 pb-10">
                 <div className="w-56 shrink-0 flex items-center gap-3">
-                  <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-accent font-serif flex items-center gap-3">
+                  <span className="text-[13px] font-bold tracking-[0.1em] uppercase text-accent flex items-center gap-3">
                     <span className="w-1.5 h-1.5 bg-accent rounded-full"></span>
                     きたまちオフィス
                   </span>
-                  <span className="text-[8px] px-1.5 py-0.5 bg-accent/10 text-accent font-bold rounded-full whitespace-nowrap">主連絡先</span>
+                  <span className="text-xs px-1.5 py-0.5 bg-accent/10 text-accent font-bold rounded-full whitespace-nowrap">主連絡先</span>
                 </div>
-                <div className="flex flex-col gap-3 font-serif text-sm text-foreground/70">
+                <div className="flex flex-col gap-3 text-sm text-foreground/70">
                   <span className="flex items-center gap-4">
-                    <span className="text-[10px] text-accent/40 uppercase tracking-widest w-8">Tel</span>
+                    <span className="text-xs text-accent/80 uppercase tracking-widest w-8">Tel</span>
                     <span className="text-lg font-bold text-accent">0742-42-6986</span>
                   </span>
                   <span className="flex items-center gap-4">
-                    <span className="text-[10px] text-accent/40 uppercase tracking-widest w-8">Fax</span>
+                    <span className="text-xs text-accent/80 uppercase tracking-widest w-8">Fax</span>
                     <span className="text-lg font-bold text-accent">0742-90-0044</span>
                   </span>
                 </div>
@@ -61,17 +61,17 @@ export default function ForBookstoresPage() {
 
               {/* 本社 */}
               <div className="flex flex-col md:flex-row md:items-baseline gap-4 md:gap-12 border-b border-accent/5 pb-10 opacity-70">
-                <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-accent/70 w-56 shrink-0 font-serif flex items-center gap-3">
+                <span className="text-[13px] font-bold tracking-[0.1em] uppercase text-accent/70 w-56 shrink-0 flex items-center gap-3">
                   <span className="w-1.5 h-1.5 bg-accent/30 rounded-full"></span>
                   本社
                 </span>
-                <div className="flex flex-col gap-3 font-serif text-sm text-foreground/70">
+                <div className="flex flex-col gap-3 text-sm text-foreground/70">
                   <span className="flex items-center gap-4">
-                    <span className="text-[10px] text-accent/40 uppercase tracking-widest w-8">Tel</span>
+                    <span className="text-xs text-accent/80 uppercase tracking-widest w-8">Tel</span>
                     0742-93-2234
                   </span>
                   <span className="flex items-center gap-4">
-                    <span className="text-[10px] text-accent/40 uppercase tracking-widest w-8">Fax</span>
+                    <span className="text-xs text-accent/80 uppercase tracking-widest w-8">Fax</span>
                     0742-93-2235
                   </span>
                 </div>

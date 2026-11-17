@@ -99,7 +99,7 @@ export default function KawaberiPage() {
       {/* リード文 — 見開きの扉ページのような余白 */}
       <section className="py-16 md:py-24 px-6">
         <motion.div {...fadeUp} className="max-w-3xl mx-auto flex flex-col items-center text-center">
-          <p className="font-serif text-2xl md:text-[2.15rem] leading-[2] md:leading-[2.1] text-[#2a2622]/90">
+          <p className="text-2xl md:text-[2.15rem] leading-[2] md:leading-[2.1] text-[#2a2622]/90">
             水のささやきと紙の音が、
             <br className="hidden md:block" />
             そっと重なる場所。
@@ -116,7 +116,7 @@ export default function KawaberiPage() {
               <span className="w-1.5 h-1.5 rounded-full bg-[#2a2622]/40" />
               <span className="h-px w-8 bg-[#2a2622]/20" />
             </div>
-            <div className="space-y-10 font-serif text-[15px] leading-loose text-[#2a2622]/85">
+            <div className="space-y-10 text-[15px] leading-loose text-[#2a2622]/85">
               <p>
                 2025年4月6日、奈良・佐保川のほとりに
                 <br />
@@ -232,10 +232,10 @@ export default function KawaberiPage() {
               },
             ].map((item) => (
               <motion.div key={item.num} {...fadeUp} className="flex flex-col items-center text-center gap-5">
-                <span className="font-serif text-xs text-[#8a7d63] tracking-[0.3em]">{item.num}</span>
-                <h3 className="font-serif text-3xl md:text-4xl font-bold text-[#2a2622]/75">{item.title}</h3>
+                <span className="text-xs text-[#8a7d63] tracking-[0.15em]">{item.num}</span>
+                <h3 className="text-3xl md:text-4xl font-bold text-[#2a2622]/75">{item.title}</h3>
                 <OpenBookFrame>
-                  <p className="text-center text-white/95 leading-[1.65] text-[clamp(12px,1.25vw,14.5px)] font-medium font-serif">
+                  <p className="text-center text-white/95 leading-[1.65] text-[clamp(12px,1.25vw,14.5px)] font-medium">
                     {item.desc}
                   </p>
                 </OpenBookFrame>
@@ -252,7 +252,7 @@ export default function KawaberiPage() {
             <img src="/S__15638541.jpg" alt="川べり店内の本棚" className="w-full h-full object-cover" />
           </motion.div>
           <motion.div {...fadeUp} className="flex flex-col justify-center">
-            <h2 className="font-serif text-2xl md:text-3xl mb-8">珈琲と、軽食を。</h2>
+            <h2 className="text-2xl md:text-3xl mb-8">珈琲と、軽食を。</h2>
             <div className="border border-[#2a2622]/15 bg-white/60 p-3">
               <img src="/menu.jpg" alt="川べり ドリンク・軽食メニュー" className="w-full h-auto" />
             </div>
@@ -264,11 +264,11 @@ export default function KawaberiPage() {
       <section className="px-6 pb-16 md:pb-24">
         <div className="max-w-5xl mx-auto">
           <motion.div {...fadeUp} className="mb-10 text-center">
-            <h2 className="font-serif text-3xl md:text-4xl">営業時間・アクセス</h2>
+            <h2 className="text-3xl md:text-4xl">営業時間・アクセス</h2>
           </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.3fr] gap-12 lg:gap-20">
-            <motion.div {...fadeUp} className="space-y-8 font-serif">
+            <motion.div {...fadeUp} className="space-y-8">
               {[
                 { label: '営業時間', value: <>10:30 - 18:00</> },
                 {
@@ -314,7 +314,7 @@ export default function KawaberiPage() {
                 href="https://maps.google.com/?q=奈良県奈良市法蓮町1050-1"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.3em] uppercase border border-[#2a2622]/30 rounded-full px-5 py-2.5 hover:border-[#2a2622] hover:bg-[#2a2622]/5 transition-colors"
+                className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.15em] uppercase border border-[#2a2622]/30 rounded-full px-5 py-2.5 hover:border-[#2a2622] hover:bg-[#2a2622]/5 transition-colors"
               >
                 <MapPin size={15} />
                 Googleマップで見る
@@ -344,7 +344,7 @@ export default function KawaberiPage() {
       {/* Closing */}
       <section className="px-6 pb-16 md:pb-20 text-center">
         <motion.div {...fadeUp} className="max-w-xl mx-auto flex flex-col items-center space-y-8">
-          <p className="font-serif text-lg leading-loose text-[#2a2622]/70">
+          <p className="text-lg leading-loose text-[#2a2622]/70">
             歴史ある奈良の街で、本とともに、
             <br />
             静かな時間をお楽しみください。

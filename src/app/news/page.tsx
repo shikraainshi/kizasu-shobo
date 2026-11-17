@@ -13,11 +13,11 @@ export default async function NewsListPage() {
       {/* 1. Breadcrumbs */}
       <nav className="bg-wakaba/20 border-b border-border py-4">
         <div className="container mx-auto px-6">
-          <ul className="flex items-center gap-3 text-[10px] font-bold tracking-[0.2em] text-accent/40 uppercase font-serif">
+          <ul className="flex items-center gap-3 text-xs font-bold tracking-[0.1em] text-accent/80 uppercase">
             <li>
               <Link href="/" className="hover:text-accent transition-colors">トップ</Link>
             </li>
-            <ChevronRight size={10} className="text-accent/20" />
+            <ChevronRight size={10} className="text-accent/50" />
             <li className="text-accent/60">お知らせ一覧</li>
           </ul>
         </div>
@@ -26,7 +26,7 @@ export default async function NewsListPage() {
       {/* 2. Page Header */}
       <header className="bg-wakaba/30 py-24 border-b border-border">
         <div className="container mx-auto px-6">
-          <h1 className="text-4xl font-serif font-bold text-center text-foreground tracking-[0.2em]">お知らせ一覧</h1>
+          <h1 className="text-4xl font-bold text-center text-foreground tracking-[0.1em]">お知らせ一覧</h1>
         </div>
       </header>
 
