@@ -95,11 +95,13 @@ export default async function ErrataPage() {
 
                     {/* 書名・著者 */}
                     <div className="flex-1 min-w-0">
-                      <p className="text-base md:text-lg font-bold text-foreground leading-snug">
-                        『{item.bookTitle.trim()}』
+                      <p className="flex flex-wrap items-baseline gap-x-3 gap-y-1 leading-snug">
+                        <span className="text-base md:text-lg font-bold text-foreground">
+                          『{item.bookTitle.trim()}』
+                        </span>
+                        {book?.author && <span className="text-xs md:text-sm text-foreground/60">{book.author}</span>}
                       </p>
                       <div className="mt-1.5 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-foreground/60">
-                        {book?.author && <span>{book.author}</span>}
                         {book && (
                           <Link href={`/books/${book.id}`} className="text-accent/70 underline underline-offset-2 hover:text-accent">
                             書籍の詳細
