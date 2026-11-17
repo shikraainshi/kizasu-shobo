@@ -34,7 +34,7 @@ export default function CompleteNotifier({ message }: { message: string }) {
         <button
           onClick={handleSend}
           disabled={isSending || sent}
-          className={`inline-flex items-center justify-center w-full border border-accent/30 text-accent py-4 font-bold tracking-[0.15em] text-[13px] uppercase transition-all  ${
+          className={`inline-flex items-center justify-center w-full border border-accent/30 text-accent py-4 font-bold tracking-[0.3em] text-[11px] uppercase transition-all font-serif ${
             isSending || sent ? 'opacity-60 cursor-not-allowed' : 'hover:bg-wakaba-hover'
           }`}
         >
@@ -45,14 +45,14 @@ export default function CompleteNotifier({ message }: { message: string }) {
       {inClient ? (
         <button
           onClick={closeLiffWindow}
-          className="inline-flex items-center justify-center w-full bg-accent text-white py-4 font-bold tracking-[0.15em] text-[13px] uppercase hover:bg-accent/90 transition-all shadow-lg"
+          className="inline-flex items-center justify-center w-full bg-accent text-white py-4 font-bold tracking-[0.3em] text-[11px] uppercase hover:bg-accent/90 transition-all font-serif shadow-lg"
         >
           閉じる
         </button>
       ) : (
         <Link
           href="/events"
-          className="inline-flex items-center justify-center w-full bg-accent text-white py-4 font-bold tracking-[0.15em] text-[13px] uppercase hover:bg-accent/90 transition-all shadow-lg"
+          className="inline-flex items-center justify-center w-full bg-accent text-white py-4 font-bold tracking-[0.3em] text-[11px] uppercase hover:bg-accent/90 transition-all font-serif shadow-lg"
         >
           イベント一覧に戻る
         </Link>

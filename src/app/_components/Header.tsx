@@ -67,10 +67,10 @@ export default function Header() {
                 className="h-10 md:h-14 w-auto object-contain transition-opacity duration-300 group-hover:opacity-80"
               />
               <div className="flex flex-col justify-center">
-                <span className="text-xs uppercase tracking-[0.15em] text-accent/60 font-bold leading-none mb-1 md:mb-1.5 ml-0.5 md:ml-1 text-left">
+                <span className="text-[9px] md:text-[11px] uppercase tracking-[0.4em] text-accent/60 font-serif font-bold leading-none mb-1 md:mb-1.5 ml-0.5 md:ml-1 text-left">
                   {subTitle}
                 </span>
-                <span className="font-mincho text-xl md:text-3xl font-bold tracking-[0.1em] text-foreground leading-none text-left">
+                <span className="text-xl md:text-3xl font-serif font-bold tracking-[0.2em] text-foreground leading-none text-left">
                   {mainTitle}
                 </span>
               </div>
@@ -78,7 +78,7 @@ export default function Header() {
           </div>
 
           {/* Center: Navigation (Desktop) */}
-          <nav className="hidden xl:flex items-center gap-6 text-[15px] font-medium tracking-[0.05em] text-foreground/80">
+          <nav className="hidden xl:flex items-center gap-6 text-[15px] font-medium tracking-[0.05em] text-foreground/80 font-serif">
             {navLinks.slice(0, 4).map((link) => (
               <Link 
                 key={link.href} 
@@ -96,7 +96,7 @@ export default function Header() {
             <div className="hidden xl:flex items-center gap-6">
               <Link
                 href="/errata"
-                className="flex items-center gap-1.5 text-[12px] tracking-[0.1em] text-accent/60 hover:text-accent underline-offset-4 hover:underline transition-colors whitespace-nowrap"
+                className="flex items-center gap-1.5 text-[12px] font-serif tracking-[0.1em] text-accent/60 hover:text-accent underline-offset-4 hover:underline transition-colors whitespace-nowrap"
               >
                 <FileText size={14} />
                 正誤表
@@ -106,7 +106,7 @@ export default function Header() {
                 href="https://www.instagram.com/kawaberi_bookandcafe/" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-accent/80 hover:text-accent transition-colors p-2"
+                className="text-accent/40 hover:text-accent transition-colors p-2"
                 aria-label="Instagram"
               >
                 <Instagram size={20} />
@@ -120,16 +120,16 @@ export default function Header() {
                     placeholder="書籍を検索" 
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="bg-wakaba/20 py-2 pl-9 pr-4 text-sm text-foreground placeholder:text-accent/60 focus:outline-none focus:bg-wakaba/40 transition-all w-40 xl:w-52"
+                    className="bg-wakaba/20 py-2 pl-9 pr-4 text-sm font-serif text-foreground placeholder:text-accent/60 focus:outline-none focus:bg-wakaba/40 transition-all w-40 xl:w-52"
                   />
                 </div>
-                <button type="submit" className="bg-accent/10 text-accent text-[13px] font-bold px-4 py-2 border-l border-accent/40 hover:bg-wakaba-hover transition-all uppercase tracking-wider">
+                <button type="submit" className="bg-accent/10 text-accent text-[11px] font-bold px-4 py-2 border-l border-accent/40 hover:bg-wakaba-hover transition-all font-serif uppercase tracking-wider">
                   検索
                 </button>
               </form>
             </div>
 
-            <Link href="/for-bookstores" className="hidden sm:block text-xs md:text-[12px] font-bold tracking-[0.1em] uppercase px-5 md:px-6 xl:px-8 py-2 md:py-3 bg-wakaba-base text-accent border border-accent/10 hover:bg-wakaba-hover hover:border-accent/20 transition-all whitespace-nowrap shadow-sm">
+            <Link href="/for-bookstores" className="hidden sm:block text-[10px] md:text-[12px] font-bold tracking-[0.2em] uppercase px-5 md:px-6 xl:px-8 py-2 md:py-3 bg-wakaba-base text-accent border border-accent/10 hover:bg-wakaba-hover hover:border-accent/20 transition-all font-serif whitespace-nowrap shadow-sm">
               書店様へ
             </Link>
 
@@ -182,16 +182,16 @@ export default function Header() {
                 {/* Mobile Search */}
                 <form onSubmit={handleSearch} className="flex flex-col gap-4">
                   <div className="relative flex items-center border border-accent/20 focus-within:border-accent transition-all bg-wakaba/20">
-                    <Search size={20} className="absolute left-4 text-accent/80" />
+                    <Search size={20} className="absolute left-4 text-accent/40" />
                     <input 
                       type="text" 
                       placeholder="書籍を検索" 
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className="w-full py-4 pl-12 pr-4 text-base text-foreground placeholder:text-accent/30 focus:outline-none bg-transparent"
+                      className="w-full py-4 pl-12 pr-4 text-base font-serif text-foreground placeholder:text-accent/30 focus:outline-none bg-transparent"
                     />
                   </div>
-                  <button type="submit" className="bg-accent text-white text-sm font-bold py-4 uppercase tracking-[0.1em] shadow-md active:scale-[0.98] transition-transform">
+                  <button type="submit" className="bg-accent text-white text-sm font-bold py-4 font-serif uppercase tracking-[0.2em] shadow-md active:scale-[0.98] transition-transform">
                     検索する
                   </button>
                 </form>
@@ -202,10 +202,10 @@ export default function Header() {
                     <Link 
                       key={link.href} 
                       href={link.href}
-                      className="text-xl font-medium text-foreground/90 border-b border-border/50 py-5 hover:text-accent transition-colors flex justify-between items-center group"
+                      className="text-xl font-serif font-medium text-foreground/90 border-b border-border/50 py-5 hover:text-accent transition-colors flex justify-between items-center group"
                     >
                       {link.label}
-                      <span className="text-accent/80 group-hover:text-accent transition-colors">→</span>
+                      <span className="text-accent/20 group-hover:text-accent transition-colors">→</span>
                     </Link>
                   ))}
                 </nav>
@@ -213,7 +213,7 @@ export default function Header() {
                 {/* Mobile Sub Link */}
                 <Link
                   href="/errata"
-                  className="-mt-4 flex items-center gap-2 text-sm tracking-[0.1em] text-accent/70 hover:text-accent transition-colors"
+                  className="-mt-4 flex items-center gap-2 text-sm font-serif tracking-[0.1em] text-accent/70 hover:text-accent transition-colors"
                 >
                   <FileText size={16} />
                   正誤表
@@ -222,7 +222,7 @@ export default function Header() {
                 {/* Mobile Social & Info */}
                 <div className="mt-auto pt-10 border-t border-border/50 flex flex-col gap-6">
                   <div className="flex items-center gap-4">
-                    <span className="text-xs text-accent/80 uppercase tracking-[0.15em] font-bold">Follow Us</span>
+                    <span className="text-xs font-serif text-accent/40 uppercase tracking-[0.3em] font-bold">Follow Us</span>
                     <div className="h-[1px] flex-1 bg-accent/10"></div>
                   </div>
                   <a 
@@ -234,7 +234,7 @@ export default function Header() {
                     <div className="p-3 border border-accent/10 rounded-full bg-wakaba/10">
                       <Instagram size={24} />
                     </div>
-                    <span className="font-medium">Instagram</span>
+                    <span className="font-serif font-medium">Instagram</span>
                   </a>
                 </div>
               </div>

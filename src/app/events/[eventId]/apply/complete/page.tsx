@@ -35,14 +35,14 @@ export default async function EventApplyCompletePage({
     return (
       <div className="min-h-[70vh] flex items-center justify-center px-6 bg-background">
         <div className="max-w-md w-full text-center space-y-6">
-          <XCircle className="mx-auto text-accent/80" size={48} />
-          <h1 className="text-xl font-bold text-foreground">決済を確認できませんでした</h1>
-          <p className="text-sm text-foreground/60 leading-relaxed">
+          <XCircle className="mx-auto text-accent/50" size={48} />
+          <h1 className="text-xl font-serif font-bold text-foreground">決済を確認できませんでした</h1>
+          <p className="text-sm text-foreground/60 font-serif leading-relaxed">
             決済がキャンセルされたか、確認中にエラーが発生しました。お手数ですがイベントページから再度お試しください。
           </p>
           <Link
             href={`/events/${eventId}`}
-            className="inline-block text-[13px] font-bold tracking-[0.15em] uppercase text-accent/60 hover:text-accent border-b border-accent/20 pb-1"
+            className="inline-block text-[11px] font-bold tracking-[0.3em] uppercase text-accent/60 hover:text-accent border-b border-accent/20 pb-1 font-serif"
           >
             イベントページに戻る
           </Link>
@@ -67,25 +67,25 @@ export default async function EventApplyCompletePage({
       <div className="max-w-md w-full text-center space-y-8">
         <CheckCircle2 className="mx-auto text-accent" size={48} />
         <div className="space-y-3">
-          <h1 className="text-2xl font-bold text-foreground">お申し込みが完了しました</h1>
-          <p className="text-sm text-foreground/60 leading-relaxed">
+          <h1 className="text-2xl font-serif font-bold text-foreground">お申し込みが完了しました</h1>
+          <p className="text-sm text-foreground/60 font-serif leading-relaxed">
             ご参加をお待ちしております。
           </p>
         </div>
 
         <dl className="text-left border border-border/40 bg-wakaba/5 p-6 grid grid-cols-[80px_1fr] gap-y-4 text-sm">
-          <dt className="text-accent/80 font-bold uppercase tracking-widest text-xs self-center">
+          <dt className="text-accent/40 font-serif font-bold uppercase tracking-widest text-[9px] self-center">
             イベント
           </dt>
-          <dd className="text-foreground/80">{event.title}</dd>
-          <dt className="text-accent/80 font-bold uppercase tracking-widest text-xs self-center">
+          <dd className="text-foreground/80 font-serif">{event.title}</dd>
+          <dt className="text-accent/40 font-serif font-bold uppercase tracking-widest text-[9px] self-center">
             参加者
           </dt>
-          <dd className="text-foreground/80">{participantName}</dd>
-          <dt className="text-accent/80 font-bold uppercase tracking-widest text-xs self-center">
+          <dd className="text-foreground/80 font-serif">{participantName}</dd>
+          <dt className="text-accent/40 font-serif font-bold uppercase tracking-widest text-[9px] self-center">
             人数
           </dt>
-          <dd className="text-foreground/80">{participantCount}名</dd>
+          <dd className="text-foreground/80 font-serif">{participantCount}名</dd>
         </dl>
 
         <CompleteNotifier message={notifyText} />

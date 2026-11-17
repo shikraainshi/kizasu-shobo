@@ -26,11 +26,11 @@ export default function AboutPage() {
         <div className="relative mx-auto grid max-w-7xl grid-cols-1 gap-16 px-6 md:grid-cols-2 md:px-12">
           {/* 左：タイトル */}
           <div>
-            <p className="mb-6 text-sm tracking-[0.15em] text-[#9ab673]">
+            <p className="mb-6 font-serif text-sm italic tracking-[0.25em] text-[#9ab673]">
               About Kizasu Shobo
             </p>
 
-            <h2 className="text-4xl md:text-5xl leading-relaxed tracking-[0.12em] text-[#263326]">
+            <h2 className="font-serif text-4xl md:text-5xl leading-relaxed tracking-[0.12em] text-[#263326]">
               萌書房について
             </h2>
 
@@ -38,7 +38,7 @@ export default function AboutPage() {
           </div>
 
           {/* 右：本文 */}
-          <div className="text-[15px] leading-[2.4] tracking-[0.08em] text-stone-700">
+          <div className="font-serif text-[15px] leading-[2.4] tracking-[0.08em] text-stone-700">
             <p>
               2001年1月、新世紀への移行と軌を一にするかのように、
               それまで流布・通用し、人々の信頼を得ていた価値観あるいは技術が、
@@ -57,16 +57,16 @@ export default function AboutPage() {
       <section id="activities" className="bg-wakaba/20 py-16 md:py-32 border-y border-border">
         <div className="container mx-auto px-6">
           <div className="max-w-5xl mx-auto">
-            <h2 className="text-xs font-bold tracking-[0.15em] uppercase text-accent/80 mb-4 text-center">Business Activities</h2>
-            <h3 className="text-3xl font-bold mb-20 text-center text-foreground">事業内容</h3>
+            <h2 className="text-[10px] font-bold tracking-[0.3em] uppercase text-accent/40 mb-4 text-center font-serif">Business Activities</h2>
+            <h3 className="text-3xl font-serif font-bold mb-20 text-center text-foreground">事業内容</h3>
             
             <div className="space-y-16 md:space-y-32">
               {/* Publishing Activity */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
                 <div className="order-2 md:order-1">
-                  <h4 className="text-xs font-bold tracking-[0.1em] uppercase text-accent/60 mb-4">01. Publishing</h4>
-                  <h5 className="text-2xl font-bold mb-8 text-foreground">出版活動</h5>
-                  <div className="space-y-6 text-foreground/70 leading-relaxed text-base">
+                  <h4 className="text-[10px] font-bold tracking-[0.2em] uppercase text-accent/60 mb-4 font-serif">01. Publishing</h4>
+                  <h5 className="text-2xl font-serif font-bold mb-8 text-foreground">出版活動</h5>
+                  <div className="space-y-6 text-foreground/70 leading-relaxed font-serif text-base">
                     <p>
                       萌書房は、哲学、思想、批評、文学、歴史など、人文学の広範な領域にわたる出版活動を展開しています。
                     </p>
@@ -75,7 +75,7 @@ export default function AboutPage() {
                     </p>
                   </div>
                   <div className="mt-10">
-                    <Link href="/books" className="inline-block text-[13px] font-bold tracking-[0.15em] uppercase border border-accent/20 px-8 py-3 hover:bg-wakaba-hover hover:text-accent transition-all text-accent/70">
+                    <Link href="/books" className="inline-block text-[11px] font-bold tracking-[0.3em] uppercase border border-accent/20 px-8 py-3 hover:bg-wakaba-hover hover:text-accent transition-all font-serif text-accent/70">
                       書籍案内を見る
                     </Link>
                   </div>
@@ -91,9 +91,9 @@ export default function AboutPage() {
                   <div className="absolute inset-0 bg-[url('/ESEF5280.JPEG')] bg-cover bg-center grayscale-[0.3] opacity-80" />
                 </div>
                 <div>
-                  <h4 className="text-xs font-bold tracking-[0.1em] uppercase text-accent/60 mb-4">02. Book Cafe</h4>
-                  <h5 className="text-2xl font-bold mb-8 text-foreground">ブックカフェ</h5>
-                  <div className="space-y-6 text-foreground/70 leading-relaxed text-base">
+                  <h4 className="text-[10px] font-bold tracking-[0.2em] uppercase text-accent/60 mb-4 font-serif">02. Book Cafe</h4>
+                  <h5 className="text-2xl font-serif font-bold mb-8 text-foreground">ブックカフェ</h5>
+                  <div className="space-y-6 text-foreground/70 leading-relaxed font-serif text-base">
                     <p>
                       奈良の静かな環境の中で、本と共にある豊かな時間を提供しています。
                     </p>
@@ -102,7 +102,7 @@ export default function AboutPage() {
                     </p>
                   </div>
                   <div className="mt-10">
-                    <Link href="/kawaberi" target="_blank" rel="noopener noreferrer" className="inline-block text-[13px] font-bold tracking-[0.15em] uppercase border border-accent/20 px-8 py-3 hover:bg-wakaba-hover hover:text-accent transition-all text-accent/70">
+                    <Link href="/kawaberi" target="_blank" rel="noopener noreferrer" className="inline-block text-[11px] font-bold tracking-[0.3em] uppercase border border-accent/20 px-8 py-3 hover:bg-wakaba-hover hover:text-accent transition-all font-serif text-accent/70">
                       カフェの詳細を見る
                     </Link>
                   </div>
@@ -116,55 +116,55 @@ export default function AboutPage() {
       {/* Company Overview Section (会社概要) */}
       <section id="company" className="container mx-auto px-6 py-16 md:py-32">
         <div className="max-w-2xl mx-auto">
-          <h2 className="text-[20px] font-bold tracking-[0.15em] uppercase text-accent/80 mb-20 text-center">会社概要</h2>
+          <h2 className="text-[20px] font-bold tracking-[0.4em] uppercase text-accent/30 mb-20 text-center font-serif">会社概要</h2>
           <div className="space-y-12">
             <div className="flex flex-col md:flex-row md:items-baseline gap-4 md:gap-20 border-b border-accent/5 pb-10">
-              <span className="text-[13px] font-bold tracking-[0.1em] uppercase text-accent/70 w-32 flex items-center gap-3">
+              <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-accent/70 w-32 font-serif flex items-center gap-3">
                 <span className="w-1.5 h-1.5 bg-accent/30 rounded-full"></span>
                 名称
               </span>
-              <span className="text-xl font-bold text-foreground">有限会社 萌書房（Kizasu Shobo）</span>
+              <span className="text-xl font-serif font-bold text-foreground">有限会社 萌書房（Kizasu Shobo）</span>
             </div>
             <div className="flex flex-col md:flex-row md:items-baseline gap-4 md:gap-20 border-b border-accent/5 pb-10">
-              <span className="text-[13px] font-bold tracking-[0.1em] uppercase text-accent/70 w-32 flex items-center gap-3">
+              <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-accent/70 w-32 font-serif flex items-center gap-3">
                 <span className="w-1.5 h-1.5 bg-accent/30 rounded-full"></span>
                 住所
               </span>
-              <div className="flex flex-col gap-6 text-sm text-foreground/70">
+              <div className="flex flex-col gap-6 font-serif text-sm text-foreground/70">
                 <div className="space-y-1">
-                  <p className="font-bold text-accent/60 text-xs uppercase tracking-widest">本社</p>
+                  <p className="font-bold text-accent/60 text-[10px] uppercase tracking-widest">本社</p>
                   <p>〒630-1242 奈良市大柳生町3619-1</p>
                 </div>
                 <div className="space-y-1">
-                  <p className="font-bold text-accent/60 text-xs uppercase tracking-widest">きたまちオフィス / Book Cafe 川べり</p>
+                  <p className="font-bold text-accent/60 text-[10px] uppercase tracking-widest">きたまちオフィス / Book Cafe 川べり</p>
                   <p>〒630-8113 奈良市法蓮町1050-1</p>
                 </div>
               </div>
             </div>
             <div className="flex flex-col md:flex-row md:items-baseline gap-4 md:gap-20 border-b border-accent/5 pb-10">
-              <span className="text-[13px] font-bold tracking-[0.1em] uppercase text-accent/70 w-32 flex items-center gap-3">
+              <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-accent/70 w-32 font-serif flex items-center gap-3">
                 <span className="w-1.5 h-1.5 bg-accent/30 rounded-full"></span>
                 代表
               </span>
-              <span className="text-foreground/70 text-sm">白石 徳浩</span>
+              <span className="text-foreground/70 font-serif text-sm">白石 徳浩</span>
             </div>
             <div className="flex flex-col md:flex-row md:items-baseline gap-4 md:gap-20 border-b border-accent/5 pb-10">
-              <span className="text-[13px] font-bold tracking-[0.1em] uppercase text-accent/70 w-32 flex items-center gap-3">
+              <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-accent/70 w-32 font-serif flex items-center gap-3">
                 <span className="w-1.5 h-1.5 bg-accent/30 rounded-full"></span>
                 設立
               </span>
-              <span className="text-foreground/70 text-sm">2001年1月</span>
+              <span className="text-foreground/70 font-serif text-sm">2001年1月</span>
             </div>
             <div className="flex flex-col md:flex-row md:items-baseline gap-4 md:gap-20 border-b border-accent/5 pb-10">
-              <span className="text-[13px] font-bold tracking-[0.1em] uppercase text-accent/70 w-32 flex items-center gap-3">
+              <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-accent/70 w-32 font-serif flex items-center gap-3">
                 <span className="w-1.5 h-1.5 bg-accent/30 rounded-full"></span>
                 連絡先
               </span>
-              <div className="flex flex-col gap-10 text-sm text-foreground/70">
+              <div className="flex flex-col gap-10 font-serif text-sm text-foreground/70">
                 <div className="space-y-2">
                   <div className="flex items-center gap-2">
                     <p className="font-bold text-accent/60">［きたまちオフィス／Book Cafe 川べり］</p>
-                    <span className="text-xs px-2 py-0.5 bg-accent/10 text-accent font-bold tracking-widest">主連絡先</span>
+                    <span className="text-[9px] px-2 py-0.5 bg-accent/10 text-accent font-bold tracking-widest">主連絡先</span>
                   </div>
                   <p>TEL：0742-42-6986 / FAX：0742-90-0044</p>
                 </div>
@@ -176,11 +176,11 @@ export default function AboutPage() {
               </div>
             </div>
             <div className="flex flex-col md:flex-row md:items-baseline gap-4 md:gap-20 pb-10">
-              <span className="text-[13px] font-bold tracking-[0.1em] uppercase text-accent/70 w-32 flex items-center gap-3">
+              <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-accent/70 w-32 font-serif flex items-center gap-3">
                 <span className="w-1.5 h-1.5 bg-accent/30 rounded-full"></span>
                 事業内容
               </span>
-              <span className="text-foreground/70 text-sm">思想・社会・文化に関わる書籍の出版、<br className="hidden md:inline" />思考と出会いを生む企画・運営</span>
+              <span className="text-foreground/70 font-serif text-sm">思想・社会・文化に関わる書籍の出版、<br className="hidden md:inline" />思考と出会いを生む企画・運営</span>
             </div>
           </div>
         </div>

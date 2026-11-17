@@ -7,7 +7,7 @@ import { getLiffUserId } from '@/lib/line/liff-client';
 import CancelPolicyList from './CancelPolicyList';
 
 const optionButtonClass = (selected: boolean) =>
-  `px-4 py-2.5 text-xs  border transition-all ${
+  `px-4 py-2.5 text-xs font-serif border transition-all ${
     selected
       ? 'bg-accent text-white border-accent'
       : 'bg-background border-accent/20 text-foreground/70 hover:border-accent/40'
@@ -76,26 +76,26 @@ export default function EventApplyForm({ event, cancelPolicy }: { event: EventDo
   return (
     <form onSubmit={handleSubmit} className="space-y-10 bg-wakaba/5 p-8 pb-6 border border-border/40">
       {error && (
-        <div className="p-4 bg-red-50 border border-red-200 text-red-600 text-sm whitespace-pre-wrap">
+        <div className="p-4 bg-red-50 border border-red-200 text-red-600 text-sm font-serif whitespace-pre-wrap">
           {error}
         </div>
       )}
 
       <div className="space-y-3">
-        <label className="text-xs font-bold tracking-[0.15em] uppercase text-accent/80 block">
-          お名前 <span className="text-accent/80 ml-2">必須</span>
+        <label className="text-[10px] font-bold tracking-[0.3em] uppercase text-accent/80 font-serif block">
+          お名前 <span className="text-accent/40 ml-2">必須</span>
         </label>
         <input
           required
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="w-full bg-background border border-accent/20 px-5 py-4 text-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/10 transition-all"
+          className="w-full bg-background border border-accent/20 px-5 py-4 text-sm font-serif focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/10 transition-all"
         />
       </div>
 
       <div className="space-y-3">
-        <label className="text-xs font-bold tracking-[0.15em] uppercase text-accent/80 block">
-          電話番号 <span className="text-accent/80 ml-2">必須</span>
+        <label className="text-[10px] font-bold tracking-[0.3em] uppercase text-accent/80 font-serif block">
+          電話番号 <span className="text-accent/40 ml-2">必須</span>
         </label>
         <input
           required
@@ -103,25 +103,25 @@ export default function EventApplyForm({ event, cancelPolicy }: { event: EventDo
           inputMode="tel"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
-          className="w-full bg-background border border-accent/20 px-5 py-4 text-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/10 transition-all"
+          className="w-full bg-background border border-accent/20 px-5 py-4 text-sm font-serif focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/10 transition-all"
         />
       </div>
 
       <div className="space-y-3">
-        <label className="text-xs font-bold tracking-[0.15em] uppercase text-accent/80 block">
-          メールアドレス <span className="text-accent/80 ml-2">任意</span>
+        <label className="text-[10px] font-bold tracking-[0.3em] uppercase text-accent/50 font-serif block">
+          メールアドレス <span className="text-accent/30 ml-2">任意</span>
         </label>
         <input
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full bg-background border border-accent/20 px-5 py-4 text-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/10 transition-all"
+          className="w-full bg-background border border-accent/20 px-5 py-4 text-sm font-serif focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/10 transition-all"
         />
       </div>
 
       <div className="space-y-3">
-        <label className="text-xs font-bold tracking-[0.15em] uppercase text-accent/80 block">
-          参加人数 <span className="text-accent/80 ml-2">必須</span>
+        <label className="text-[10px] font-bold tracking-[0.3em] uppercase text-accent/80 font-serif block">
+          参加人数 <span className="text-accent/40 ml-2">必須</span>
         </label>
         <div className="flex items-center gap-5">
           <button
@@ -132,7 +132,7 @@ export default function EventApplyForm({ event, cancelPolicy }: { event: EventDo
           >
             −
           </button>
-          <span className="w-8 text-center text-lg tabular-nums">{participantCount}</span>
+          <span className="w-8 text-center text-lg font-serif tabular-nums">{participantCount}</span>
           <button
             type="button"
             onClick={() => setParticipantCount((c) => Math.min(99, c + 1))}
@@ -145,8 +145,8 @@ export default function EventApplyForm({ event, cancelPolicy }: { event: EventDo
       </div>
 
       <div className="space-y-3">
-        <label className="text-xs font-bold tracking-[0.15em] uppercase text-accent/80 block">
-          居住エリア <span className="text-accent/80 ml-2">任意</span>
+        <label className="text-[10px] font-bold tracking-[0.3em] uppercase text-accent/50 font-serif block">
+          居住エリア <span className="text-accent/30 ml-2">任意</span>
         </label>
         <div className="flex flex-wrap gap-2">
           {AREA_OPTIONS.map((option) => (
@@ -163,8 +163,8 @@ export default function EventApplyForm({ event, cancelPolicy }: { event: EventDo
       </div>
 
       <div className="space-y-3">
-        <label className="text-xs font-bold tracking-[0.15em] uppercase text-accent/80 block">
-          このイベントを知ったきっかけ <span className="text-accent/80 ml-2">任意</span>
+        <label className="text-[10px] font-bold tracking-[0.3em] uppercase text-accent/50 font-serif block">
+          このイベントを知ったきっかけ <span className="text-accent/30 ml-2">任意</span>
         </label>
         <div className="flex flex-wrap gap-2">
           {SOURCE_OPTIONS.map((option) => (
@@ -182,7 +182,7 @@ export default function EventApplyForm({ event, cancelPolicy }: { event: EventDo
 
       {cancelPolicy && (
         <div className="space-y-3">
-          <label className="text-xs font-bold tracking-[0.15em] uppercase text-accent/80 block">
+          <label className="text-[10px] font-bold tracking-[0.3em] uppercase text-accent/80 font-serif block">
             キャンセルポリシー
           </label>
           <div className="border border-border/40 p-5 max-h-40 overflow-y-auto">
@@ -191,7 +191,7 @@ export default function EventApplyForm({ event, cancelPolicy }: { event: EventDo
         </div>
       )}
 
-      <label className="flex items-start gap-3 text-sm text-foreground/80 cursor-pointer">
+      <label className="flex items-start gap-3 text-sm font-serif text-foreground/80 cursor-pointer">
         <input
           type="checkbox"
           checked={agreed}
@@ -202,13 +202,13 @@ export default function EventApplyForm({ event, cancelPolicy }: { event: EventDo
       </label>
 
       <div className="sticky bottom-0 -mx-8 px-8 pt-6 pb-6 bg-wakaba/5 border-t border-border/40">
-        <p className="text-sm text-foreground/70 mb-4">
+        <p className="text-sm font-serif text-foreground/70 mb-4">
           お支払い金額: <span className="text-lg font-bold text-foreground">{amount.toLocaleString()}円</span>
         </p>
         <button
           type="submit"
           disabled={isLoading}
-          className={`w-full bg-accent text-white py-5 font-bold tracking-[0.15em] text-[12px] uppercase transition-all  shadow-lg ${
+          className={`w-full bg-accent text-white py-5 font-bold tracking-[0.3em] text-[12px] uppercase transition-all font-serif shadow-lg ${
             isLoading ? 'opacity-70 cursor-not-allowed' : 'hover:bg-accent/90'
           }`}
         >

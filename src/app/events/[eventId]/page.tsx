@@ -27,7 +27,7 @@ export default async function EventDetailPage({
     <div className="pb-24 bg-background">
       <section className="bg-wakaba/30 py-20 border-b border-border">
         <div className="container mx-auto px-6 max-w-3xl">
-          <h1 className="text-3xl font-bold text-foreground tracking-[0.1em]">{event.title}</h1>
+          <h1 className="text-3xl font-serif font-bold text-foreground tracking-[0.1em]">{event.title}</h1>
         </div>
       </section>
 
@@ -37,26 +37,26 @@ export default async function EventDetailPage({
         <div className="flex items-center gap-4 border border-border/40 bg-wakaba/10 px-6 py-5">
           <Ticket size={22} className="text-accent/70 shrink-0" />
           <div className="flex items-baseline gap-2">
-            <span className="text-xs font-bold tracking-[0.15em] uppercase text-accent/60">
+            <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-accent/60 font-serif">
               参加費
             </span>
             {event.price > 0 ? (
-              <span className="">
+              <span className="font-serif">
                 <span className="text-2xl font-bold text-foreground tabular-nums">
                   {event.price.toLocaleString()}
                 </span>
                 <span className="text-sm text-foreground/70 ml-1">円</span>
-                <span className="text-xs text-foreground/70 ml-2">／ 1名</span>
+                <span className="text-xs text-foreground/50 ml-2">／ 1名</span>
               </span>
             ) : (
-              <span className="text-2xl font-bold text-foreground">参加無料</span>
+              <span className="text-2xl font-bold text-foreground font-serif">参加無料</span>
             )}
           </div>
         </div>
 
         {cancelPolicy && (
           <div className="bg-wakaba/5 border border-border/40 p-6 space-y-2">
-            <h2 className="text-xs font-bold tracking-[0.1em] uppercase text-accent/60">
+            <h2 className="text-xs font-bold tracking-[0.2em] uppercase text-accent/60 font-serif">
               キャンセルポリシー
             </h2>
             <CancelPolicyList text={cancelPolicy} className="text-sm" />
@@ -65,19 +65,19 @@ export default async function EventDetailPage({
 
         <div className="pt-4">
           {isFull ? (
-            <div className="text-center py-5 border border-border/40 bg-wakaba/5 text-sm text-foreground/70 tracking-widest">
+            <div className="text-center py-5 border border-border/40 bg-wakaba/5 text-sm font-serif text-foreground/50 tracking-widest">
               満席になりました
             </div>
           ) : (
             <Link
               href={`/events/${event.id}/apply`}
-              className="inline-flex items-center justify-center w-full bg-accent text-white py-5 font-bold tracking-[0.15em] text-[12px] uppercase hover:bg-accent/90 transition-all shadow-lg"
+              className="inline-flex items-center justify-center w-full bg-accent text-white py-5 font-bold tracking-[0.3em] text-[12px] uppercase hover:bg-accent/90 transition-all font-serif shadow-lg"
             >
               申し込みへ進む
             </Link>
           )}
           {remaining !== null && !isFull && (
-            <p className="text-center text-[13px] text-foreground/70 mt-3 tracking-widest">
+            <p className="text-center text-[11px] text-foreground/40 font-serif mt-3 tracking-widest">
               残り{remaining}名
             </p>
           )}

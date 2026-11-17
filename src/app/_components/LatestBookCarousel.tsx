@@ -53,7 +53,7 @@ export default function LatestBookCarousel({ books, title, footerHref, footerLab
       <div className="container mx-auto px-6 md:px-12 lg:px-24 relative z-10">
         {title && (
           <div className="flex flex-col mb-10 items-center pt-6">
-            <h2 className="text-3xl font-bold text-foreground tracking-widest relative">
+            <h2 className="text-3xl font-serif font-bold text-foreground tracking-widest relative">
               {title}
               <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-6 h-[1.5px] bg-accent/40" />
             </h2>
@@ -74,25 +74,25 @@ export default function LatestBookCarousel({ books, title, footerHref, footerLab
                 className="flex flex-col gap-4"
               >
                 <div className="flex flex-col gap-1.5">
-                  <span className="text-xs uppercase tracking-[0.15em] text-accent/60 font-bold">
+                  <span className="text-[9px] uppercase tracking-[0.4em] text-accent/60 font-serif font-bold">
                     {currentBook.category}
                   </span>
-                  <h2 className="text-xl md:text-2xl xl:text-3xl font-bold text-foreground leading-tight tracking-tight">
+                  <h2 className="text-xl md:text-2xl xl:text-3xl font-serif font-bold text-foreground leading-tight tracking-tight">
                     {currentBook.title}
                   </h2>
-                  <p className="text-sm text-accent/70 border-l border-accent/20 pl-4 mt-0.5">
+                  <p className="text-sm text-accent/70 font-serif italic border-l border-accent/20 pl-4 mt-0.5">
                     {currentBook.author}
                   </p>
                 </div>
 
-                <p className="text-xs text-muted-foreground leading-relaxed">
+                <p className="text-xs text-muted-foreground leading-relaxed font-serif">
                   {currentBook.description}
                 </p>
 
                 <div className="mt-2">
                   <Link
                     href={`/books/${currentBook.id}`}
-                    className="group relative inline-block overflow-hidden border border-accent/20 px-6 py-2.5 rounded-none font-bold text-xs tracking-[0.1em] uppercase transition-all hover:bg-wakaba-hover hover:border-accent/40 text-accent"
+                    className="group relative inline-block overflow-hidden border border-accent/20 px-6 py-2.5 rounded-none font-serif font-bold text-[8px] tracking-[0.2em] uppercase transition-all hover:bg-wakaba-hover hover:border-accent/40 text-accent"
                   >
                     <span className="relative z-10">詳細を見る</span>
                   </Link>
@@ -149,7 +149,7 @@ export default function LatestBookCarousel({ books, title, footerHref, footerLab
                           <div className={`w-full aspect-[2/3] overflow-hidden border transition-all duration-700 bg-wakaba/10 flex items-center justify-center p-3
                             ${isActive ? 'border-accent/20 shadow-2xl' : 'border-transparent shadow-sm'}`}
                           >
-                            <h3 className={`${isActive ? 'text-base' : 'text-xs'}  font-bold leading-tight text-foreground text-center`}>
+                            <h3 className={`${isActive ? 'text-base' : 'text-[9px]'} font-serif font-bold leading-tight text-foreground text-center`}>
                               {book.title}
                             </h3>
                           </div>
@@ -166,13 +166,13 @@ export default function LatestBookCarousel({ books, title, footerHref, footerLab
               <button
                 type="button"
                 onClick={prevBook}
-                className="group flex items-center justify-center w-12 h-12 border border-accent/20 text-accent/80 hover:text-accent hover:border-accent bg-background hover:bg-wakaba-hover transition-all duration-200"
+                className="group flex items-center justify-center w-12 h-12 border border-accent/20 text-accent/50 hover:text-accent hover:border-accent bg-background hover:bg-wakaba-hover transition-all duration-200"
                 aria-label="前の本へ"
               >
                 <MoveLeft size={18} className="group-hover:-translate-x-1 transition-transform duration-200" />
               </button>
 
-              <div className="flex items-center gap-3 font-mono text-xs tracking-[0.15em] text-accent/80">
+              <div className="flex items-center gap-3 font-mono text-[10px] tracking-[0.25em] text-accent/40">
                 <span className="text-accent font-bold text-sm">{(currentIndex + 1).toString().padStart(2, '0')}</span>
                 <div className="w-8 h-[1px] bg-accent/20" />
                 <span>{books.length.toString().padStart(2, '0')}</span>
@@ -181,7 +181,7 @@ export default function LatestBookCarousel({ books, title, footerHref, footerLab
               <button
                 type="button"
                 onClick={nextBook}
-                className="group flex items-center justify-center w-12 h-12 border border-accent/20 text-accent/80 hover:text-accent hover:border-accent bg-background hover:bg-wakaba-hover transition-all duration-200"
+                className="group flex items-center justify-center w-12 h-12 border border-accent/20 text-accent/50 hover:text-accent hover:border-accent bg-background hover:bg-wakaba-hover transition-all duration-200"
                 aria-label="次の本へ"
               >
                 <MoveRight size={18} className="group-hover:translate-x-1 transition-transform duration-200" />
@@ -193,7 +193,7 @@ export default function LatestBookCarousel({ books, title, footerHref, footerLab
 
         {footerHref && (
           <div className="mt-8 flex justify-end">
-            <Link href={footerHref} className="inline-flex items-center gap-4 border-b border-accent/30 pb-3 text-sm tracking-[0.1em] text-accent/60 transition hover:gap-6 hover:text-accent hover:border-accent">
+            <Link href={footerHref} className="inline-flex items-center gap-4 border-b border-accent/30 pb-3 text-sm tracking-[0.2em] text-accent/60 font-serif transition hover:gap-6 hover:text-accent hover:border-accent">
               {footerLabel ?? '一覧へ'}
               <span>›</span>
             </Link>

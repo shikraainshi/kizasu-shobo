@@ -65,10 +65,10 @@ export default function NewsClient({ news: allNews }: { news: News[] }) {
               <button
                 key={tab}
                 onClick={() => selectTab(tab)}
-                className={`shrink-0 px-5 py-4 text-xs font-bold tracking-[0.1em]  border-b-2 transition-colors ${
+                className={`shrink-0 px-5 py-4 text-xs font-bold tracking-[0.2em] font-serif border-b-2 transition-colors ${
                   activeTab === tab
                     ? 'border-accent text-accent'
-                    : 'border-transparent text-accent/80 hover:text-accent/70'
+                    : 'border-transparent text-accent/40 hover:text-accent/70'
                 }`}
               >
                 {tab}
@@ -83,13 +83,13 @@ export default function NewsClient({ news: allNews }: { news: News[] }) {
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto">
             {filtered.length === 0 ? (
-              <p className="text-center text-accent/80 py-20 tracking-widest">該当するお知らせはありません</p>
+              <p className="text-center text-accent/40 font-serif py-20 tracking-widest">該当するお知らせはありません</p>
             ) : (
               <div className="space-y-14">
                 {groups.map((group) => (
                   <div key={group.year || 'unknown'}>
                     {group.year && (
-                      <h2 className="text-lg font-bold text-accent/70 tracking-[0.1em] mb-2">
+                      <h2 className="text-lg font-serif font-bold text-accent/70 tracking-[0.2em] mb-2">
                         {group.year}年
                       </h2>
                     )}
@@ -99,22 +99,22 @@ export default function NewsClient({ news: allNews }: { news: News[] }) {
                         const inner = (
                           <div className="flex flex-col md:flex-row md:items-center gap-3 md:gap-12 py-5 transition-all">
                             <div className="flex items-center gap-6 md:w-48 shrink-0">
-                              <span className="text-[13px] text-accent/80 font-mono tabular-nums leading-none tracking-wider">
+                              <span className="text-[11px] text-accent/50 font-mono tabular-nums leading-none tracking-wider">
                                 {item.date ? item.date.replace(/-/g, '.') : ''}
                               </span>
-                              <span className={`text-xs tracking-[0.15em] border px-3 py-1 font-bold  ${getCategoryColor(item.category)}`}>
+                              <span className={`text-[9px] tracking-[0.15em] border px-3 py-1 font-bold font-serif ${getCategoryColor(item.category)}`}>
                                 {item.category}
                               </span>
                             </div>
 
-                            <span className="text-sm md:text-base text-foreground group-hover:text-accent transition-colors flex-1 leading-relaxed">
+                            <span className="text-sm md:text-base text-foreground group-hover:text-accent transition-colors flex-1 leading-relaxed font-serif">
                               {item.important && <span className="text-accent font-bold mr-2">【重要】</span>}
                               {item.title.trim()}
                             </span>
 
                             {href && (
                               <div className="hidden md:block opacity-0 group-hover:opacity-100 transition-all transform translate-x-[-10px] group-hover:translate-x-0">
-                                <ChevronRight size={20} className="text-accent/80" />
+                                <ChevronRight size={20} className="text-accent/30" />
                               </div>
                             )}
                           </div>
@@ -139,7 +139,7 @@ export default function NewsClient({ news: allNews }: { news: News[] }) {
               <div className="text-center mt-14">
                 <button
                   onClick={() => setVisibleCount((n) => n + PAGE_SIZE)}
-                  className="px-10 py-3 border border-accent/30 text-accent text-sm tracking-[0.1em] hover:bg-accent hover:text-white transition-colors"
+                  className="px-10 py-3 border border-accent/30 text-accent text-sm font-serif tracking-[0.2em] hover:bg-accent hover:text-white transition-colors"
                 >
                   もっと見る（残り{remaining}件）
                 </button>

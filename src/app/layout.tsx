@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Noto_Sans_JP, Noto_Serif_JP } from "next/font/google";
+import { Geist, Geist_Mono, Noto_Serif_JP } from "next/font/google";
 import "./globals.css";
 import Header from "./_components/Header";
 import Footer from "./_components/Footer";
@@ -12,12 +12,6 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
-});
-
-const notoSans = Noto_Sans_JP({
-  variable: "--font-noto-sans",
-  weight: ["400", "500", "700"],
-  display: "swap",
 });
 
 const notoSerif = Noto_Serif_JP({
@@ -44,7 +38,7 @@ export default function RootLayout({
   return (
     <html lang="ja" suppressHydrationWarning style={{ colorScheme: 'light' }}>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${notoSans.variable} ${notoSerif.variable} antialiased min-h-screen flex flex-col bg-background text-foreground font-sans`}
+        className={`${geistSans.variable} ${geistMono.variable} ${notoSerif.variable} antialiased min-h-screen flex flex-col bg-background text-foreground font-serif`}
       >
         <Header />
 

@@ -45,11 +45,11 @@ export default async function ErrataPage() {
       {/* Breadcrumbs */}
       <nav className="bg-wakaba/20 border-b border-border py-4">
         <div className="container mx-auto px-6">
-          <ul className="flex items-center gap-3 text-xs font-bold tracking-[0.1em] text-accent/80 uppercase">
+          <ul className="flex items-center gap-3 text-[10px] font-bold tracking-[0.2em] text-accent/40 uppercase font-serif">
             <li>
               <Link href="/" className="hover:text-accent transition-colors">トップ</Link>
             </li>
-            <ChevronRight size={10} className="text-accent/50" />
+            <ChevronRight size={10} className="text-accent/20" />
             <li className="text-accent/60">正誤表</li>
           </ul>
         </div>
@@ -58,26 +58,26 @@ export default async function ErrataPage() {
       {/* Page Header */}
       <header className="bg-wakaba/30 py-24 border-b border-border">
         <div className="container mx-auto px-6">
-          <h1 className="text-4xl font-bold text-center text-foreground tracking-[0.1em]">正誤表</h1>
+          <h1 className="text-4xl font-serif font-bold text-center text-foreground tracking-[0.2em]">正誤表</h1>
         </div>
       </header>
 
       <section className="py-16">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto">
-            <div className="mb-12 text-[15px] leading-[2.2] tracking-[0.05em] text-foreground/80">
+            <div className="mb-12 font-serif text-[15px] leading-[2.2] tracking-[0.05em] text-foreground/80">
               <p>既刊の正誤表をPDF形式で掲載しています。</p>
               <p>「正誤表」ボタンを押すと閲覧／ダウンロードできます。</p>
             </div>
 
             {items.length === 0 ? (
-              <p className="text-center text-accent/80 py-20 tracking-widest border-t border-accent/5">
+              <p className="text-center text-accent/40 font-serif py-20 tracking-widest border-t border-accent/5">
                 現在掲載している正誤表はありません
               </p>
             ) : (
               <ul className="divide-y divide-accent/10 border-y border-accent/10">
                 {items.map(({ item, book }) => (
-                  <li key={item.id} className="flex items-center gap-5 py-6 px-2">
+                  <li key={item.id} className="flex items-center gap-5 py-6 px-2 font-serif">
                     {/* 書影 */}
                     <div className="shrink-0 w-14 h-20 flex items-center justify-center" aria-hidden="true">
                       {book?.image ? (
@@ -88,7 +88,7 @@ export default async function ErrataPage() {
                         />
                       ) : (
                         <span className="w-full h-full flex items-center justify-center bg-wakaba/10 border border-border/40">
-                          <FileText size={20} className="text-accent/80" />
+                          <FileText size={20} className="text-accent/40" />
                         </span>
                       )}
                     </div>
@@ -96,7 +96,7 @@ export default async function ErrataPage() {
                     {/* 書名・著者 */}
                     <div className="flex-1 min-w-0">
                       <p className="flex flex-wrap items-baseline gap-x-3 gap-y-1 leading-snug">
-                        <span className="font-mincho text-base md:text-lg font-bold text-foreground">
+                        <span className="text-base md:text-lg font-bold text-foreground">
                           『{item.bookTitle.trim()}』
                         </span>
                         {book?.author && <span className="text-xs md:text-sm text-foreground/60">{book.author}</span>}

@@ -26,8 +26,8 @@ export default async function EventApplyPage({
     <div className="pb-24 bg-background">
       <section className="bg-wakaba/30 py-16 border-b border-border">
         <div className="container mx-auto px-6 max-w-2xl">
-          <h1 className="text-2xl font-bold text-foreground tracking-[0.1em]">お申し込み</h1>
-          <p className="text-sm text-foreground/60 mt-2">{event.title}</p>
+          <h1 className="text-2xl font-serif font-bold text-foreground tracking-[0.1em]">お申し込み</h1>
+          <p className="text-sm text-foreground/60 font-serif mt-2">{event.title}</p>
         </div>
       </section>
       <section className="max-w-2xl mx-auto px-6 py-14">

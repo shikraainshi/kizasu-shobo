@@ -1,13 +1,12 @@
 @import "tailwindcss";
 
 :root {
-  /* 紙のような、少し温かみのある背景 */
-  --background: #faf8f3;
+  --background: #fdfdfd;
   --foreground: #1a2421;
   --accent: #2d4a3e;
   --accent-foreground: #ffffff;
-  --muted: #5f6b66;
-  --border: #e4e2d8;
+  --muted: #6b7280;
+  --border: #e2e8e0;
   --wakaba: #f1f5f1;
   --wakaba-hover: #dceddc;
   --wakaba-base: #bcd8bc;
@@ -23,27 +22,34 @@
   --color-wakaba: var(--wakaba);
   --color-wakaba-hover: var(--wakaba-hover);
   --color-wakaba-base: var(--wakaba-base);
-  /* 本文・日付・ボタンなどはゴシック体、見出し・書名は明朝体 */
-  --font-sans: var(--font-noto-sans), "Hiragino Sans", "Yu Gothic UI", sans-serif;
-  --font-serif: var(--font-noto-serif), "Hiragino Mincho ProN", "Yu Mincho", serif;
-  --font-mincho: var(--font-noto-serif), "Hiragino Mincho ProN", "Yu Mincho", serif;
-  --font-mono: var(--font-geist-mono), monospace;
+  --font-sans: var(--font-noto-serif);
+  --font-mono: var(--font-geist-mono);
+  --font-serif: var(--font-noto-serif);
 }
 
 body {
   color-scheme: light;
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans);
+  font-family: var(--font-noto-serif), serif;
   line-height: 1.8;
   -webkit-font-smoothing: antialiased;
 }
 
-/* 見出しは明朝体。クラスで個別に上書きできるよう base レイヤーに置く */
-@layer base {
-  h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-serif);
-    font-weight: 700;
-    letter-spacing: 0.02em;
-  }
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-noto-serif), serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.font-sans {
+  font-family: var(--font-geist-sans), sans-serif;
+}
+
+.font-mono {
+  font-family: var(--font-geist-mono), monospace;
+}
+
+.font-serif {
+  font-family: var(--font-noto-serif), serif;
 }

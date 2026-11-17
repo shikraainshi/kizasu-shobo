@@ -80,10 +80,10 @@ export default function Footer() {
             {/* Left 3/5: Company Name and Contact Info */}
             <div className="col-span-1 md:col-span-3 border-l border-accent/10 pl-6 md:pl-12 lg:pl-20">
               <div className="flex flex-col mb-8">
-                <span className="text-[13px] uppercase tracking-[0.15em] text-accent/80 font-bold mb-2">Kizasu Shobo</span>
-                <span className="font-mincho text-3xl font-bold tracking-[0.1em] text-foreground">萌書房</span>
+                <span className="text-[11px] uppercase tracking-[0.5em] text-accent/50 font-serif font-bold mb-2">Kizasu Shobo</span>
+                <span className="text-3xl font-serif font-bold tracking-[0.2em] text-foreground">萌書房</span>
               </div>
-              <div className="space-y-4 text-[14px] text-foreground/80 leading-relaxed">
+              <div className="space-y-4 text-[14px] font-serif text-foreground/80 leading-relaxed">
                 <p className="font-bold text-foreground">きたまちオフィス / Book Cafe 川べり</p>
                 <p>〒630-8113 奈良市法蓮町1050-1</p>
                 <p>TEL：0742-42-6986 ／ FAX：0742-90-0044</p>
@@ -94,8 +94,8 @@ export default function Footer() {
             {/* Right 2/5: Content and Social Links tucked to the right */}
             <div className="col-span-1 md:col-span-2 grid grid-cols-2 gap-12">
               <div className="flex flex-col">
-                <h4 className="font-bold text-xs mb-8 uppercase tracking-[0.15em] text-accent/80 border-b border-accent/5 pb-2">コンテンツ</h4>
-                <ul className="space-y-4 text-sm text-foreground/80">
+                <h4 className="font-serif font-bold text-[10px] mb-8 uppercase tracking-[0.3em] text-accent/40 border-b border-accent/5 pb-2">コンテンツ</h4>
+                <ul className="space-y-4 text-sm text-foreground/80 font-serif">
                   <li><a href="/books" className="hover:text-accent transition-colors">書籍案内</a></li>
                   <li><a href="/kawaberi" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">ブックカフェ</a></li>
                   <li><a href="/about" className="hover:text-accent transition-colors">萌書房について</a></li>
@@ -103,8 +103,8 @@ export default function Footer() {
                 </ul>
               </div>
               <div className="flex flex-col">
-                <h4 className="font-bold text-xs mb-8 uppercase tracking-[0.15em] text-accent/80 border-b border-accent/5 pb-2">公式アカウント</h4>
-                <ul className="space-y-4 text-sm text-foreground/80">
+                <h4 className="font-serif font-bold text-[10px] mb-8 uppercase tracking-[0.3em] text-accent/40 border-b border-accent/5 pb-2">公式アカウント</h4>
+                <ul className="space-y-4 text-sm text-foreground/80 font-serif">
                   <li>
                     <a 
                       href="https://www.instagram.com/kawaberi_bookandcafe/" 
@@ -112,7 +112,7 @@ export default function Footer() {
                       rel="noopener noreferrer" 
                       className="flex items-center gap-3 hover:text-accent transition-colors group"
                     >
-                      <Instagram size={16} className="text-accent/80 group-hover:text-accent transition-colors" />
+                      <Instagram size={16} className="text-accent/40 group-hover:text-accent transition-colors" />
                       Instagram
                     </a>
                   </li>
@@ -122,10 +122,10 @@ export default function Footer() {
           </div>
 
           <div className="pt-8 border-t border-accent/10 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-xs tracking-[0.1em] text-accent/80 uppercase font-bold">
+            <p className="text-[9px] tracking-[0.2em] text-accent/40 uppercase font-serif font-bold">
               © 2026 Kizasu Shobo. All Rights Reserved.
             </p>
-            <div className="flex gap-8 text-xs tracking-[0.1em] text-accent/80 uppercase font-bold">
+            <div className="flex gap-8 text-[9px] tracking-[0.2em] text-accent/40 uppercase font-serif font-bold">
               <button onClick={() => setModalType('privacy')} className="hover:text-accent transition-colors">個人情報保護方針</button>
               <button onClick={() => setModalType('terms')} className="hover:text-accent transition-colors">利用規約</button>
             </div>
@@ -141,15 +141,15 @@ export default function Footer() {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="p-8 border-b border-accent/5 flex justify-between items-center bg-wakaba/10">
-              <h3 className="text-xl font-bold text-accent tracking-widest">{legalContent[modalType].title}</h3>
+              <h3 className="text-xl font-serif font-bold text-accent tracking-widest">{legalContent[modalType].title}</h3>
               <button 
                 onClick={closeModal}
-                className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-wakaba/30 transition-colors text-accent/80 hover:text-accent"
+                className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-wakaba/30 transition-colors text-accent/40 hover:text-accent"
               >
                 <X size={24} />
               </button>
             </div>
-            <div className="p-8 md:p-12 overflow-y-auto text-sm leading-relaxed text-foreground/70 space-y-4">
+            <div className="p-8 md:p-12 overflow-y-auto font-serif text-sm leading-relaxed text-foreground/70 space-y-4">
               <div className="whitespace-pre-wrap">
                 {legalContent[modalType].content}
               </div>
@@ -157,7 +157,7 @@ export default function Footer() {
             <div className="p-6 border-t border-accent/5 text-center bg-wakaba/5">
               <button 
                 onClick={closeModal}
-                className="px-12 py-3 bg-accent text-white font-bold text-xs tracking-[0.15em] uppercase hover:bg-accent/90 transition-all"
+                className="px-12 py-3 bg-accent text-white font-bold text-[10px] tracking-[0.3em] uppercase hover:bg-accent/90 transition-all"
               >
                 閉じる
               </button>
