@@ -67,7 +67,7 @@ export default async function ErrataPage() {
           <div className="max-w-4xl mx-auto">
             <div className="mb-12 font-serif text-[15px] leading-[2.2] tracking-[0.05em] text-foreground/80">
               <p>既刊の正誤表をPDF形式で掲載しています。</p>
-              <p>書籍のタイトルをクリックすると閲覧／ダウンロードできます。</p>
+              <p>「正誤表」ボタンを押すと閲覧／ダウンロードできます。</p>
             </div>
 
             {items.length === 0 ? (
@@ -79,14 +79,7 @@ export default async function ErrataPage() {
                 {items.map(({ item, book }) => (
                   <li key={item.id} className="flex items-center gap-5 py-6 px-2 font-serif">
                     {/* 書影 */}
-                    <a
-                      href={item.pdfUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="shrink-0 w-14 h-20 flex items-center justify-center"
-                      aria-hidden="true"
-                      tabIndex={-1}
-                    >
+                    <div className="shrink-0 w-14 h-20 flex items-center justify-center" aria-hidden="true">
                       {book?.image ? (
                         <img
                           src={book.image}
@@ -98,21 +91,15 @@ export default async function ErrataPage() {
                           <FileText size={20} className="text-accent/40" />
                         </span>
                       )}
-                    </a>
+                    </div>
 
                     {/* 書名・著者 */}
                     <div className="flex-1 min-w-0">
-                      <a
-                        href={item.pdfUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="block text-base md:text-lg font-bold text-foreground leading-snug hover:text-accent transition-colors"
-                      >
+                      <p className="text-base md:text-lg font-bold text-foreground leading-snug">
                         『{item.bookTitle.trim()}』
-                      </a>
+                      </p>
                       <div className="mt-1.5 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-foreground/60">
                         {book?.author && <span>{book.author}</span>}
-                        <span className="tabular-nums">{formatDate(item.updatedAt)} 更新</span>
                         {book && (
                           <Link href={`/books/${book.id}`} className="text-accent/70 underline underline-offset-2 hover:text-accent">
                             書籍の詳細
@@ -121,16 +108,21 @@ export default async function ErrataPage() {
                       </div>
                     </div>
 
-                    {/* PDF */}
-                    <a
-                      href={item.pdfUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="shrink-0 flex items-center gap-1.5 text-[11px] font-bold tracking-[0.15em] border border-accent/30 text-accent/80 px-3 py-1.5 hover:bg-accent hover:text-white transition-colors"
-                    >
-                      <FileText size={14} />
-                      PDF
-                    </a>
+                    {/* 正誤表ボタン＋更新日 */}
+                    <div className="shrink-0 flex flex-col items-center gap-2">
+                      <a
+                        href={item.pdfUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-center gap-2 min-w-[6rem] md:min-w-[7.5rem] px-4 md:px-5 py-3 text-sm font-bold tracking-[0.15em] border border-accent/40 text-accent bg-wakaba/10 hover:bg-accent hover:text-white hover:border-accent transition-colors"
+                      >
+                        <FileText size={16} />
+                        正誤表
+                      </a>
+                      <span className="text-xs text-foreground/60 tabular-nums">
+                        {formatDate(item.updatedAt)} 更新
+                      </span>
+                    </div>
                   </li>
                 ))}
               </ul>
