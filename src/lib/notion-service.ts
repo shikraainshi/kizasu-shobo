@@ -186,20 +186,33 @@ export async function getNewsFromNotion(): Promise<News[]> {
   }
 
   try {
-    const response: any = await notion.request({
-      path: `databases/${NOTION_NEWS_DB_ID}/query`,
-      method: "post",
-      body: {
-        sorts: [
-          {
-            property: "LHW%3F", // "日時" ID
-            direction: "descending",
-          },
-        ],
-      },
-    });
+    // Notion API は1回に最大100件までしか返さないので、続きがある限り取得する
+    let allResults: any[] = [];
+    let hasMore = true;
+    let nextCursor: string | undefined = undefined;
 
-    return response.results.map((page: any) => {
+    while (hasMore && allResults.length < 1000) {
+      const response: any = await notion.request({
+        path: `databases/${NOTION_NEWS_DB_ID}/query`,
+        method: "post",
+        body: {
+          page_size: 100,
+          start_cursor: nextCursor,
+          sorts: [
+            {
+              property: "LHW%3F", // "日時" ID
+              direction: "descending",
+            },
+          ],
+        },
+      });
+
+      allResults = [...allResults, ...response.results];
+      hasMore = response.has_more;
+      nextCursor = response.next_cursor || undefined;
+    }
+
+    return allResults.map((page: any) => {
       const props = page.properties;
       const getPropValue = (id: string) => {
         const prop = Object.values(props).find((p: any) => p.id === id) as any;
