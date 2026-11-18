@@ -196,12 +196,12 @@ export default function HomeClient({ latestBooks, featuredBooks, newArrivals, in
                 : `/news/${item.slug}`;
               const inner = (
                 <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-10">
-                  <div className="flex items-center md:w-56 shrink-0 gap-8">
-                    <span className="text-sm text-accent/80 font-serif leading-none tracking-wider font-bold w-20">
+                  <div className="flex items-center md:w-60 shrink-0 gap-8">
+                    <span className="text-sm text-accent/80 font-serif leading-none tracking-wider font-bold w-20 shrink-0">
                       {item.date.replace(/-/g, '.')}
                     </span>
-                    <div className="w-24 flex justify-start">
-                      <span className={`text-xs tracking-[0.1em] border px-2 py-0.5 font-bold font-serif w-full text-center truncate ${getCategoryColor(item.category)}`}>
+                    <div className="w-28 shrink-0 flex justify-start">
+                      <span className={`text-xs tracking-[0.1em] border px-2 py-0.5 font-bold font-serif w-full text-center whitespace-nowrap ${getCategoryColor(item.category)}`}>
                         {item.category}
                       </span>
                     </div>

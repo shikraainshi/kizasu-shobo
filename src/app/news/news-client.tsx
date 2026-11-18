@@ -98,11 +98,11 @@ export default function NewsClient({ news: allNews }: { news: News[] }) {
                         const href = getHref(item);
                         const inner = (
                           <div className="flex flex-col md:flex-row md:items-center gap-3 md:gap-12 py-5 transition-all">
-                            <div className="flex items-center gap-6 md:w-48 shrink-0">
-                              <span className="text-[13px] text-accent/80 font-mono tabular-nums leading-none tracking-wider">
+                            <div className="flex items-center gap-6 md:w-64 shrink-0">
+                              <span className="text-[13px] text-accent/80 font-mono tabular-nums leading-none tracking-wider shrink-0">
                                 {item.date ? item.date.replace(/-/g, '.') : ''}
                               </span>
-                              <span className={`text-xs tracking-[0.15em] border px-3 py-1 font-bold font-serif ${getCategoryColor(item.category)}`}>
+                              <span className={`w-28 shrink-0 text-center whitespace-nowrap text-xs tracking-[0.1em] border px-2 py-1 font-bold font-serif ${getCategoryColor(item.category)}`}>
                                 {item.category}
                               </span>
                             </div>

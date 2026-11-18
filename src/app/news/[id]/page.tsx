@@ -49,7 +49,7 @@ export default async function NewsDetailPage({
               <time className="text-sm font-mono text-accent/80 tracking-wider">
                 {newsItem.date.replace(/-/g, '.')}
               </time>
-              <span className={`text-xs tracking-[0.1em] border px-4 py-1.5 font-bold font-serif ${getCategoryColor(newsItem.category)}`}>
+              <span className={`whitespace-nowrap text-xs tracking-[0.1em] border px-4 py-1.5 font-bold font-serif ${getCategoryColor(newsItem.category)}`}>
                 {newsItem.category}
               </span>
             </div>
