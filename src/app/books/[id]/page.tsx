@@ -109,6 +109,16 @@ export default async function BookDetailPage({ params }: { params: Promise<{ id:
                 </dl>
               </div>
 
+              {/ディケンズ全集/.test(book.title) && (
+                <Link
+                  href="/dickens"
+                  className="inline-flex items-center gap-1 text-sm text-accent underline underline-offset-4 decoration-accent/40 hover:decoration-accent"
+                >
+                  ディケンズ全集 特集ページ（全巻構成・組見本）
+                  <ChevronRight size={14} />
+                </Link>
+              )}
+
               {/* 正誤表 */}
               {errata.length > 0 && (
                 <div className="pt-12 border-t border-accent/10">
