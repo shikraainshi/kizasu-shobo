@@ -67,10 +67,10 @@ export default function Header() {
                 className="h-10 md:h-14 w-auto object-contain transition-opacity duration-300 group-hover:opacity-80"
               />
               <div className="flex flex-col justify-center">
-                <span className="text-xs md:text-[11px] uppercase tracking-[0.15em] text-accent/60 font-serif font-bold leading-none mb-1 md:mb-1.5 ml-0.5 md:ml-1 text-left">
+                <span className="text-xs md:text-[11px] uppercase tracking-[0.15em] text-accent/60 font-serif font-bold leading-none mb-1 md:mb-1.5 ml-0.5 md:ml-1 text-left whitespace-nowrap">
                   {subTitle}
                 </span>
-                <span className="text-xl md:text-3xl font-serif font-bold tracking-[0.2em] text-foreground leading-none text-left">
+                <span className="text-xl md:text-3xl font-serif font-bold tracking-[0.2em] text-foreground leading-none text-left whitespace-nowrap">
                   {mainTitle}
                 </span>
               </div>
@@ -78,12 +78,12 @@ export default function Header() {
           </div>
 
           {/* Center: Navigation (Desktop) */}
-          <nav className="hidden xl:flex items-center gap-6 text-[15px] font-medium tracking-[0.05em] text-foreground/80 font-serif">
+          <nav className="hidden xl:flex items-center gap-1 2xl:gap-4 text-[15px] font-medium tracking-[0.05em] text-foreground/80 font-serif">
             {navLinks.slice(0, 4).map((link) => (
               <Link 
                 key={link.href} 
                 href={link.href} 
-                className="px-3 py-1.5 rounded-none hover:bg-wakaba-hover hover:text-accent transition-all duration-300"
+                className="px-3 py-1.5 rounded-none whitespace-nowrap hover:bg-wakaba-hover hover:text-accent transition-all duration-300"
               >
                 {link.label}
               </Link>
@@ -91,9 +91,9 @@ export default function Header() {
           </nav>
 
           {/* Right: Buttons & Hamburger */}
-          <div className="flex items-center justify-end gap-3 md:gap-6">
+          <div className="flex items-center justify-end gap-3 md:gap-6 xl:gap-4 2xl:gap-6">
             {/* Social & Search Unit (Desktop) */}
-            <div className="hidden xl:flex items-center gap-6">
+            <div className="hidden xl:flex items-center gap-3 2xl:gap-6">
               <Link
                 href="/errata"
                 className="flex items-center gap-1.5 text-[12px] font-serif tracking-[0.1em] text-accent/60 hover:text-accent underline-offset-4 hover:underline transition-colors whitespace-nowrap"
@@ -120,16 +120,16 @@ export default function Header() {
                     placeholder="書籍を検索" 
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="bg-wakaba/20 py-2 pl-9 pr-4 text-sm font-serif text-foreground placeholder:text-accent/60 focus:outline-none focus:bg-wakaba/40 transition-all w-40 xl:w-52"
+                    className="bg-wakaba/20 py-2 pl-9 pr-4 text-sm font-serif text-foreground placeholder:text-accent/60 focus:outline-none focus:bg-wakaba/40 transition-all w-36 2xl:w-52"
                   />
                 </div>
-                <button type="submit" className="bg-accent/10 text-accent text-[13px] font-bold px-4 py-2 border-l border-accent/40 hover:bg-wakaba-hover transition-all font-serif uppercase tracking-wider">
+                <button type="submit" className="bg-accent/10 text-accent text-[13px] font-bold px-4 py-2 border-l border-accent/40 hover:bg-wakaba-hover transition-all font-serif uppercase tracking-wider whitespace-nowrap">
                   検索
                 </button>
               </form>
             </div>
 
-            <Link href="/for-bookstores" className="hidden sm:block text-xs md:text-[12px] font-bold tracking-[0.1em] uppercase px-5 md:px-6 xl:px-8 py-2 md:py-3 bg-wakaba-base text-accent border border-accent/10 hover:bg-wakaba-hover hover:border-accent/20 transition-all font-serif whitespace-nowrap shadow-sm">
+            <Link href="/for-bookstores" className="hidden sm:block text-xs md:text-[12px] font-bold tracking-[0.1em] uppercase px-5 md:px-6 2xl:px-8 py-2 md:py-3 bg-wakaba-base text-accent border border-accent/10 hover:bg-wakaba-hover hover:border-accent/20 transition-all font-serif whitespace-nowrap shadow-sm">
               書店様へ
             </Link>
 
