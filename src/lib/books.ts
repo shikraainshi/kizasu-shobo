@@ -17,6 +17,8 @@ export interface Book {
   featured?: boolean;
   isPublic?: boolean;
   notionPageId?: string;
+  /** シリーズ名（例：「叢書シェリング入門　3」） */
+  series?: string;
 }
 
 // JSONデータをBook型の配列として扱う（フォールバック用）

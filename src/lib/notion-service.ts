@@ -117,6 +117,13 @@ async function queryAllBookPages(): Promise<Book[]> {
       const colorProp = getProp("背景色", "MGGs");
       const color = colorProp?.rich_text?.[0]?.plain_text || "";
 
+      // シリーズ名（例：「叢書シェリング入門　3」）。rich_text / select のどちらでも読む
+      const seriesProp = props["シリーズ名"];
+      const series =
+        seriesProp?.rich_text?.map((t: any) => t.plain_text).join("") ||
+        seriesProp?.select?.name ||
+        "";
+
       const imageProp = getProp("書影", "mWz%3B");
       let imageUrl = "";
 
@@ -151,6 +158,7 @@ async function queryAllBookPages(): Promise<Book[]> {
         featured,
         isPublic,
         notionPageId: page.id,
+        series,
       };
     });
 

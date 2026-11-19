@@ -119,6 +119,16 @@ export default async function BookDetailPage({ params }: { params: Promise<{ id:
                 </Link>
               )}
 
+              {(book.series ?? "").includes("叢書シェリング入門") && (
+                <Link
+                  href="/schelling"
+                  className="inline-flex items-center gap-1 text-sm text-accent underline underline-offset-4 decoration-accent/40 hover:decoration-accent"
+                >
+                  叢書シェリング入門 特集ページ（シリーズ一覧・関連書）
+                  <ChevronRight size={14} />
+                </Link>
+              )}
+
               {/* 正誤表 */}
               {errata.length > 0 && (
                 <div className="pt-12 border-t border-accent/10">
