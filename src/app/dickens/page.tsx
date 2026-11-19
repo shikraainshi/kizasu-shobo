@@ -255,7 +255,7 @@ export default async function DickensPage() {
             </div>
             <div className="lg:pt-11">
               <Sample
-                images={["/dickens/CD_novels_sample1.png", "/dickens/CD_novels_sample2.png"]}
+                images={["/dickens/CD_novels_sample-1.jpg", "/dickens/CD_novels_sample-2.jpg"]}
                 pdf="/dickens/CD_novels_sample.pdf"
                 label="小説作品"
               />
@@ -269,7 +269,7 @@ export default async function DickensPage() {
             </div>
             <div className="lg:pt-11">
               <Sample
-                images={["/dickens/CD_letters_sample1.png", "/dickens/CD_letters_sample2.png"]}
+                images={["/dickens/CD_letters_sample-1.jpg", "/dickens/CD_letters_sample-2.jpg"]}
                 pdf="/dickens/CD_letters_sample.pdf"
                 label="書簡集"
               />
