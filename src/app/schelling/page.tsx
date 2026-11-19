@@ -56,7 +56,7 @@ export default async function SchellingPage() {
 
   const seriesBooks = books
     .filter((b) => (b.series ?? "").includes(SERIES_NAME))
-    .sort((a, b) => seriesNumber(a) - seriesNumber(b));
+    .sort((a, b) => seriesNumber(a) - seriesNumber(b) || a.id - b.id);
 
   // 関連書：書名・副題・詳細説明にシェリングを含み、叢書に入っていないもの（新しい順）
   const related = books
@@ -143,8 +143,7 @@ export default async function SchellingPage() {
       {related.length > 0 && (
         <section className="py-16 md:py-20">
           <div className="container mx-auto px-6 max-w-6xl">
-            <h2 className="text-2xl md:text-3xl font-bold text-foreground tracking-[0.1em] mb-4">関連書</h2>
-            <p className="text-sm text-foreground/70 mb-10">シェリングを扱った萌書房の書籍です。</p>
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground tracking-[0.1em] mb-10">関連書</h2>
             <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-x-6 gap-y-10">
               {related.map((book) => (
                 <li key={book.id}>

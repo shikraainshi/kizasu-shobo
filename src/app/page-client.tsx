@@ -70,7 +70,7 @@ export default function HomeClient({ latestBooks, featuredBooks, newArrivals, in
             <img 
               src="/topphoto.jpg" 
               alt="萌書房の原風景" 
-              className="w-full h-full object-cover object-center max-md:object-[85%_center] grayscale-[0.1] brightness-105 blur-[2px]"
+              className="w-full h-full object-cover object-center max-md:object-[85%_center] grayscale-[0.1] saturate-[0.75] brightness-105 opacity-90 blur-[2px]"
             />
           </motion.div>
           {/* Subtle gradient overlay to help text legibility */}
