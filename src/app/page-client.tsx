@@ -144,7 +144,7 @@ export default function HomeClient({ latestBooks, featuredBooks, newArrivals, in
                 <img
                   src={f.image}
                   alt={f.imageAlt}
-                  className="w-24 sm:w-32 h-auto shrink-0 border border-border shadow-sm grayscale-[0.1] group-hover:grayscale-0 transition-all duration-700"
+                  className="w-24 sm:w-32 aspect-[5/6] object-cover object-top shrink-0 border border-border shadow-sm grayscale-[0.1] group-hover:grayscale-0 transition-all duration-700"
                 />
                 <div className="min-w-0 font-serif">
                   <p className="text-xs font-bold tracking-[0.15em] text-accent/80 mb-2">{f.kicker}</p>
