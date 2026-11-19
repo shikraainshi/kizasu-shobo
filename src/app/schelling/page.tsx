@@ -169,10 +169,17 @@ export default async function SchellingPage() {
             <h2 className="text-2xl md:text-3xl font-bold text-foreground tracking-[0.1em] mb-8">
               シェリングについて
             </h2>
+            <div className="flex flex-col sm:flex-row gap-8 items-start">
+            <img
+              src="/schelling/schelling_portrait.jpg"
+              alt="シェリングの肖像"
+              className="w-40 sm:w-48 h-auto shrink-0 border border-border shadow-sm"
+            />
             <p className="text-[15px] md:text-base leading-[2.1] text-foreground/85">
               フリードリヒ・ヴィルヘルム・ヨーゼフ・シェリング（Friedrich Wilhelm Joseph Schelling
               1775-1854）は，フィヒテ，ヘーゲルと並ぶドイツ観念論を代表する哲学者。南ドイツ・ヴュルテンベルクのレオンベルクに生まれ，テュービンゲン神学校ではヘーゲル，ヘルダーリンと学んだ。早熟の天才として知られ，23歳でイェーナ大学に招かれて以降，自然哲学，超越論的観念論，同一哲学，芸術哲学と次々に思索を展開。『人間的自由の本質』（自由論，1809年）で悪と自由の問題に踏み込み，後期には神話の哲学・啓示の哲学を講じた。1841年にはヘーゲル亡き後のベルリン大学に招聘されている。1854年，スイスのバート・ラガーツで没。
             </p>
+            </div>
             <p className="mt-6 text-[15px] md:text-base leading-[2.1] text-foreground/85">
               本叢書は，処女作『悪の起源論』から，自然哲学，『自由論』，芸術哲学，神話論，そしてスピノザ主義との関わりまで，シェリングの多面的な思索に，それぞれの主題から分け入るための入門シリーズです。
             </p>
