@@ -175,8 +175,6 @@ export default async function DickensPage() {
   }
 
   const latest = [...books].sort((a, b) => b.id - a.id);
-  const novelCount = books.filter((b) => !titleKey(b.title).includes("書簡集")).length;
-  const letterCount = books.length - novelCount;
 
   return (
     <main className="min-h-screen bg-background font-serif">
@@ -214,12 +212,7 @@ export default async function DickensPage() {
       {latest.length > 0 && (
         <section className="py-16 md:py-20 border-b border-border">
           <div className="container mx-auto px-6 max-w-6xl">
-            <div className="flex flex-wrap items-baseline justify-between gap-4 mb-10">
-              <h2 className="text-2xl md:text-3xl font-bold text-foreground tracking-[0.1em]">既刊</h2>
-              <p className="text-sm text-foreground/70">
-                小説作品等 {novelCount}冊／書簡集 {letterCount}冊（新しい順）
-              </p>
-            </div>
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground tracking-[0.1em] mb-10">既刊</h2>
             <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-x-6 gap-y-10">
               {latest.map((book) => (
                 <li key={book.id}>
@@ -255,7 +248,7 @@ export default async function DickensPage() {
             「小説作品」「書簡集」ともにおよその発刊順です。小説作品は上下分冊になる巻があります。
           </p>
 
-          <div className="grid lg:grid-cols-[1fr_320px] gap-10 lg:gap-16 mb-16">
+          <div className="grid lg:grid-cols-[1fr_460px] gap-10 lg:gap-16 mb-16">
             <div>
               <h3 className="text-lg font-bold text-accent tracking-[0.1em] mb-4">小説作品</h3>
               <VolumeList volumes={NOVELS} books={books} />
@@ -269,7 +262,7 @@ export default async function DickensPage() {
             </div>
           </div>
 
-          <div className="grid lg:grid-cols-[1fr_320px] gap-10 lg:gap-16">
+          <div className="grid lg:grid-cols-[1fr_460px] gap-10 lg:gap-16">
             <div>
               <h3 className="text-lg font-bold text-accent tracking-[0.1em] mb-4">書簡集</h3>
               <VolumeList volumes={LETTERS} books={books} />
