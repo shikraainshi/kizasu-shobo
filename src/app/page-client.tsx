@@ -70,11 +70,11 @@ export default function HomeClient({ latestBooks, featuredBooks, newArrivals, in
             <img 
               src="/topphoto.jpg" 
               alt="萌書房の原風景" 
-              className="w-full h-full object-cover object-center max-md:object-[85%_center] grayscale-[0.1] brightness-95 blur-[2px]"
+              className="w-full h-full object-cover object-center max-md:object-[85%_center] grayscale-[0.1] blur-[2px]"
             />
           </motion.div>
           {/* Subtle gradient overlay to help text legibility */}
-          <div className="absolute inset-0 bg-gradient-to-l from-black/40 via-black/15 to-transparent pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-l from-black/30 via-black/10 to-transparent pointer-events-none" />
         </div>
 
         <div className="relative z-10 w-full px-6 sm:pl-12 sm:pr-24 md:pl-24 md:pr-48 lg:pl-32 lg:pr-64 flex justify-center sm:justify-end">
