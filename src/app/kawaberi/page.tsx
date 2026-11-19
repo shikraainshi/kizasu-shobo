@@ -253,9 +253,7 @@ export default function KawaberiPage() {
           </motion.div>
           <motion.div {...fadeUp} className="flex flex-col justify-center">
             <h2 className="font-serif text-2xl md:text-3xl mb-8">珈琲と、軽食を。</h2>
-            <div className="border border-[#2a2622]/15 bg-white/60 p-3">
-              <img src="/menu.jpg" alt="川べり ドリンク・軽食メニュー" className="w-full h-auto" />
-            </div>
+            <img src="/menu.jpg" alt="川べり ドリンク・軽食メニュー" className="w-full h-auto" />
           </motion.div>
         </div>
       </section>
