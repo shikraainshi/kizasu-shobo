@@ -93,11 +93,9 @@ export default function AboutPage() {
                 <div>
                   <h4 className="text-xs font-bold tracking-[0.1em] uppercase text-accent/60 mb-4 font-serif">02. Book Cafe</h4>
                   <h5 className="text-2xl font-serif font-bold mb-8 text-foreground">ブックカフェ</h5>
-                  <div className="space-y-6 text-foreground/70 leading-relaxed font-serif text-base [word-break:auto-phrase]">
+                  <div className="space-y-6 text-foreground/70 leading-relaxed font-serif text-base text-justify md:max-w-[24.5em]">
                     <p>
-                      <span className="inline-block">奈良の静かな環境の中で、</span>
-                      <span className="inline-block">本と共にある豊かな時間を</span>
-                      <span className="inline-block">提供しています。</span>
+                      奈良の静かな環境の中で、本と共にある豊かな時間を提供しています。
                     </p>
                     <p>
                       萌書房の全刊行本を手に取ってご覧いただけるほか、厳選された珈琲と共に、思索を深め、あるいは日常の喧騒から離れてゆったりとしたひとときをお過ごしいただけます。
