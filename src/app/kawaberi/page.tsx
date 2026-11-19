@@ -94,6 +94,33 @@ export default function KawaberiPage() {
             <img src="/kawaberilogo.jpg" alt="Book Cafe 川べり" className="w-full h-full object-contain" />
           </div>
         </motion.div>
+
+        {/* LINE・Instagram（右下） */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.4 }}
+          className="absolute right-6 md:right-12 bottom-6 md:bottom-12 z-10 flex items-center gap-3"
+        >
+          <a
+            href="https://line.me/R/ti/p/@537ukidz"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LINE公式アカウント"
+            className="w-11 h-11 md:w-12 md:h-12 rounded-full bg-white/90 text-[#2a2622] shadow-md flex items-center justify-center hover:bg-white transition-colors"
+          >
+            <LineIcon size={24} />
+          </a>
+          <a
+            href="https://www.instagram.com/kawaberi_bookandcafe/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram"
+            className="w-11 h-11 md:w-12 md:h-12 rounded-full bg-white/90 text-[#2a2622] shadow-md flex items-center justify-center hover:bg-white transition-colors"
+          >
+            <Instagram size={22} />
+          </a>
+        </motion.div>
       </section>
 
       {/* リード文 — 見開きの扉ページのような余白 */}
