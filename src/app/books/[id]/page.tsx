@@ -16,6 +16,11 @@ export default async function BookDetailPage({ params }: { params: Promise<{ id:
 
   const purchaseUrl = getPurchaseUrl(book.isbn);
 
+  // 特集ページへのリンク：書名・著者・副題・詳細説明・シリーズ名にディケンズ／シェリングを含む本
+  const bookText = `${book.title} ${book.author} ${book.description} ${book.fullDescription} ${book.series ?? ""}`;
+  const isDickens = /ディケンズ/.test(bookText);
+  const isSchelling = /シェリング/.test(bookText);
+
   let errata: ErrataDoc[] = [];
   try {
     errata = await getErrataForBook(book.title);
@@ -109,7 +114,7 @@ export default async function BookDetailPage({ params }: { params: Promise<{ id:
                 </dl>
               </div>
 
-              {/ディケンズ全集/.test(book.title) && (
+              {isDickens && (
                 <Link
                   href="/dickens"
                   className="inline-flex items-center gap-1 text-sm text-accent underline underline-offset-4 decoration-accent/40 hover:decoration-accent"
@@ -119,7 +124,7 @@ export default async function BookDetailPage({ params }: { params: Promise<{ id:
                 </Link>
               )}
 
-              {(book.series ?? "").includes("叢書シェリング入門") && (
+              {isSchelling && (
                 <Link
                   href="/schelling"
                   className="inline-flex items-center gap-1 text-sm text-accent underline underline-offset-4 decoration-accent/40 hover:decoration-accent"
