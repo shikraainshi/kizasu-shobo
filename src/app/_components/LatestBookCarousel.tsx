@@ -74,25 +74,25 @@ export default function LatestBookCarousel({ books, title, footerHref, footerLab
                 className="flex flex-col gap-4"
               >
                 <div className="flex flex-col gap-1.5">
-                  <span className="text-xs uppercase tracking-[0.15em] text-accent/60 font-serif font-bold">
+                  <span className="text-sm uppercase tracking-[0.15em] text-accent/70 font-serif font-bold">
                     {currentBook.category}
                   </span>
                   <h2 className="text-xl md:text-2xl xl:text-3xl font-serif font-bold text-foreground leading-tight tracking-tight">
                     {currentBook.title}
                   </h2>
-                  <p className="text-sm text-accent/70 font-serif border-l border-accent/20 pl-4 mt-0.5">
+                  <p className="text-base text-accent/80 font-serif border-l border-accent/20 pl-4 mt-1">
                     {currentBook.author}
                   </p>
                 </div>
 
-                <p className="text-xs text-muted-foreground leading-relaxed font-serif">
+                <p className="text-[15px] md:text-base text-foreground/75 leading-loose font-serif">
                   {currentBook.description}
                 </p>
 
                 <div className="mt-2">
                   <Link
                     href={`/books/${currentBook.id}`}
-                    className="group relative inline-block overflow-hidden border border-accent/20 px-6 py-2.5 rounded-none font-serif font-bold text-xs tracking-[0.1em] uppercase transition-all hover:bg-wakaba-hover hover:border-accent/40 text-accent"
+                    className="group relative inline-block overflow-hidden border border-accent/20 px-6 py-3 rounded-none font-serif font-bold text-sm tracking-[0.1em] uppercase transition-all hover:bg-wakaba-hover hover:border-accent/40 text-accent"
                   >
                     <span className="relative z-10">詳細を見る</span>
                   </Link>

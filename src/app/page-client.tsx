@@ -15,6 +15,26 @@ interface HomeClientProps {
   initialNews: News[];
 }
 
+/** トップの「特集」に並べるページ */
+const FEATURES = [
+  {
+    href: "/dickens",
+    kicker: "チャールズ・ディケンズ／田辺洋子 訳",
+    title: "ディケンズ全集",
+    text: "本邦初の個人訳全集。小説作品等23冊（28作品），書簡集12巻。",
+    image: "/dickens/CD_portrait.jpg",
+    imageAlt: "チャールズ・ディケンズの肖像",
+  },
+  {
+    href: "/schelling",
+    kicker: "F・W・J・シェリング",
+    title: "叢書シェリング入門",
+    text: "シェリングの多面的な思索に，それぞれの主題から分け入るための入門シリーズ。",
+    image: "/schelling/schelling_portrait.jpg",
+    imageAlt: "シェリングの肖像",
+  },
+];
+
 /** 背景色（#rrggbb）が暗いかどうか。暗い背景のときだけ白文字にする */
 function isDarkColor(hex: string): boolean {
   const m = hex.match(/^#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i);
@@ -103,6 +123,43 @@ export default function HomeClient({ latestBooks, featuredBooks, newArrivals, in
         >
           <div className="w-[1px] h-16 bg-gradient-to-b from-white/60 to-transparent" />
         </motion.div>
+      </section>
+
+      {/* 特集（ディケンズ全集・叢書シェリング入門） */}
+      <section className="py-16 md:py-24 bg-wakaba/10 border-t border-accent/5">
+        <div className="max-w-[1260px] mx-auto px-6 md:px-12 lg:px-16">
+          <div className="flex flex-col mb-14 md:mb-16 items-center">
+            <h2 className="text-3xl font-serif font-bold text-foreground tracking-widest relative">
+              特集
+              <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-6 h-[1.5px] bg-accent/40"></div>
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+            {FEATURES.map((f) => (
+              <Link
+                key={f.href}
+                href={f.href}
+                className="group flex gap-6 sm:gap-8 items-center bg-background border border-border/60 p-6 sm:p-8 shadow-[0_2px_10px_-3px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_40px_-12px_rgba(0,0,0,0.12)] hover:-translate-y-1 transition-all duration-500"
+              >
+                <img
+                  src={f.image}
+                  alt={f.imageAlt}
+                  className="w-24 sm:w-32 h-auto shrink-0 border border-border shadow-sm grayscale-[0.1] group-hover:grayscale-0 transition-all duration-700"
+                />
+                <div className="min-w-0 font-serif">
+                  <p className="text-xs font-bold tracking-[0.15em] text-accent/80 mb-2">{f.kicker}</p>
+                  <h3 className="text-xl md:text-2xl font-bold text-foreground tracking-[0.1em] mb-3 group-hover:text-accent transition-colors">
+                    {f.title}
+                  </h3>
+                  <p className="text-[15px] leading-relaxed text-foreground/75 mb-4">{f.text}</p>
+                  <span className="text-sm font-bold tracking-[0.1em] text-accent border-b border-accent/30 group-hover:border-accent pb-1 transition-colors">
+                    特集ページへ ›
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
       </section>
 
       {/* 2. 新着書籍 */}
